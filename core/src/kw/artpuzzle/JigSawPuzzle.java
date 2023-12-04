@@ -15,7 +15,7 @@ public class JigSawPuzzle extends BaseGame {
         Gdx.isJiami = true;
         Asset.enterGameClear();
         NLog.isLog = false;
-        Constant.viewColor.set(Color.BLACK);
+        Constant.viewColor.set(Color.WHITE);
     }
 
     @Override
