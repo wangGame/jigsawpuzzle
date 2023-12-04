@@ -1,6 +1,7 @@
 package kw.artpuzzle.group.game;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -29,6 +30,7 @@ public class GameView extends Group {
     private ScrollPane bottomPanelScrollPanel;
     private GameLogicUtils logicUtils;
     private Image gameViewBg;
+    private ModelUtils modelUtils ;
     public void initView(){
         setSize(1080,1920);
         this.gameViewBg = new Image(new NinePatch(Asset.getAsset().getTexture("white.png")));
@@ -36,7 +38,7 @@ public class GameView extends Group {
         gameViewBg.setColor(Color.valueOf("#AAAAAA"));
         gameViewBg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         gameViewBg.setPosition(540,960,Align.center);
-        ModelUtils modelUtils = new ModelUtils("animals_426.jpg",6,6);
+        modelUtils = new ModelUtils("123.jpg",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
         bottomPanelScrollPanel = new ScrollPane(new Table(){{
@@ -57,6 +59,18 @@ public class GameView extends Group {
         view.setScale(0.5f);
         view.setPosition(Constant.GAMEWIDTH/2.0f,(Constant.GAMEHIGHT - 300)/2.0f + 300,Align.center);
         addActor(bottomPanelScrollPanel);
+
+        Texture texture = modelUtils.getTexture();
+
+//        Group group = new Group();
+//        for (ModelGroup allModel : allModels) {
+//            allModel.addListener(getItemListener(allModel));
+//            group.addActor(allModel);
+//            allModel.setPosition(allModel.getPosX(),allModel.getPosY(),Align.center);
+//        }
+//        addActor(group);
+//        group.setPosition(200,200);
+//        group.setScale(0.4f);
     }
 
     private boolean successMove = false;
@@ -79,7 +93,8 @@ public class GameView extends Group {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (successMove)return;
-                if (Math.abs(x - startV.x) * Math.abs(x - startV.x) + Math.abs(y - startV.y) * Math.abs(y - startV.y)>20){
+                if (Math.abs(x - startV.x) * Math.abs(x - startV.x) +
+                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>2000){
                     ModelGroup group = getGroup();
                     convert.set(x,y);
                     bottomPanelScrollPanel.cancel();

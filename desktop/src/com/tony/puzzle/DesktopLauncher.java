@@ -9,8 +9,8 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.x = 1000;
         config.y = 0;
-        config.height = (int) (640);
-        config.width = (int) (360);
+        config.height = (int) (640*1.3f);
+        config.width = (int) (360*1.3f);
         new LwjglApplication(new JigSawPuzzle(),config);
     }
 }

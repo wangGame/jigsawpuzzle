@@ -51,8 +51,8 @@ public class ModelGroup extends Group {
             public void setSize(float width, float height) {
                 super.setSize(width, height);
                 if (texture==null)return;
-                u = texture.getWidth() / getWidth() ;
-                v = texture.getWidth() / getWidth() ;
+                u = texture.getWidth() / getWidth() * (1800.0f/ texture.getWidth());
+                v = texture.getHeight() / getHeight() * (1800.0f / texture.getHeight());
                 texture.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
             }
         };
