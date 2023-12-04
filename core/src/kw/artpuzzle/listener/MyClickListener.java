@@ -1,4 +1,4 @@
-package kw.artpuzzle.group;
+package kw.artpuzzle.listener;
 
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;

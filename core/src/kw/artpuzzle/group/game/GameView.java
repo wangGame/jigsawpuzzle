@@ -1,13 +1,13 @@
-package kw.artpuzzle.group;
+package kw.artpuzzle.group.game;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
@@ -15,8 +15,10 @@ import com.kw.gdx.scrollpane.ScrollPane;
 
 import java.util.ArrayList;
 
+import kw.artpuzzle.listener.MyClickListener;
+import kw.artpuzzle.utils.GameLogicUtils;
 import kw.artpuzzle.view.ModelGroup;
-import kw.artpuzzle.view.ModelGroupTest;
+import kw.artpuzzle.view.ModelUtils;
 import kw.artpuzzle.view.TempView;
 
 /**
@@ -24,13 +26,20 @@ import kw.artpuzzle.view.TempView;
  * @Date 2023/12/4 10:37
  */
 public class GameView extends Group {
-    private ScrollPane pane;
-    private PlayTargetView view;
-    public void init(){
-        ModelGroupTest t = new ModelGroupTest();
-        ArrayList<ModelGroup> allModels = t.getAllModels();
-        view = new PlayTargetView(t.getView());
-        pane = new ScrollPane(new Table(){{
+    private ScrollPane bottomPanelScrollPanel;
+    private GameLogicUtils logicUtils;
+    private Image gameViewBg;
+    public void initView(){
+        setSize(1080,1920);
+        this.gameViewBg = new Image(new NinePatch(Asset.getAsset().getTexture("white.png")));
+        addActor(gameViewBg);
+        gameViewBg.setColor(Color.valueOf("#AAAAAA"));
+        gameViewBg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        gameViewBg.setPosition(540,960,Align.center);
+        ModelUtils modelUtils = new ModelUtils("animals_426.jpg",6,6);
+        ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
+        logicUtils = new GameLogicUtils(modelUtils.getTempView());
+        bottomPanelScrollPanel = new ScrollPane(new Table(){{
             for (ModelGroup allModel : allModels) {
                 allModel.addListener(getItemListener(allModel));
                 add(allModel);
@@ -39,15 +48,15 @@ public class GameView extends Group {
             align(Align.bottom);
             setY(100);
         }});
-        pane.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
-        pane.setDebug(true);
-        pane.setY(100);
-        TempView view = t.getView();
+        bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        bottomPanelScrollPanel.setDebug(true);
+        bottomPanelScrollPanel.setY(100);
+        TempView view = modelUtils.getTempView();
         addActor(view);
         view.setOrigin(Align.center);
         view.setScale(0.5f);
         view.setPosition(Constant.GAMEWIDTH/2.0f,(Constant.GAMEHIGHT - 300)/2.0f + 300,Align.center);
-        addActor(pane);
+        addActor(bottomPanelScrollPanel);
     }
 
     private boolean successMove = false;
@@ -60,9 +69,9 @@ public class GameView extends Group {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 successMove = false;
                 startV.set(x,y);
-                pane.setValid(true);
+                bottomPanelScrollPanel.setValid(true);
                 ModelGroup group = getGroup();
-                targetPos = view.findTargetPos(group.getName());
+                targetPos = logicUtils.findTargetPos(group.getName());
                 return super.touchDown(event, x, y, pointer, button);
             }
 
@@ -70,26 +79,25 @@ public class GameView extends Group {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (successMove)return;
-
                 if (Math.abs(x - startV.x) * Math.abs(x - startV.x) + Math.abs(y - startV.y) * Math.abs(y - startV.y)>20){
                     ModelGroup group = getGroup();
                     convert.set(x,y);
-                    pane.cancel();
+                    bottomPanelScrollPanel.cancel();
                     group.localToStageCoordinates(convert);
                     group.setImagePosition(x,y);
                     Vector2 vector2 = group.imageVector();
-                    view.convertTarget(vector2);
-                    if (view.check(targetPos,vector2)) {
+                    logicUtils.convertTarget(vector2);
+                    if (logicUtils.check(targetPos,vector2)) {
                         successMove = true;
-                        group.addAction(Actions.moveToAligned(targetPos.x,targetPos.y,Align.center,0.2f));
+                        group.addAction(Actions.moveToAligned(targetPos.x,targetPos.y,Align.center,0.1f));
                         Vector2 vector21 = group.imageVector();
-                        view.convertTarget(vector21);
+                        logicUtils.convertTarget(vector21);
                         group.resetPosition();
                         group.setX(vector21.x,Align.center);
                         group.setY(vector21.y,Align.center);
                         group.clearListeners();
                         group.setImageScale(1.0f);
-                        view.addActor(group);
+                        logicUtils.addActor(group);
                     }
                 }else {
                     return;

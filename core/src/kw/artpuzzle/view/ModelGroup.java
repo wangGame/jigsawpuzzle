@@ -10,9 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 
-import java.util.Calendar;
-
-import kw.artpuzzle.constant.Constant;
+import kw.artpuzzle.constant.GameConstant;
 
 /**
  * @Auther jian xian si qi
@@ -20,15 +18,15 @@ import kw.artpuzzle.constant.Constant;
  *
  * 基本就是这样弄了，  具体细节用的时候在完善
  */
-public class ModelGroup  extends Group {
+public class ModelGroup extends Group {
     private ShaderProgram program;
-    private Texture t;
     private float startU = 0.f;
     private float startV = 0.f;
     private float u;
     private float v;
     private Image image;
     private float currentScale;
+    private Texture texture;
 
     public ModelGroup(String maskName){
         setSize(200,200);
@@ -37,7 +35,7 @@ public class ModelGroup  extends Group {
             public void draw(Batch batch, float parentAlpha) {
                 batch.setShader(program);
                 Gdx.gl.glActiveTexture(GL20.GL_TEXTURE1);
-                t.bind();
+                texture.bind();
                 int uniformLocation = program.getUniformLocation("u_texture3");
                 program.setUniformi(uniformLocation,1);
                 program.setUniformf("u",startU);
@@ -52,10 +50,10 @@ public class ModelGroup  extends Group {
             @Override
             public void setSize(float width, float height) {
                 super.setSize(width, height);
-                t = Asset.getAsset().getTexture("animals_426.jpg");
-                u = t.getWidth() / getWidth() ;
-                v = t.getWidth() / getWidth() ;
-                t.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
+                if (texture==null)return;
+                u = texture.getWidth() / getWidth() ;
+                v = texture.getWidth() / getWidth() ;
+                texture.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
             }
         };
         addActor(image);
@@ -100,7 +98,7 @@ public class ModelGroup  extends Group {
 
     public void setImagePosition(float x, float y) {
         image.setPosition(x, y,Align.center);
-        image.setScale(Constant.modelScale);
+        image.setScale(GameConstant.modelScale);
     }
 
     private Vector2 imageVector = new Vector2();
@@ -120,5 +118,9 @@ public class ModelGroup  extends Group {
 
     public void setImageScale(float v) {
         image.setScale(1.0f);
+    }
+
+    public void setTexure(Texture texture) {
+        this.texture = texture;
     }
 }

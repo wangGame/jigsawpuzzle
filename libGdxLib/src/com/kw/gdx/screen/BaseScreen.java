@@ -123,6 +123,11 @@ public class BaseScreen implements Screen {
         initRootView();
         initAnnotation();
         initView();
+        initListener();
+    }
+
+    private void initListener() {
+
     }
 
     public void initView(){}
