@@ -9,7 +9,7 @@ import com.kw.gdx.resource.annotation.GameInfo;
 import com.kw.gdx.utils.log.NLog;
 import kw.artpuzzle.screen.LoadingScreen;
 
-@GameInfo(width = 720,height = 1280,batch = Constant.COUPOLYGONBATCH)
+@GameInfo(width = 1080,height = 1920,batch = Constant.COUPOLYGONBATCH)
 public class JigSawPuzzle extends BaseGame {
     public JigSawPuzzle(){
         Gdx.isJiami = true;

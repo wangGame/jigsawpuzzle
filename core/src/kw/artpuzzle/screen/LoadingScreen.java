@@ -2,6 +2,7 @@ package kw.artpuzzle.screen;
 
 import com.kw.gdx.BaseGame;
 import com.kw.gdx.asset.Asset;
+import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.sound.AudioProcess;
 
@@ -11,6 +12,7 @@ import kw.artpuzzle.audio.AudioType;
  * @Auther jian xian si qi
  * @Date 2023/12/1 15:48
  */
+@ScreenResource("cocos/loadscreen.json")
 public class LoadingScreen extends BaseScreen {
     public LoadingScreen(BaseGame game) {
         super(game);
