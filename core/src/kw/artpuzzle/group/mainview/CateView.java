@@ -16,27 +16,6 @@ public class CateView extends BaseView {
         String str[] = {
                 "ABCDEF",
                 "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF",
                 "ABCDEF"
         };
         cateScrollpane = new ScrollPane(new Table(){{

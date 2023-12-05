@@ -1,6 +1,7 @@
 package kw.artpuzzle.group.group;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kw.gdx.constant.Constant;
 
 /**
@@ -9,6 +10,15 @@ import com.kw.gdx.constant.Constant;
  */
 public class MyPlayingGroup extends MyPzBaseGroup {
     public MyPlayingGroup(){
+        Table contentTable = getContentTable();
+        for (int i = 0; i < 3; i++) {
+            contentTable.add(new ItemGroup()).pad(15);
+            contentTable.add(new ItemGroup()).pad(15);
+            contentTable.row();
+        }
+    }
 
+    public static MyPzBaseGroup getInstance() {
+        return new MyPlayingGroup();
     }
 }

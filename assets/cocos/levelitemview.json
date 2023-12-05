@@ -17,7 +17,6 @@
           {
             "ClipAble": false,
             "BackColorAlpha": 102,
-            "ComboBoxIndex": 1,
             "SingleColor": {
               "R": 150,
               "G": 200
@@ -30,6 +29,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -108,7 +109,6 @@
               {
                 "ClipAble": false,
                 "BackColorAlpha": 102,
-                "ComboBoxIndex": 1,
                 "SingleColor": {
                   "R": 150,
                   "G": 200
@@ -121,6 +121,8 @@
                 "ColorVector": {
                   "ScaleY": 1.0
                 },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
                 "TouchEnable": true,
                 "AnchorPoint": {},
                 "Position": {
@@ -253,7 +255,6 @@
               {
                 "ClipAble": false,
                 "BackColorAlpha": 102,
-                "ComboBoxIndex": 1,
                 "SingleColor": {
                   "R": 150,
                   "G": 200
@@ -266,10 +267,12 @@
                 "ColorVector": {
                   "ScaleY": 1.0
                 },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
                 "TouchEnable": true,
                 "AnchorPoint": {},
                 "Position": {
-                  "X": 333.0,
+                  "X": 336.0,
                   "Y": 377.0
                 },
                 "Scale": {
@@ -279,15 +282,15 @@
                 "CColor": {},
                 "IconVisible": false,
                 "PrePosition": {
-                  "X": 0.7161,
+                  "X": 0.7226,
                   "Y": 0.8108
                 },
                 "PreSize": {
                   "X": 0.2301,
                   "Y": 0.1376
                 },
-                "LeftMargin": 333.0,
-                "RightMargin": 25.0,
+                "LeftMargin": 336.0,
+                "RightMargin": 22.0,
                 "TopMargin": 24.0,
                 "BottomMargin": 377.0,
                 "Tag": 53,

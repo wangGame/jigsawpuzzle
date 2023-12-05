@@ -11,17 +11,16 @@ import com.kw.gdx.scrollpane.ScrollPane;
  * @Date 2023/12/5 15:01
  */
 public abstract class MyPzBaseGroup extends Group {
-    public static MyPzBaseGroup instance;
     private ScrollPane levelListScrollPanel;
     private Table contentTable;
     public MyPzBaseGroup(){
         levelListScrollPanel = new ScrollPane(contentTable = new Table(){{
-
+            align(Align.top);
         }});
         addActor(levelListScrollPanel);
         float height = Constant.GAMEHIGHT - 142 - 142 - 100;
         setSize(Constant.GAMEWIDTH,height);
-        levelListScrollPanel.setSize(getWidth()/2.0f,getHeight()/2.0f);
+        levelListScrollPanel.setSize(getWidth(),getHeight());
         levelListScrollPanel.setPosition(getWidth()/2.0f,getHeight()/2.0f, Align.center);
     }
 
@@ -30,7 +29,6 @@ public abstract class MyPzBaseGroup extends Group {
     }
 
     public static MyPzBaseGroup getInstance() {
-        if (instance!=null)return instance;
-        return instance = new MyPuzzleGroup();
+        return null;
     }
 }

@@ -1,16 +1,16 @@
 package kw.artpuzzle.group.mainview;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
-import com.kw.gdx.constant.Constant;
 import com.kw.gdx.scrollpane.ScrollPane;
 
-import java.util.logging.Level;
-
 import kw.artpuzzle.group.group.ItemGroup;
+import kw.artpuzzle.utils.DailyUtils;
+import kw.artpuzzle.utils.DateBean;
 
 /**
  * @Auther jian xian si qi
@@ -18,38 +18,70 @@ import kw.artpuzzle.group.group.ItemGroup;
  */
 public class DailyView extends BaseView {
     private ScrollPane scrollPane;
+    private DateBean dateBean;
+    private int currentMonthDays;
+    private Table contentTable;
+
     public DailyView(){
-        scrollPane = new ScrollPane(new Table(){{
-//            Group titleGrop = new Group();
-//            titleGrop.setSize(Constant.GAMEWIDTH,100);
-//            add(titleGrop);
-//            row();
-            for (int yy = 0; yy < 30; yy++) {
-
-                for (int i = 0; i < 2; i++) {
-
-                    add(new Group(){{
-                        Label label = new Label("",new Label.LabelStyle(){{
-                            font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
-                        }});
-                        addActor(label);
-                        label.setText("2023 11");
-                        label.pack();
-                        setSize(465,50);
-                        label.setPosition(465.0f/2.0f,25, Align.center);
-                        setDebug(true);
-                    }}).pad(15);
+        contentTable = new Table();
+        dateBean = DailyUtils.currentDateBean();
+        currentMonthDays = DailyUtils.currentMonthDay(dateBean.getYear(),dateBean.getMonth());
+        scrollPane = new ScrollPane(contentTable){
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                if (getScrollPercentY()>0.7f){
+                    addOneMonthData(false);
+                    scrollPane.layout();
+                    scrollPane.validate();
                 }
-                row();
-                for (int i = 0; i < 4; i++) {
-                    add(new ItemGroup()).pad(15);
-                    add(new ItemGroup()).pad(15);
-                    row();
-                }
-
             }
-        }});
+        };
+        scrollPane.layout();
+        scrollPane.validate();
+        addOneMonthData(true);
         scrollPane.setSize(getWidth(),getHeight());
         addActor(scrollPane);
+    }
+
+    private void addOneMonthData(boolean b) {
+        contentTable.add(new Group() {{
+            Label label = new Label("", new Label.LabelStyle() {{
+                font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
+            }});
+            label.setColor(Color.BLACK);
+            addActor(label);
+            label.setText(dateBean.getYear()+" "+dateBean.getMonth());
+            label.pack();
+            setSize(465, 50);
+            label.setPosition(465.0f / 2.0f, 25, Align.center);
+            setDebug(true);
+        }}).pad(15);
+
+        contentTable.add(new Group() {{
+            setSize(465, 50);
+        }}).pad(15);
+        contentTable.row();
+        int tempDay = currentMonthDays;
+        if (b){
+            tempDay = dateBean.getDay();
+        }
+        int index = 0;
+        for (int i = 1; i <= tempDay; i++) {
+            contentTable.add(new ItemGroup()).pad(15);
+            index ++ ;
+            if (index % 2 == 0) {
+                contentTable.row();
+            }
+        }
+        if (tempDay % 2 == 1) {
+            contentTable.add(new Group() {{
+                setSize(465, 50);
+            }}).pad(15);
+            contentTable.row();
+        }
+        contentTable.pack();
+        DailyUtils.subMonth(dateBean);
+        currentMonthDays = DailyUtils.currentMonthDay(dateBean.getYear(), dateBean.getMonth());
     }
 }

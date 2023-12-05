@@ -11,10 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class MyPuzzleGroup extends MyPzBaseGroup{
     public MyPuzzleGroup(){
         Table contentTable = getContentTable();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             contentTable.add(new ItemGroup()).pad(15);
             contentTable.add(new ItemGroup()).pad(15);
             contentTable.row();
         }
+    }
+
+    public static MyPzBaseGroup getInstance() {
+        return new MyPuzzleGroup();
     }
 }

@@ -1,7 +1,10 @@
 package kw.artpuzzle.screen;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.BaseGame;
@@ -32,6 +35,7 @@ public class MainScreen extends BaseScreen {
     @Override
     public void initView() {
         super.initView();
+        rootView.findActor("content").setTouchable(Touchable.disabled);
         mainScrollPane = new ScrollPane(new Table(){{
             add(new MainView(runnable));
             add(new DailyView());
@@ -46,42 +50,47 @@ public class MainScreen extends BaseScreen {
     }
 
     @Override
-    protected void initAnnotation() {
-        super.initAnnotation();
-        Actor librarybtn = rootView.findActor("librarybtn");
-        Actor dailybtn = rootView.findActor("dailybtn");
-        Actor categorybtn = rootView.findActor("categorybtn");
-        Actor collectbtn = rootView.findActor("collectbtn");
+    protected void initListener() {
+        super.initListener();
+        Group librarybtn = rootView.findActor("librarybtn");
+        Group dailybtn = rootView.findActor("dailybtn");
+        Group categorybtn = rootView.findActor("categorybtn");
+        Group collectbtn = rootView.findActor("collectbtn");
+        extracted(librarybtn,0);
+        extracted(dailybtn,1);
+        extracted(categorybtn,2);
+        extracted(collectbtn,3);
+
+        updatePage(librarybtn);
+    }
+
+    public void resetBtn(){
+        Group librarybtn = rootView.findActor("librarybtn");
+        Group dailybtn = rootView.findActor("dailybtn");
+        Group categorybtn = rootView.findActor("categorybtn");
+        Group collectbtn = rootView.findActor("collectbtn");
+//        868e9d
+        changeColor(librarybtn,"#868e9d");
+        changeColor(dailybtn,"#868e9d");
+        changeColor(categorybtn,"#868e9d");
+        changeColor(collectbtn,"#868e9d");
+    }
+
+    public void changeColor(Group librarybtn,String color){
+        Actor cateIcon = librarybtn.findActor("cateIcon");
+        cateIcon.setColor(Color.valueOf(color));
+        Actor btnlabel = librarybtn.findActor("btnlabel");
+        btnlabel.setColor(Color.valueOf(color));
+    }
+
+    private void extracted(Group librarybtn,int page) {
+        librarybtn.setOrigin(Align.center);
         librarybtn.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                pageIndex = 0;
-                updatePage();
-            }
-        });
-        dailybtn.addListener(new OrdinaryButtonListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                pageIndex = 1;
-                updatePage();
-            }
-        });
-        categorybtn.addListener(new OrdinaryButtonListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                pageIndex = 2;
-                updatePage();
-            }
-        });
-        collectbtn.addListener(new OrdinaryButtonListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                pageIndex = 3;
-                updatePage();
+                pageIndex = page;
+                updatePage(librarybtn);
             }
         });
     }
@@ -95,8 +104,10 @@ public class MainScreen extends BaseScreen {
         }
     };
 
-    public void updatePage(){
+    public void updatePage(Group librarybtn){
+        resetBtn();
         mainScrollPane.setScrollX(Constant.GAMEWIDTH * pageIndex);
         mainScrollPane.updateVisualScroll();
+        changeColor(librarybtn,"#30ca58");
     }
 }

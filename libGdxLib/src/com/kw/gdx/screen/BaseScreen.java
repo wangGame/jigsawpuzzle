@@ -126,7 +126,7 @@ public class BaseScreen implements Screen {
         initListener();
     }
 
-    private void initListener() {
+    protected void initListener() {
 
     }
 
