@@ -1,6 +1,9 @@
 package kw.artpuzzle.group.group;
 
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 
 /**
@@ -9,7 +12,12 @@ import com.kw.gdx.constant.Constant;
  */
 public class CateDetailGroup extends Group {
     public CateDetailGroup(){
+        setDebug(true);
         setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 140);
-
+        Image bg = new Image(new NinePatch(
+                Asset.getAsset().getTexture("white.png"),
+                2,2,2,2));
+        addActor(bg);
+        bg.setSize(getWidth(),getHeight());
     }
 }

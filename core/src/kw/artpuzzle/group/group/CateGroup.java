@@ -1,5 +1,6 @@
 package kw.artpuzzle.group.group;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -20,6 +21,7 @@ public class CateGroup extends Group {
         Label cateLabel = new Label("",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
         }});
+        cateLabel.setColor(Color.BLACK);
         cateLabel.setText(s);
         addActor(cateLabel);
         cateLabel.setX(icon.getX(Align.right)+20);

@@ -15,6 +15,7 @@ import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.group.game.GameView;
+import kw.artpuzzle.group.group.CateDetailGroup;
 import kw.artpuzzle.group.mainview.CateView;
 import kw.artpuzzle.group.mainview.DailyView;
 import kw.artpuzzle.group.mainview.MainView;
@@ -39,7 +40,13 @@ public class MainScreen extends BaseScreen {
         mainScrollPane = new ScrollPane(new Table(){{
             add(new MainView(runnable));
             add(new DailyView());
-            add(new CateView());
+            add(new CateView(new Runnable(){
+                @Override
+                public void run() {
+                    Group content = rootView.findActor("content");
+                    content.addActor(new CateDetailGroup());
+                }
+            }));
             add(new PuzzleView());
             pack();
         }});
