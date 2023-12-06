@@ -79,9 +79,11 @@ public class GameView extends Group {
             private Vector2 startV = new Vector2();
             private Vector2 convert = new Vector2();
             private Vector2 targetPos ;
+            private boolean isDragged = false;
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 successMove = false;
+                isDragged = false;
                 startV.set(x,y);
                 bottomPanelScrollPanel.setValid(true);
                 ModelGroup group = getGroup();
@@ -93,8 +95,9 @@ public class GameView extends Group {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (successMove)return;
-                if ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&(Math.abs(x - startV.x) * Math.abs(x - startV.x) +
-                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>200)){
+                if (isDragged || ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&(Math.abs(x - startV.x) * Math.abs(x - startV.x) +
+                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>200))){
+                    isDragged = true;
                     ModelGroup group = getGroup();
                     convert.set(x,y);
                     bottomPanelScrollPanel.cancel();
