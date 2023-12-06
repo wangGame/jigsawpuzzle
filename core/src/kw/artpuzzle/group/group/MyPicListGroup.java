@@ -1,6 +1,5 @@
 package kw.artpuzzle.group.group;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
@@ -12,7 +11,12 @@ public class MyPicListGroup extends MyPzBaseGroup {
     public MyPicListGroup(){
         Table contentTable = getContentTable();
         for (int i = 0; i < 2; i++) {
-            contentTable.add(new ItemGroup()).pad(15);
+            contentTable.add(new ItemGroup(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            })).pad(15);
             contentTable.add(new ItemGroup()).pad(15);
             contentTable.row();
         }

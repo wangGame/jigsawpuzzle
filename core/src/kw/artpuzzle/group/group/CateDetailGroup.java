@@ -41,7 +41,12 @@ public class CateDetailGroup extends Group {
         });
         detailScrollPanel = new ScrollPane(new Table(){{
             for (int i = 1; i <= 10; i++) {
-                add(new ItemGroup()).pad(15);
+                add(new ItemGroup(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                })).pad(15);
                 if (i % 2 == 0) {
                     row();
                 }

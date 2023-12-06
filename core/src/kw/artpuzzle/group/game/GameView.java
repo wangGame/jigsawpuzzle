@@ -93,8 +93,8 @@ public class GameView extends Group {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (successMove)return;
-                if (Math.abs(x - startV.x) * Math.abs(x - startV.x) +
-                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>2000){
+                if ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&(Math.abs(x - startV.x) * Math.abs(x - startV.x) +
+                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>200)){
                     ModelGroup group = getGroup();
                     convert.set(x,y);
                     bottomPanelScrollPanel.cancel();

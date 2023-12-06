@@ -1,8 +1,6 @@
 package kw.artpuzzle.group.group;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.kw.gdx.constant.Constant;
 
 /**
  * @Auther jian xian si qi
