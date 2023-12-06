@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
@@ -60,43 +61,38 @@ public class GameView extends Group {
         addActor(view);
         view.setOrigin(Align.center);
         view.setScale(0.5f);
-        view.addListener(new ClickListener(){
-            private Vector2 initialPointer1 = new Vector2();
-            private Vector2 initialPointer2 = new Vector2();
-            float initialDistance;
-
-            private Vector2 pointer1 =  new Vector2();
-            private Vector2 pointer2 =  new Vector2();
+        setOrigin(Align.center);
+        addListener(new ActorGestureListener(){
+            private float touchDownScale;
+            private float minScale;
+            private float maxScale;
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (pointer == 0) {
-                    initialPointer1.set(x, y);
-                } else if (pointer == 1) {
-                    initialPointer2.set(x, y);
-                    initialDistance = initialPointer1.dst(initialPointer2);
-                }
-                return super.touchDown(event, x, y, pointer, button);
+            public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                touchDownScale = view.getScaleX();
+                minScale = (1080.0f * 0.6f) / view.getWidth();
+                maxScale = (1080.0f * 1.2f) / view.getWidth();
             }
 
             @Override
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                super.touchDragged(event, x, y, pointer);
-                pointer1.set(x, y);
-                pointer2.set(initialPointer2);
-                float distance = pointer1.dst(pointer2);
-                float scale = distance / initialDistance;
-                setScale(scale);
+            public void zoom(InputEvent event, float initialDistance, float distance) {
+                super.zoom(event, initialDistance, distance);
+                System.out.println(minScale +" ------- "+maxScale);
+                float v = distance / initialDistance;
+                float v1 = v *touchDownScale;
+                if (maxScale<v1){
+                    v1 = maxScale;
+                }
+                if (minScale>v1){
+                    v1 = minScale;
+                }
+                view.setScale(v1);
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-            }
 
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                System.out.println(":------------------------------");
             }
         });
         view.setPosition(Constant.GAMEWIDTH/2.0f,(Constant.GAMEHIGHT - 300)/2.0f + 300,Align.center);
