@@ -24,7 +24,7 @@ public class CateView extends BaseView {
             for (String s : str) {
                 CateGroup cateGroup = new CateGroup(s);
                 add(cateGroup).pad(10);
-                cateGroup.addListener(new OrdinaryButtonListener(){
+                cateGroup.addListener(new OrdinaryButtonListener(1.0f){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);

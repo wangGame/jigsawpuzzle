@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.BaseGame;
@@ -20,6 +21,8 @@ import kw.artpuzzle.group.mainview.CateView;
 import kw.artpuzzle.group.mainview.DailyView;
 import kw.artpuzzle.group.mainview.MainView;
 import kw.artpuzzle.group.mainview.PuzzleView;
+import kw.artpuzzle.utils.DailyUtils;
+import kw.artpuzzle.utils.DateBean;
 
 /**
  * @Auther jian xian si qi
@@ -29,6 +32,7 @@ import kw.artpuzzle.group.mainview.PuzzleView;
 public class MainScreen extends BaseScreen {
     private ScrollPane mainScrollPane;
     private int pageIndex;
+    private Group content;
     public MainScreen(BaseGame game) {
         super(game);
     }
@@ -36,15 +40,18 @@ public class MainScreen extends BaseScreen {
     @Override
     public void initView() {
         super.initView();
-        rootView.findActor("content").setTouchable(Touchable.disabled);
+        content = rootView.findActor("content");
+        rootView.findActor("maintop").setTouchable(Touchable.childrenOnly);
+        content.setTouchable(Touchable.childrenOnly);
         mainScrollPane = new ScrollPane(new Table(){{
             add(new MainView(runnable));
             add(new DailyView());
             add(new CateView(new Runnable(){
                 @Override
                 public void run() {
-                    Group content = rootView.findActor("content");
-                    content.addActor(new CateDetailGroup());
+                    CateDetailGroup cateDetailGroup = new CateDetailGroup();
+                    cateDetailGroup.setY(142);
+                    content.addActor(cateDetailGroup);
                 }
             }));
             add(new PuzzleView());
@@ -53,7 +60,7 @@ public class MainScreen extends BaseScreen {
         mainScrollPane.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 142 - 142);
         mainScrollPane.setPosition(540.0f,960.0f,Align.center);
         mainScrollPane.setRectangle(0,0,0,0);
-        rootView.addActor(mainScrollPane);
+        content.addActor(mainScrollPane);
     }
 
     @Override
@@ -67,8 +74,12 @@ public class MainScreen extends BaseScreen {
         extracted(dailybtn,1);
         extracted(categorybtn,2);
         extracted(collectbtn,3);
-
         updatePage(librarybtn);
+        Label dailynum = dailybtn.findActor("dailynum");
+        if (dailynum!=null) {
+            DateBean dateBean = DailyUtils.currentDateBean();
+            dailynum.setText(dateBean.getDay());
+        }
     }
 
     public void resetBtn(){
@@ -81,6 +92,7 @@ public class MainScreen extends BaseScreen {
         changeColor(dailybtn,"#868e9d");
         changeColor(categorybtn,"#868e9d");
         changeColor(collectbtn,"#868e9d");
+        dailybtn.findActor("dailynum").setColor(Color.valueOf("#868e9d"));
     }
 
     public void changeColor(Group librarybtn,String color){
@@ -116,5 +128,9 @@ public class MainScreen extends BaseScreen {
         mainScrollPane.setScrollX(Constant.GAMEWIDTH * pageIndex);
         mainScrollPane.updateVisualScroll();
         changeColor(librarybtn,"#30ca58");
+        Label dailynum = librarybtn.findActor("dailynum");
+        if (dailynum!=null) {
+            dailynum.setColor(Color.valueOf("#30ca58"));
+        }
     }
 }

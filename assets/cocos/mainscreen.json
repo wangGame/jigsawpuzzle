@@ -48,9 +48,11 @@
               "Y": 0.0
             },
             "PreSize": {
-              "X": 1.0,
-              "Y": 1.0
+              "X": 2.3226,
+              "Y": 4.129
             },
+            "RightMargin": -615.0,
+            "TopMargin": -1455.0,
             "Tag": 23,
             "Children": [
               {
@@ -720,190 +722,6 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
-            "Scale9Width": 1,
-            "Scale9Height": 1,
-            "TouchEnable": true,
-            "AnchorPoint": {
-              "ScaleY": 1.0
-            },
-            "Position": {
-              "X": 0.0,
-              "Y": 1920.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 1.0
-            },
-            "PreSize": {
-              "X": 1.0,
-              "Y": 0.074
-            },
-            "BottomMargin": 1778.0,
-            "Tag": 52,
-            "Children": [
-              {
-                "FileData": {
-                  "Type": "MarkedSubImage",
-                  "Path": "mainpic/reward.png",
-                  "Plist": "plist/mainpic.plist"
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 813.0,
-                  "Y": 71.0
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.7528,
-                  "Y": 0.5
-                },
-                "PreSize": {
-                  "X": 0.0759,
-                  "Y": 0.5352
-                },
-                "LeftMargin": 813.0,
-                "RightMargin": 185.0,
-                "TopMargin": 33.0,
-                "BottomMargin": 33.0,
-                "Tag": 66,
-                "ActionTag": 306936245,
-                "Size": {
-                  "X": 82.0,
-                  "Y": 76.0
-                },
-                "Name": "reward",
-                "ctype": "SpriteObjectData"
-              },
-              {
-                "FileData": {
-                  "Type": "MarkedSubImage",
-                  "Path": "mainpic/mainSettingsIcon.png",
-                  "Plist": "plist/mainpic.plist"
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleX": 0.5,
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 986.0,
-                  "Y": 71.0
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.913,
-                  "Y": 0.5
-                },
-                "PreSize": {
-                  "X": 0.0704,
-                  "Y": 0.5352
-                },
-                "LeftMargin": 948.0,
-                "RightMargin": 56.0,
-                "TopMargin": 33.0,
-                "BottomMargin": 33.0,
-                "Tag": 67,
-                "ActionTag": 31030601,
-                "Size": {
-                  "X": 76.0,
-                  "Y": 76.0
-                },
-                "Name": "mainSettingsIcon",
-                "ctype": "SpriteObjectData"
-              }
-            ],
-            "ActionTag": -145421386,
-            "Size": {
-              "X": 1080.0,
-              "Y": 142.0
-            },
-            "Name": "maintop",
-            "ctype": "PanelObjectData"
-          },
-          {
-            "ClipAble": false,
-            "BackColorAlpha": 102,
-            "SingleColor": {
-              "R": 150,
-              "G": 200
-            },
-            "FirstColor": {
-              "R": 150,
-              "G": 200
-            },
-            "EndColor": {},
-            "ColorVector": {
-              "ScaleY": 1.0
-            },
-            "TouchEnable": true,
-            "AnchorPoint": {},
-            "Position": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.0,
-              "Y": 0.0
-            },
-            "PreSize": {
-              "X": 1.0,
-              "Y": 1.0
-            },
-            "Tag": 445,
-            "ActionTag": -1229429160,
-            "Size": {
-              "X": 1080.0,
-              "Y": 1920.0
-            },
-            "Name": "content",
-            "ctype": "PanelObjectData"
-          },
-          {
-            "ClipAble": false,
-            "BackColorAlpha": 102,
-            "SingleColor": {
-              "R": 150,
-              "G": 200
-            },
-            "FirstColor": {
-              "R": 150,
-              "G": 200
-            },
-            "EndColor": {},
-            "ColorVector": {
-              "ScaleY": 1.0
-            },
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5
@@ -919,16 +737,16 @@
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 0.5,
-              "Y": 0.9375
+              "X": 1.1613,
+              "Y": 3.871
             },
             "PreSize": {
-              "X": 0.2778,
-              "Y": 0.049
+              "X": 0.6452,
+              "Y": 0.2022
             },
             "LeftMargin": 390.0,
-            "RightMargin": 390.0,
-            "TopMargin": 26.0,
+            "RightMargin": -225.0,
+            "TopMargin": -1429.0,
             "BottomMargin": 1800.0,
             "Tag": 444,
             "Children": [
@@ -1168,6 +986,195 @@
               "Y": 94.0
             },
             "Name": "fontgroup",
+            "ctype": "PanelObjectData"
+          },
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "SingleColor": {
+              "R": 150,
+              "G": 200
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "TouchEnable": true,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": -0.0005
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PreSize": {
+              "X": 2.3226,
+              "Y": 4.129
+            },
+            "RightMargin": -615.0,
+            "TopMargin": -1454.9995,
+            "BottomMargin": -0.0005,
+            "Tag": 445,
+            "ActionTag": -1229429160,
+            "Size": {
+              "X": 1080.0,
+              "Y": 1920.0
+            },
+            "Name": "content",
+            "ctype": "PanelObjectData"
+          },
+          {
+            "ClipAble": false,
+            "BackColorAlpha": 102,
+            "SingleColor": {
+              "R": 150,
+              "G": 200
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleY": 1.0
+            },
+            "Position": {
+              "X": 0.0,
+              "Y": 1920.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 4.129
+            },
+            "PreSize": {
+              "X": 2.3226,
+              "Y": 0.3054
+            },
+            "RightMargin": -615.0,
+            "TopMargin": -1455.0,
+            "BottomMargin": 1778.0,
+            "Tag": 52,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "MarkedSubImage",
+                  "Path": "mainpic/reward.png",
+                  "Plist": "plist/mainpic.plist"
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 813.0,
+                  "Y": 71.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.7528,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.0759,
+                  "Y": 0.5352
+                },
+                "LeftMargin": 813.0,
+                "RightMargin": 185.0,
+                "TopMargin": 33.0,
+                "BottomMargin": 33.0,
+                "Tag": 66,
+                "ActionTag": 306936245,
+                "Size": {
+                  "X": 82.0,
+                  "Y": 76.0
+                },
+                "Name": "reward",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "MarkedSubImage",
+                  "Path": "mainpic/mainSettingsIcon.png",
+                  "Plist": "plist/mainpic.plist"
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 986.0,
+                  "Y": 71.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.913,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.0704,
+                  "Y": 0.5352
+                },
+                "LeftMargin": 948.0,
+                "RightMargin": 56.0,
+                "TopMargin": 33.0,
+                "BottomMargin": 33.0,
+                "Tag": 67,
+                "ActionTag": 31030601,
+                "Size": {
+                  "X": 76.0,
+                  "Y": 76.0
+                },
+                "Name": "mainSettingsIcon",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -145421386,
+            "Size": {
+              "X": 1080.0,
+              "Y": 142.0
+            },
+            "Name": "maintop",
             "ctype": "PanelObjectData"
           }
         ],
