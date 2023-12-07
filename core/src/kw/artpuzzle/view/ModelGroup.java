@@ -123,4 +123,8 @@ public class ModelGroup extends Group {
     public void setTexure(Texture texture) {
         this.texture = texture;
     }
+
+    public void setUpdateSize(Runnable runnable){
+
+    }
 }

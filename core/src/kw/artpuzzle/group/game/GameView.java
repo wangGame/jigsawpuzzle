@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -15,6 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
+import com.kw.gdx.listener.OrdinaryButtonListener;
+import com.kw.gdx.resource.cocosload.CocosResource;
+import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 import java.util.ArrayList;
@@ -30,24 +34,73 @@ import kw.artpuzzle.view.TempView;
  * @Date 2023/12/4 10:37
  */
 public class GameView extends Group {
+    private Group rootView;
     private ScrollPane bottomPanelScrollPanel;
     private GameLogicUtils logicUtils;
-    private Image gameViewBg;
     private ModelUtils modelUtils ;
+    private  BaseScreen baseScreen;
+    public GameView(BaseScreen baseScreen){
+       this.baseScreen = baseScreen;
+    }
+
+
     public void initView(){
         setSize(1080,1920);
-        this.gameViewBg = new Image(new NinePatch(Asset.getAsset().getTexture("white.png")));
-        addActor(gameViewBg);
-        gameViewBg.setColor(Color.valueOf("#AAAAAA"));
-        gameViewBg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
-        gameViewBg.setPosition(540,960,Align.center);
-        modelUtils = new ModelUtils("123.jpg",6,6);
+        setPosition(Constant.GAMEWIDTH/2.0f,Constant.GAMEHIGHT/2.0f,Align.center);
+        rootView = CocosResource.loadFile("cocos/gamegroup.json");
+        addActor(rootView);
+        Actor gamebg = rootView.findActor("gamebg");
+        gamebg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        gamebg.setPosition(540.0f,960.0f,Align.center);
+        rootView.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
+
+        Group gamebottom = rootView.findActor("gamebottom");
+        gamebottom.setY(gamebottom.getY() - baseScreen.getOffsetY());
+
+        Group gamemiddle = rootView.findActor("gamemiddle");
+        Actor middlebg = gamemiddle.findActor("middlebg");
+        Vector2 vector2 = new Vector2();
+        vector2.set(middlebg.getX(Align.center),middlebg.getY(Align.center));
+        middlebg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 140.0f - 260.0f);
+        middlebg.setPosition(vector2,Align.center);
+        Group gametop = rootView.findActor("gametop");
+        gametop.setY(gametop.getY() + baseScreen.getOffsetY());
+
+        Actor topback = gametop.findActor("topback");
+        Actor egebtn = gametop.findActor("egebtn");
+        Actor clearbtn = gametop.findActor("clearbtn");
+        Actor tipbtn = gametop.findActor("tipbtn");
+        Actor prebtn = gametop.findActor("prebtn");
+        Actor themebtn = gametop.findActor("themebtn");
+        ArrayList<Actor> actors = new ArrayList<>();
+        actors.add(topback);
+        actors.add(egebtn);
+        actors.add(clearbtn);
+        actors.add(tipbtn);
+        actors.add(prebtn);
+        actors.add(themebtn);
+        float v = Constant.GAMEWIDTH / 6.0f;
+        float v1 = v / 2.0f;
+        for (int i = 0; i < actors.size(); i++) {
+            Actor actor = actors.get(i);
+            actor.setX(v1 + v * i,Align.center);
+        }
+
+        modelUtils = new ModelUtils("234.jpg",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
+
         bottomPanelScrollPanel = new ScrollPane(new Table(){{
             for (ModelGroup allModel : allModels) {
                 allModel.addListener(getItemListener(allModel));
                 add(allModel);
+                allModel.setUpdateSize(new Runnable(){
+
+                    @Override
+                    public void run() {
+
+                    }
+                });
             }
             pack();
             align(Align.bottom);
@@ -56,11 +109,14 @@ public class GameView extends Group {
         bottomPanelScrollPanel.setTouchable(Touchable.childrenOnly);
         bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         bottomPanelScrollPanel.setDebug(true);
-        bottomPanelScrollPanel.setY(100);
+        bottomPanelScrollPanel.setY(50);
+        gamebottom.addActor(bottomPanelScrollPanel);
+
         TempView view = modelUtils.getTempView();
-        addActor(view);
+        gamemiddle.addActor(view);
         view.setOrigin(Align.center);
         view.setScale(0.5f);
+
         setOrigin(Align.center);
         addListener(new ActorGestureListener(){
             private float touchDownScale;
@@ -95,8 +151,8 @@ public class GameView extends Group {
 
             }
         });
-        view.setPosition(Constant.GAMEWIDTH/2.0f,(Constant.GAMEHIGHT - 300)/2.0f + 300,Align.center);
-        addActor(bottomPanelScrollPanel);
+        view.setPosition(gamemiddle.getWidth()/2.0f,gamemiddle.getHeight()/2.f,Align.center);
+
         bottomPanelScrollPanel.setRectangle(0,0,getWidth(),220);
         Texture texture = modelUtils.getTexture();
 
@@ -109,6 +165,23 @@ public class GameView extends Group {
 //        addActor(group);
 //        group.setPosition(200,200);
 //        group.setScale(0.4f);
+        topback.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                GameView.this.addAction(
+                        Actions.sequence(
+                                Actions.fadeOut(0.2f),
+                                Actions.removeActor()));
+            }
+        });
+        egebtn.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
     }
 
     private boolean successMove = false;

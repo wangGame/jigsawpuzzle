@@ -1,7 +1,10 @@
 package kw.artpuzzle.screen;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.BaseGame;
 import com.kw.gdx.asset.Asset;
+import com.kw.gdx.constant.Constant;
 import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.sound.AudioProcess;
@@ -22,6 +25,9 @@ public class LoadingScreen extends BaseScreen {
     public void show() {
         super.show();
         AudioProcess.prepare(AudioType.class);
+        Actor loadingbg = rootView.findActor("loadingbg");
+        loadingbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        loadingbg.setPosition(540.0f,960.0f, Align.center);
     }
 
     @Override

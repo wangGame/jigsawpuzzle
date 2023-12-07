@@ -61,6 +61,12 @@ public class MainScreen extends BaseScreen {
         mainScrollPane.setPosition(540.0f,960.0f,Align.center);
         mainScrollPane.setRectangle(0,0,0,0);
         content.addActor(mainScrollPane);
+        Actor maintop = rootView.findActor("maintop");
+        maintop.setY(maintop.getY()+offsetY);
+        Actor fontgroup = rootView.findActor("fontgroup");
+        fontgroup.setY(fontgroup.getY()+offsetY);
+        Actor mainbottom = rootView.findActor("mainbottom");
+        mainbottom.setY(mainbottom.getY()-offsetY);
     }
 
     @Override
@@ -117,7 +123,7 @@ public class MainScreen extends BaseScreen {
     public Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            GameView gameView = new GameView();
+            GameView gameView = new GameView(MainScreen.this);
             gameView.initView();
             stage.addActor(gameView);
         }

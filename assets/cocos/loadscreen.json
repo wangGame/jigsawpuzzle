@@ -56,7 +56,7 @@
               "X": 1080.0,
               "Y": 1920.0
             },
-            "Name": "Image_1",
+            "Name": "loadingbg",
             "ctype": "ImageViewObjectData"
           },
           {
@@ -101,7 +101,7 @@
               "X": 200.0,
               "Y": 200.0
             },
-            "Name": "iconRound_1",
+            "Name": "loadingicon",
             "ctype": "SpriteObjectData"
           }
         ],
@@ -109,7 +109,7 @@
           "X": 1080.0,
           "Y": 1920.0
         },
-        "Name": "Scene",
+        "Name": "loading",
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [

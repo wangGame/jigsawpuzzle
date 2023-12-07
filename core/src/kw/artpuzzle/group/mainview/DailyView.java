@@ -54,8 +54,7 @@ public class DailyView extends BaseView {
             label.setText(dateBean.getYear()+" "+dateBean.getMonth());
             label.pack();
             setSize(465, 50);
-            label.setPosition(465.0f / 2.0f, 25, Align.center);
-            setDebug(true);
+            label.setPosition(0, 25, Align.left);
         }}).pad(15);
 
         contentTable.add(new Group() {{
