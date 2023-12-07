@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
@@ -50,6 +52,7 @@ public class GameView extends Group {
             align(Align.bottom);
             setY(100);
         }});
+        bottomPanelScrollPanel.setTouchable(Touchable.childrenOnly);
         bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         bottomPanelScrollPanel.setDebug(true);
         bottomPanelScrollPanel.setY(100);
@@ -57,9 +60,48 @@ public class GameView extends Group {
         addActor(view);
         view.setOrigin(Align.center);
         view.setScale(0.5f);
+        view.addListener(new ClickListener(){
+            private Vector2 initialPointer1 = new Vector2();
+            private Vector2 initialPointer2 = new Vector2();
+            float initialDistance;
+
+            private Vector2 pointer1 =  new Vector2();
+            private Vector2 pointer2 =  new Vector2();
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (pointer == 0) {
+                    initialPointer1.set(x, y);
+                } else if (pointer == 1) {
+                    initialPointer2.set(x, y);
+                    initialDistance = initialPointer1.dst(initialPointer2);
+                }
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                pointer1.set(x, y);
+                pointer2.set(initialPointer2);
+                float distance = pointer1.dst(pointer2);
+                float scale = distance / initialDistance;
+                setScale(scale);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                System.out.println(":------------------------------");
+            }
+        });
         view.setPosition(Constant.GAMEWIDTH/2.0f,(Constant.GAMEHIGHT - 300)/2.0f + 300,Align.center);
         addActor(bottomPanelScrollPanel);
-
+        bottomPanelScrollPanel.setRectangle(0,0,getWidth(),220);
         Texture texture = modelUtils.getTexture();
 
 //        Group group = new Group();
