@@ -50,7 +50,7 @@ public class MainScreen extends BaseScreen {
                 @Override
                 public void run() {
                     CateDetailGroup cateDetailGroup = new CateDetailGroup();
-                    cateDetailGroup.setY(142);
+                    cateDetailGroup.setY(-offsetY/2.0f);
                     content.addActor(cateDetailGroup);
                 }
             }));
