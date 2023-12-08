@@ -10,6 +10,7 @@ import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.sound.AudioProcess;
 
 import kw.artpuzzle.audio.AudioType;
+import kw.artpuzzle.data.GameData;
 
 /**
  * @Auther jian xian si qi
@@ -28,6 +29,7 @@ public class LoadingScreen extends BaseScreen {
         Actor loadingbg = rootView.findActor("loadingbg");
         loadingbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         loadingbg.setPosition(540.0f,960.0f, Align.center);
+        GameData.loadLevel();
     }
 
     @Override
