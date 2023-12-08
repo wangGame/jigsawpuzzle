@@ -11,6 +11,7 @@ import com.kw.gdx.constant.Configuration;
 import com.kw.gdx.constant.Constant;
 
 import kw.artpuzzle.JigSawPuzzle;
+import kw.artpuzzle.listener.GameListener;
 
 public class AndroidLauncher extends BaseApplication{
     private Vibrator vibrator;
@@ -40,7 +41,14 @@ public class AndroidLauncher extends BaseApplication{
         configuration.useWakelock = true;
         configuration.numSamples = 2;
         Constant.realseDebug = isDebug;
-        jigSawPuzzle = new JigSawPuzzle();
+        jigSawPuzzle = new JigSawPuzzle(
+                new AndroidDownLoad(this),
+                new GameListener() {
+                    @Override
+                    public void changeLocalPath() {
+
+                    }
+                });
         initialize(jigSawPuzzle,configuration);
     }
 

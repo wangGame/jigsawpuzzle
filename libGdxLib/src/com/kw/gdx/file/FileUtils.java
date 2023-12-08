@@ -55,16 +55,21 @@ public class FileUtils {
     public static void copyFile(String sourceFilePath, String targetFilePath) throws IOException {
         File sourceFile = new File(sourceFilePath);
         File targetFile = new File(targetFilePath);
-        try(FileInputStream inputStream = new FileInputStream(sourceFile);
-            FileOutputStream outputStream = new FileOutputStream(targetFile);
-            )
-        {
-                byte[] buffer = new byte[4096];
-                int length = 0;
-                while ((length = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, length);
-                }
-            }
+        if (!targetFile.exists()) {
+            targetFile.getParentFile().mkdirs(); // 确保父目录存在
+            targetFile.createNewFile();
+        }
+//        FileOutputStream outputStream = new FileOutputStream(targetFile);
+//        try(FileInputStream inputStream = new FileInputStream(sourceFile);
+//
+//            )
+//        {
+//                byte[] buffer = new byte[4096];
+//                int length = 0;
+//                while ((length = inputStream.read(buffer)) != -1) {
+//                    outputStream.write(buffer, 0, length);
+//                }
+//            }
     }
 
     //测试方法

@@ -21,7 +21,7 @@ public class MainView extends BaseView {
         ArrayMap<Integer, LevelBean> levelData = GameData.getLevelData();
         levelScrollPanel = new ScrollPane(new Table(){{
             for (int i = 1; i <= levelData.size; i++) {
-                LevelBean levelBean = levelData.get(i-1);
+                LevelBean levelBean = levelData.get(i);
                 add(new ItemGroup(levelBean,runnable)).pad(15);
                 if (i%2 == 0){
                     row();

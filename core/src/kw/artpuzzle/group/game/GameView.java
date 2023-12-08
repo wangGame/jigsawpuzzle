@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.listener.OrdinaryButtonListener;
@@ -23,6 +24,9 @@ import com.kw.gdx.scrollpane.ScrollPane;
 
 import java.util.ArrayList;
 
+import kw.artpuzzle.constant.LevelConfig;
+import kw.artpuzzle.data.GameData;
+import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.listener.MyClickListener;
 import kw.artpuzzle.utils.GameLogicUtils;
 import kw.artpuzzle.view.ModelGroup;
@@ -42,7 +46,6 @@ public class GameView extends Group {
     public GameView(BaseScreen baseScreen){
        this.baseScreen = baseScreen;
     }
-
 
     public void initView(){
         setSize(1080,1920);
@@ -65,7 +68,6 @@ public class GameView extends Group {
         middlebg.setPosition(vector2,Align.center);
         Group gametop = rootView.findActor("gametop");
         gametop.setY(gametop.getY() + baseScreen.getOffsetY());
-
         Actor topback = gametop.findActor("topback");
         Actor egebtn = gametop.findActor("egebtn");
         Actor clearbtn = gametop.findActor("clearbtn");
@@ -85,8 +87,11 @@ public class GameView extends Group {
             Actor actor = actors.get(i);
             actor.setX(v1 + v * i,Align.center);
         }
-
-        modelUtils = new ModelUtils("234.jpg",6,6);
+        ArrayMap<Integer, LevelBean> levelData = GameData.getLevelData();
+        LevelBean levelBean = levelData.get(LevelConfig.levelIndex);
+        modelUtils = new ModelUtils("finallevel/"
+                +levelBean.getVersion()+"/"+levelBean.getLevelId()
+                +"/"+levelBean.getLevelId()+".png",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
 
@@ -103,7 +108,7 @@ public class GameView extends Group {
                 });
             }
             pack();
-            align(Align.bottom);
+            align(Align.bottomLeft);
             setY(100);
         }});
         bottomPanelScrollPanel.setTouchable(Touchable.childrenOnly);

@@ -93,4 +93,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(":core")
     implementation project(":libGdxLib")
+    implementation 'com.liulishuo.filedownloader:library:1.7.7'
 }

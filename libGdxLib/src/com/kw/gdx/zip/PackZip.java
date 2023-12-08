@@ -96,27 +96,38 @@ public class PackZip {
      */
     public static boolean copyOutToTemp(String from, String to){
         NLog.i("copyOutToTemp start from %s to %s",from,to);
-//        String sourceFolderPath1 = "data\\origin\\cocos";
-//        String targetFolderPath1 = "data\\md5";
         String sourceFolderPath1 = from;
         String targetFolderPath1 = to;
         File targetFile = new File(to);
         if (!targetFile.exists())targetFile.mkdirs();
         File file = new File(sourceFolderPath1);
-        for (File listFile : file.listFiles()) {
-            if (listFile.isDirectory()){
-                copyOutToTemp(listFile.getPath(),to+File.separator+listFile.getName());
-            }else {
-                String sp = sourceFolderPath1 + File.separator + listFile.getName();
-                String tp = targetFolderPath1 + File.separator + listFile.getName();
-                try {
-                    FileUtils.copyFile(sp, tp);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    targetFile.delete();
-                    file.delete();
-                    return false;
+        if (file.isDirectory()) {
+            for (File listFile : file.listFiles()) {
+                if (listFile.isDirectory()) {
+                    copyOutToTemp(listFile.getPath(), to + File.separator + listFile.getName());
+                } else {
+                    String sp = sourceFolderPath1 + File.separator + listFile.getName();
+                    String tp = targetFolderPath1 + File.separator + listFile.getName();
+                    try {
+                        FileUtils.copyFile(sp, tp);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        targetFile.delete();
+                        file.delete();
+                        return false;
+                    }
                 }
+            }
+        }else {
+            String sp = sourceFolderPath1;
+            String tp = targetFolderPath1;
+            try {
+                FileUtils.copyFile(sp, tp);
+            } catch (IOException e) {
+                e.printStackTrace();
+                targetFile.delete();
+                file.delete();
+                return false;
             }
         }
         targetFile.delete();
@@ -197,13 +208,25 @@ public class PackZip {
     public static boolean unpackZip(String from, String to){
         NLog.i("unpackZip start from %s to %s",from,to);
         File file = new File(from);
-        for (File listFile : file.listFiles()){
-            NLog.i("deal path %s",listFile.getPath());
+        if (file.isDirectory()) {
+            for (File listFile : file.listFiles()) {
+                NLog.i("deal path %s", listFile.getPath());
+                UnPackZip z = new UnPackZip();
+                String[] split = listFile.getName().split("\\.");
+                try {
+                    z.unZipFiles(listFile.getPath(), to + split[0] + File.separator);
+                    listFile.delete();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }else {
             UnPackZip z = new UnPackZip();
-            String[] split = listFile.getName().split("\\.");
+            String[] split = file.getName().split("\\.");
             try {
-                z.unZipFiles(listFile.getPath(),to+split[0]+File.separator);
-                listFile.delete();
+                z.unZipFiles(file.getPath(), to + split[0] + File.separator);
+                file.delete();
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
