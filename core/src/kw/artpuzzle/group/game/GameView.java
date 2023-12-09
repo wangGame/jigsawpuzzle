@@ -1,21 +1,16 @@
 package kw.artpuzzle.group.game;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.resource.cocosload.CocosResource;
@@ -87,7 +82,7 @@ public class GameView extends Group {
             Actor actor = actors.get(i);
             actor.setX(v1 + v * i,Align.center);
         }
-        ArrayMap<Integer, LevelBean> levelData = GameData.getLevelData();
+        ArrayMap<Integer, LevelBean> levelData = GameData.getInstance().getLevelSortData();
         LevelBean levelBean = levelData.get(LevelConfig.levelIndex);
         modelUtils = new ModelUtils("finallevel/"
                 +levelBean.getVersion()+"/"+levelBean.getLevelId()

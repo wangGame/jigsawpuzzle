@@ -23,8 +23,8 @@ public class DownLevelUtils extends BaseDownLoadUtils{
         this.levelBean = levelBean;
         this.siteusing = NetContant.url
                 +levelBean.getVersion()
-                +"/"+levelBean.getLevelId()+".zip";
-        this.toPath = outPath+levelBean.getLevelId()+".zip";
+                +"/"+levelBean.getLevelUUID()+".zip";
+        this.toPath = outPath+levelBean.getLevelUUID()+".zip";
     }
 
     protected void downFile() {
@@ -36,12 +36,14 @@ public class DownLevelUtils extends BaseDownLoadUtils{
                     @Override
                     public void run() {
                         String localStoragePath = Gdx.files.getLocalStoragePath();
-                        Gdx.files.local(toPath).copyTo(Gdx.files.local(append("level/temp/"+levelBean.getLevelId()+"/"+levelBean.getLevelId()+".zip")));
+                        Gdx.files.local(toPath).copyTo(
+                                Gdx.files.local(append("level/temp/"+levelBean.getLevelUUID()+"/"+levelBean.getLevelUUID()+".zip")));
                         reDownLoad(PackZip.unpackZip(
-                                append(localStoragePath, "level/temp/"+levelBean.getLevelId()+"/"+levelBean.getLevelId()+".zip"),
+                                append(localStoragePath, "level/temp/"+levelBean.getLevelUUID()+"/"+levelBean.getLevelUUID()+".zip"),
                                 append(localStoragePath, "level/md5/")));
-                        reDownLoad(PackZip.check(append(localStoragePath,"level/md5/"+levelBean.getLevelId())));
-                        Gdx.files.local(append("level/md5/"+levelBean.getLevelId()+"/")).copyTo(Gdx.files.local("finallevel/"+levelBean.getVersion()+"/"));
+                        reDownLoad(PackZip.check(append(localStoragePath,"level/md5/"+levelBean.getLevelUUID())));
+                        Gdx.files.local(append("level/md5/"+levelBean.getLevelUUID()+"/"))
+                                .copyTo(Gdx.files.local("finallevel/"+levelBean.getVersion()+"/"));
                         runnable.run();
                     }
                 }.start();

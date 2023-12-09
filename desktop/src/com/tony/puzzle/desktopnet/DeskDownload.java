@@ -45,7 +45,7 @@ public class DeskDownload extends DownLoad {
                                DownLoadListener runnable,
                                DownLoadListener onFail) {
         NLog.i("download uri: %s",url);
-//        System.out.println(url);
+        System.out.println(url);
         final Net.HttpRequest down1 = new Net.HttpRequest();
         down1.setUrl(url);
         down1.setMethod("GET");

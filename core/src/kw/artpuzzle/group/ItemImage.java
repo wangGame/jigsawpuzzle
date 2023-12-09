@@ -27,10 +27,10 @@ public class ItemImage extends Group {
         setSize(465.00f,465.00f);
         this.levelBean = levelBean;
         localStoragePath = Gdx.files.getLocalStoragePath();
-        levelPath = "finallevel/" + levelBean.getVersion() + "/" + levelBean.getLevelId();
+        levelPath = "finallevel/" + levelBean.getVersion() + "/" + levelBean.getLevelUUID();
         if (Gdx.files.local(levelPath).exists()){
             if (PackZip.check(localStoragePath + levelPath)) {
-                Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelId()+".png"));
+                Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
                 addActor(levelImage);
                 levelImage.setSize(getWidth(),getHeight());
             }else {
@@ -54,7 +54,7 @@ public class ItemImage extends Group {
                     @Override
                     public void run() {
                         if (PackZip.check(localStoragePath + levelPath)) {
-                            Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelId()+".png"));
+                            Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
                             addActor(levelImage);
                             levelImage.setSize(getWidth(),getHeight());
                         }

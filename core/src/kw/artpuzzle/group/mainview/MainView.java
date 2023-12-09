@@ -1,10 +1,8 @@
 package kw.artpuzzle.group.mainview;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.data.GameData;
@@ -18,7 +16,7 @@ import kw.artpuzzle.group.group.ItemGroup;
 public class MainView extends BaseView {
     private ScrollPane levelScrollPanel;
     public MainView(Runnable runnable){
-        ArrayMap<Integer, LevelBean> levelData = GameData.getLevelData();
+        ArrayMap<Integer, LevelBean> levelData = GameData.getInstance().getLevelSortData();
         levelScrollPanel = new ScrollPane(new Table(){{
             for (int i = 1; i <= levelData.size; i++) {
                 LevelBean levelBean = levelData.get(i);

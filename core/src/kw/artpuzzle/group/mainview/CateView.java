@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.scrollpane.ScrollPane;
 
+import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.group.group.CateGroup;
 
 /**
@@ -15,11 +16,7 @@ import kw.artpuzzle.group.group.CateGroup;
 public class CateView extends BaseView {
     private ScrollPane cateScrollpane;
     public CateView(Runnable runnable){
-        String str[] = {
-                "ABCDEF",
-                "ABCDEF",
-                "ABCDEF"
-        };
+        GameData.getInstance().readyCate();
         cateScrollpane = new ScrollPane(new Table(){{
             for (String s : str) {
                 CateGroup cateGroup = new CateGroup(s);

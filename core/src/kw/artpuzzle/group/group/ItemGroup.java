@@ -57,8 +57,4 @@ public class ItemGroup extends Group {
         processlabel.setColor(Color.valueOf("#AAAAAA"));
     }
 
-    public ItemGroup(Runnable runnable){
-
-    }
-
 }

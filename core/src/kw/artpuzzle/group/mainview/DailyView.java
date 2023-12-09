@@ -5,9 +5,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.scrollpane.ScrollPane;
 
+import kw.artpuzzle.data.GameData;
+import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.group.group.ItemGroup;
 import kw.artpuzzle.utils.DailyUtils;
 import kw.artpuzzle.utils.DateBean;
@@ -45,6 +48,7 @@ public class DailyView extends BaseView {
     }
 
     private void addOneMonthData(boolean b) {
+        ArrayMap<Integer, LevelBean> levelBeanArrayMap = GameData.getInstance().readyDaily(dateBean.getYear() + "-" + dateBean.getMonth() + ".csv");
         contentTable.add(new Group() {{
             Label label = new Label("", new Label.LabelStyle() {{
                 font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
@@ -67,7 +71,16 @@ public class DailyView extends BaseView {
         }
         int index = 0;
         for (int i = 1; i <= tempDay; i++) {
-            contentTable.add(new ItemGroup()).pad(15);
+            LevelBean levelBean = levelBeanArrayMap.get(tempDay - i - 1);
+            if (levelBean == null){
+                levelBean = new LevelBean();
+            }
+            contentTable.add(new ItemGroup(levelBean, new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            })).pad(15);
             index ++ ;
             if (index % 2 == 0) {
                 contentTable.row();
