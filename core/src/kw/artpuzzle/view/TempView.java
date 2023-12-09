@@ -12,7 +12,6 @@ import kw.artpuzzle.constant.GameConstant;
 
 public class TempView extends Group {
     public TempView(){
-        setDebug(true);
         Group group = new Group();
         addActor(group);
         Texture texture = Asset.getAsset().getTexture("out1/" + 0 + ".png");
@@ -34,7 +33,7 @@ public class TempView extends Group {
         }
         group.setSize(1800,1800);
         group.setOrigin(Align.center);
-        group.setDebug(true);
+        group.setVisible(false);
         setSize(group.getWidth(),group.getHeight());
         group.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
 
@@ -42,7 +41,8 @@ public class TempView extends Group {
         addActor(playImg);
         playImg.setSize(getWidth(),getHeight());
         playImg.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
-        playImg.setColor(Color.valueOf("333333"));
+        playImg.setColor(Color.valueOf("AAAAAA"));
+        playImg.getColor().a = 0.3f;
     }
 
     @Override

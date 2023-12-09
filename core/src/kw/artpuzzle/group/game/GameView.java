@@ -85,8 +85,8 @@ public class GameView extends Group {
         ArrayMap<Integer, LevelBean> levelData = GameData.getInstance().getLevelSortData();
         LevelBean levelBean = levelData.get(LevelConfig.levelIndex);
         modelUtils = new ModelUtils("finallevel/"
-                +levelBean.getVersion()+"/"+levelBean.getLevelId()
-                +"/"+levelBean.getLevelId()+".png",6,6);
+                +levelBean.getVersion()+"/"+levelBean.getLevelUUID()
+                +"/"+levelBean.getLevelUUID()+".png",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
 

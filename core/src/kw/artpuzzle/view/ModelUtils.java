@@ -14,7 +14,7 @@ public class ModelUtils {
     private Texture texture;
     public ModelUtils(String targetTextureName,int row,int colomn){
         allModels = new ArrayList<>();
-        texture = Asset.getAsset().getTexture(targetTextureName);
+        texture = Asset.getAsset().getLocalTexture(targetTextureName);
         int width = texture.getWidth();
         int height = texture.getHeight();
         int modelIndex = -1;

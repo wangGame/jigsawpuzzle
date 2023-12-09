@@ -21,6 +21,7 @@ import kw.artpuzzle.group.mainview.CateView;
 import kw.artpuzzle.group.mainview.DailyView;
 import kw.artpuzzle.group.mainview.MainView;
 import kw.artpuzzle.group.mainview.PuzzleView;
+import kw.artpuzzle.listener.SignListener;
 import kw.artpuzzle.utils.DailyUtils;
 import kw.artpuzzle.utils.DateBean;
 
@@ -46,12 +47,15 @@ public class MainScreen extends BaseScreen {
         mainScrollPane = new ScrollPane(new Table(){{
             add(new MainView(runnable));
             add(new DailyView());
-            add(new CateView(new Runnable(){
+            add(new CateView(new SignListener(){
                 @Override
-                public void run() {
-                    CateDetailGroup cateDetailGroup = new CateDetailGroup();
-                    cateDetailGroup.setY(-offsetY/2.0f);
-                    content.addActor(cateDetailGroup);
+                public void sign(Object o) {
+                    if (o instanceof String){
+                        String cateName = (String)o;
+                        CateDetailGroup cateDetailGroup = new CateDetailGroup(cateName);
+                        cateDetailGroup.setY(1920 + offsetY ,Align.top);
+                        content.addActor(cateDetailGroup);
+                    }
                 }
             }));
             add(new PuzzleView());
