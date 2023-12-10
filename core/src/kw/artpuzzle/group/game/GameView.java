@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
+import kw.artpuzzle.group.group.BgTheme;
 import kw.artpuzzle.listener.MyClickListener;
 import kw.artpuzzle.utils.GameLogicUtils;
 import kw.artpuzzle.view.ModelGroup;
@@ -46,9 +47,11 @@ public class GameView extends Group {
     private Table bottomModelTable;
     //因为排序
     private ArrayList<ModelGroup> finalModelGroup;
+    private boolean showBorder;
 
     public GameView(BaseScreen baseScreen){
        this.baseScreen = baseScreen;
+       this.finalModelGroup = new ArrayList<>();
     }
 
     public void initView(){
@@ -107,10 +110,11 @@ public class GameView extends Group {
                 +levelBean.getVersion()+"/"+levelBean.getLevelUUID()
                 +"/"+levelBean.getLevelUUID()+".png",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
+        finalModelGroup.addAll(allModels);
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
 
         bottomPanelScrollPanel = new ScrollPane(bottomModelTable = new Table(){{
-            for (ModelGroup allModel : allModels) {
+            for (ModelGroup allModel : finalModelGroup) {
                 allModel.addListener(getItemListener(allModel));
                 add(allModel);
                 allModel.setUpdateSize(new Runnable(){
@@ -140,7 +144,7 @@ public class GameView extends Group {
         view.setScale(0.5f);
         picGroup.setPosition(gamemiddle.getWidth()/2.0f,gamemiddle.getHeight()/2.0f,Align.center);
         setOrigin(Align.center);
-        addListener(new ActorGestureListener(){
+        gamemiddle.addListener(new ActorGestureListener(){
             private float touchDownScale;
             private float minScale;
             private float maxScale;
@@ -199,10 +203,10 @@ public class GameView extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                gameSuccess(picGroup,view);
+                showBorder();
             }
         });
-
+//        gameSuccess(picGroup,view);
         prebtn.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -210,6 +214,16 @@ public class GameView extends Group {
                 isShowPre = !isShowPre;
                 //绘制
                 view.setShowPre(isShowPre);
+            }
+        });
+
+        themebtn.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                BgTheme bgTheme = new BgTheme();
+                addActor(bgTheme);
+
             }
         });
     }
@@ -281,6 +295,7 @@ public class GameView extends Group {
                     logicUtils.convertTarget(vector2);
                     if (logicUtils.check(targetPos,vector2)) {
                         successMove = true;
+                        finalModelGroup.remove(group);
                         group.addAction(Actions.moveToAligned(targetPos.x,targetPos.y,Align.center,0.1f));
                         Vector2 vector21 = group.imageVector();
                         logicUtils.convertTarget(vector21);
@@ -305,5 +320,22 @@ public class GameView extends Group {
                 group.resetScale();
             }
         };
+    }
+
+    public void showBorder() {
+        showBorder = !showBorder;
+        bottomModelTable.clear();
+        for (ModelGroup modelGroup : finalModelGroup) {
+            if (showBorder) {
+                ArrayList<ModelGroup> borderModels = modelUtils.getBorderModels();
+                if (borderModels.contains(modelGroup)) {
+                    bottomModelTable.add(modelGroup);
+                }
+            }else {
+                bottomModelTable.add(modelGroup);
+            }
+        }
+        bottomModelTable.pack();
+        bottomModelTable.align(Align.bottomLeft);
     }
 }

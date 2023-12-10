@@ -57,4 +57,8 @@ public class ModelUtils {
         return tempView;
     }
 
+    public ArrayList<ModelGroup> getBorderModels() {
+        return borderModels;
+    }
+
 }
