@@ -10,15 +10,19 @@ import java.util.ArrayList;
 
 public class ModelUtils {
     private ArrayList<ModelGroup> allModels;
+    private ArrayList<ModelGroup> borderModels;
+    private ArrayList<ModelGroup> insetModels;
     private TempView tempView;
     private Texture texture;
     public ModelUtils(String targetTextureName,int row,int colomn){
         allModels = new ArrayList<>();
+        borderModels = new ArrayList<>();
+        insetModels = new ArrayList<>();
         texture = Asset.getAsset().getLocalTexture(targetTextureName);
         int width = texture.getWidth();
         int height = texture.getHeight();
         int modelIndex = -1;
-        tempView = new TempView();
+        tempView = new TempView(texture);
         for (int i3 = 0; i3 < row; i3++) {
             for (int i4 = 0; i4 < colomn; i4++) {
                 modelIndex ++;
@@ -32,6 +36,11 @@ public class ModelUtils {
                 maskImage.setStartU(((actor.getX())/(width * 1.0f)) * (width/1800.0f));
                 maskImage.setStartV(1.0f -((actor.getY()+actor.getHeight())/height)*(height/1800.0f));
                 allModels.add(maskImage);
+                if (i3 == 0 || i4 == 0){
+                    borderModels.add(maskImage);
+                }else {
+                    insetModels.add(maskImage);
+                }
             }
         }
     }
@@ -47,4 +56,5 @@ public class ModelUtils {
     public TempView getTempView() {
         return tempView;
     }
+
 }

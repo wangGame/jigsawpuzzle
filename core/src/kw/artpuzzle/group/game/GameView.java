@@ -1,16 +1,20 @@
 package kw.artpuzzle.group.game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.resource.cocosload.CocosResource;
@@ -38,6 +42,11 @@ public class GameView extends Group {
     private GameLogicUtils logicUtils;
     private ModelUtils modelUtils ;
     private  BaseScreen baseScreen;
+    private boolean isShowPre;
+    private Table bottomModelTable;
+    //因为排序
+    private ArrayList<ModelGroup> finalModelGroup;
+
     public GameView(BaseScreen baseScreen){
        this.baseScreen = baseScreen;
     }
@@ -52,11 +61,14 @@ public class GameView extends Group {
         gamebg.setPosition(540.0f,960.0f,Align.center);
         rootView.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
 
+        rootView.findActor("gamebg").setColor(Color.valueOf("#C0C3C8"));
+
         Group gamebottom = rootView.findActor("gamebottom");
         gamebottom.setY(gamebottom.getY() - baseScreen.getOffsetY());
 
         Group gamemiddle = rootView.findActor("gamemiddle");
         Actor middlebg = gamemiddle.findActor("middlebg");
+        middlebg.setVisible(false);
         Vector2 vector2 = new Vector2();
         vector2.set(middlebg.getX(Align.center),middlebg.getY(Align.center));
         middlebg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 140.0f - 260.0f);
@@ -76,6 +88,13 @@ public class GameView extends Group {
         actors.add(tipbtn);
         actors.add(prebtn);
         actors.add(themebtn);
+        topback.setOrigin(Align.center);
+        egebtn.setOrigin(Align.center);
+        clearbtn.setOrigin(Align.center);
+        tipbtn.setOrigin(Align.center);
+        prebtn.setOrigin(Align.center);
+        themebtn.setOrigin(Align.center);
+
         float v = Constant.GAMEWIDTH / 6.0f;
         float v1 = v / 2.0f;
         for (int i = 0; i < actors.size(); i++) {
@@ -90,7 +109,7 @@ public class GameView extends Group {
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
 
-        bottomPanelScrollPanel = new ScrollPane(new Table(){{
+        bottomPanelScrollPanel = new ScrollPane(bottomModelTable = new Table(){{
             for (ModelGroup allModel : allModels) {
                 allModel.addListener(getItemListener(allModel));
                 add(allModel);
@@ -112,11 +131,14 @@ public class GameView extends Group {
         bottomPanelScrollPanel.setY(50);
         gamebottom.addActor(bottomPanelScrollPanel);
 
+        Group picGroup = new Group();
+        picGroup.setSize(1050,1050);
         TempView view = modelUtils.getTempView();
-        gamemiddle.addActor(view);
+        picGroup.addActor(view);
+        gamemiddle.addActor(picGroup);
         view.setOrigin(Align.center);
         view.setScale(0.5f);
-
+        picGroup.setPosition(gamemiddle.getWidth()/2.0f,gamemiddle.getHeight()/2.0f,Align.center);
         setOrigin(Align.center);
         addListener(new ActorGestureListener(){
             private float touchDownScale;
@@ -151,11 +173,9 @@ public class GameView extends Group {
 
             }
         });
-        view.setPosition(gamemiddle.getWidth()/2.0f,gamemiddle.getHeight()/2.f,Align.center);
-
+        view.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.f,Align.center);
         bottomPanelScrollPanel.setRectangle(0,0,getWidth(),220);
         Texture texture = modelUtils.getTexture();
-
 //        Group group = new Group();
 //        for (ModelGroup allModel : allModels) {
 //            allModel.addListener(getItemListener(allModel));
@@ -179,7 +199,50 @@ public class GameView extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                gameSuccess(picGroup,view);
+            }
+        });
 
+        prebtn.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                isShowPre = !isShowPre;
+                //绘制
+                view.setShowPre(isShowPre);
+            }
+        });
+    }
+
+    private void gameSuccess(Group picGroup,TempView view) {
+        Actor gametop1 = rootView.findActor("gametop");
+        Actor gamebottom1 = rootView.findActor("gamebottom");
+        gamebottom1.setVisible(false);
+        gametop1.setVisible(false);
+        view.setScale(0.56f);
+//        view.addAction(Actions.scaleTo(0.52f,0.52f,0.2f));
+        Image image = new Image(new NinePatch(
+                Asset.getAsset().getTexture("common/success_border.png"),
+                16,16,16,16));
+        picGroup.addActor(image);
+        image.setSize(1050,1050);
+        image.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.0f,Align.center);
+        picGroup.setOrigin(Align.center);
+        picGroup.addAction(Actions.sequence(
+                Actions.delay(2,
+                        Actions.scaleTo(0.798f,0.798f,0.3f))));
+
+        Group group = CocosResource.loadFile("cocos/btn.json");
+        addActor(group);
+        group.setPosition(getWidth()/2.0f,200 - baseScreen.getOffsetY(),Align.bottom);
+        group.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                GameView.this.addAction(Actions.sequence(
+                        Actions.fadeOut(0.4f),
+                        Actions.removeActor()
+                ));
             }
         });
     }
