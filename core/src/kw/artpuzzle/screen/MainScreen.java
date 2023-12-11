@@ -46,7 +46,7 @@ public class MainScreen extends BaseScreen {
         content.setTouchable(Touchable.childrenOnly);
         mainScrollPane = new ScrollPane(new Table(){{
             add(new MainView(runnable));
-            add(new DailyView());
+            add(new DailyView(runnable));
             add(new CateView(new SignListener(){
                 @Override
                 public void sign(Object o) {

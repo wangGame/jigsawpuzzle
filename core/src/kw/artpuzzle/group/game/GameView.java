@@ -22,6 +22,7 @@ import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
@@ -104,13 +105,13 @@ public class GameView extends Group {
             Actor actor = actors.get(i);
             actor.setX(v1 + v * i,Align.center);
         }
-        ArrayMap<Integer, LevelBean> levelData = GameData.getInstance().getLevelSortData();
-        LevelBean levelBean = levelData.get(LevelConfig.levelIndex);
+        LevelBean levelBean = LevelConfig.levelIndex;
         modelUtils = new ModelUtils("finallevel/"
                 +levelBean.getVersion()+"/"+levelBean.getLevelUUID()
                 +"/"+levelBean.getLevelUUID()+".png",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         finalModelGroup.addAll(allModels);
+        Collections.shuffle(finalModelGroup);
         logicUtils = new GameLogicUtils(modelUtils.getTempView());
 
         bottomPanelScrollPanel = new ScrollPane(bottomModelTable = new Table(){{

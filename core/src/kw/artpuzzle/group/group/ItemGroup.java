@@ -47,7 +47,7 @@ public class ItemGroup extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                LevelConfig.levelIndex = levelBean.getSortId();
+                LevelConfig.levelIndex = levelBean;
                 runnable.run();
             }
         });

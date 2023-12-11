@@ -28,13 +28,17 @@ public class JigSawPuzzle extends BaseGame {
 
     @Override
     protected void loadingView() {
-        FileHandle local = Gdx.files.local("/");
-
         setScreen(new LoadingScreen(this));
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+    }
+
+    @Override
+    public void render() {
+        Asset.getAsset().assetManagerUpdate();
+        super.render();
     }
 }

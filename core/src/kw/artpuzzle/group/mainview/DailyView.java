@@ -24,8 +24,10 @@ public class DailyView extends BaseView {
     private DateBean dateBean;
     private int currentMonthDays;
     private Table contentTable;
+    private Runnable runnable;
 
-    public DailyView(){
+    public DailyView(Runnable runnable){
+        this.runnable = runnable;
         contentTable = new Table();
         dateBean = DailyUtils.currentDateBean();
         currentMonthDays = DailyUtils.currentMonthDay(dateBean.getYear(),dateBean.getMonth());
@@ -48,7 +50,8 @@ public class DailyView extends BaseView {
     }
 
     private void addOneMonthData(boolean b) {
-        ArrayMap<Integer, LevelBean> levelBeanArrayMap = GameData.getInstance().readyDaily(dateBean.getYear() + "-" + dateBean.getMonth() + ".csv");
+        ArrayMap<Integer, LevelBean> levelBeanArrayMap = GameData.getInstance().readyDaily(dateBean.getYear()
+                + "-" + (dateBean.getMonth()+1) + ".csv");
         contentTable.add(new Group() {{
             Label label = new Label("", new Label.LabelStyle() {{
                 font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
@@ -71,16 +74,11 @@ public class DailyView extends BaseView {
         }
         int index = 0;
         for (int i = 1; i <= tempDay; i++) {
-            LevelBean levelBean = levelBeanArrayMap.get(tempDay - i - 1);
+            LevelBean levelBean = levelBeanArrayMap.get(tempDay - i+1);
             if (levelBean == null){
                 levelBean = new LevelBean();
             }
-            contentTable.add(new ItemGroup(levelBean, new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            })).pad(15);
+            contentTable.add(new ItemGroup(levelBean,runnable)).pad(15);
             index ++ ;
             if (index % 2 == 0) {
                 contentTable.row();

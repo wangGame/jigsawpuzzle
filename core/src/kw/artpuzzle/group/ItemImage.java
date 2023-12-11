@@ -2,6 +2,7 @@ package kw.artpuzzle.group;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -23,6 +24,7 @@ public class ItemImage extends Group {
     private LevelBean levelBean;
     private String levelPath;
     private String localStoragePath;
+    private int status = 0; //
     public ItemImage(LevelBean levelBean){
         setSize(465.00f,465.00f);
         this.levelBean = levelBean;
@@ -30,9 +32,10 @@ public class ItemImage extends Group {
         levelPath = "finallevel/" + levelBean.getVersion() + "/" + levelBean.getLevelUUID();
         if (Gdx.files.local(levelPath).exists()){
             if (PackZip.check(localStoragePath + levelPath)) {
-                Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
-                addActor(levelImage);
-                levelImage.setSize(getWidth(),getHeight());
+            status = 9;
+//                Image levelImage = new Image(Asset.getAsset().getLocalTexture());
+//                addActor(levelImage);
+//                levelImage.setSize(getWidth(),getHeight());
             }else {
                 FileHandle local = Gdx.files.local(levelPath);
                 local.deleteDirectory();
@@ -54,9 +57,12 @@ public class ItemImage extends Group {
                     @Override
                     public void run() {
                         if (PackZip.check(localStoragePath + levelPath)) {
-                            Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
-                            addActor(levelImage);
-                            levelImage.setSize(getWidth(),getHeight());
+                            status = 1;
+                            Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevelUUID()+".png");
+//
+//                            Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
+//                            addActor(levelImage);
+//                            levelImage.setSize(getWidth(),getHeight());
                         }
                     }
                 });
@@ -68,5 +74,23 @@ public class ItemImage extends Group {
             }
         });
         downLevelUtils.downLoad();
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        if (status == 9){
+            status = 1;
+            Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevelUUID()+".png");
+        }
+        if (status == 1){
+            if (Asset.getAsset().isLocalAssetManagerLoaded(
+                    levelPath+"/"+levelBean.getLevelUUID()+".png")){
+                status = 2;
+                Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
+                addActor(levelImage);
+                levelImage.setSize(getWidth(),getHeight());
+            }
+        }
     }
 }

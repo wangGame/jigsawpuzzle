@@ -30,7 +30,7 @@ public class GameLogicUtils {
         Vector2 vector21 = new Vector2(vector2);
         Vector2 sub = vector21.sub(targetPos);
         float v = sub.x * sub.x + sub.y * sub.y;
-        System.out.println(5000.0f/(GameConstant.modelScale* GameConstant.modelScale)+"--------------------");
+
         if (v<10000.0f/(GameConstant.modelScale* GameConstant.modelScale)){
             return true;
         }else {
@@ -43,6 +43,6 @@ public class GameLogicUtils {
     }
 
     public void addActor(ModelGroup group) {
-        view.addActor(group);
+        view.addFindActor(group);
     }
 }
