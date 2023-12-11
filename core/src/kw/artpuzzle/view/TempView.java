@@ -24,6 +24,7 @@ public class TempView extends Group {
             Image image = new Image(Asset.getAsset().getTexture("out1/"+i+".png"));
             image.setName(i+"");
             splitPicGroup.addActor(image);
+            image.setVisible(false);
             image.setPosition(startX, startY);
             startX += image.getWidth()-300;
             index++;
@@ -36,7 +37,7 @@ public class TempView extends Group {
         splitPicGroup.setSize(1800,1800);
         preImage.setSize(1800,1800);
         splitPicGroup.setOrigin(Align.center);
-        splitPicGroup.setVisible(false);
+
         setSize(splitPicGroup.getWidth(),splitPicGroup.getHeight());
         preImage.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         addActor(preImage);
