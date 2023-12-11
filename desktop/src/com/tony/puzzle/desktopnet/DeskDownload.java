@@ -40,7 +40,7 @@ public class DeskDownload extends DownLoad {
         System.out.println(siteusing+fromPath);
         startDownload(siteusing + fromPath, toPath, onComplete,onFail);
     }
-//    http://gaoshanren.cdn-doodlemobile.com/Art_Puzzle/level_resource/verion1/level0.zip
+    //    http://gaoshanren.cdn-doodlemobile.com/Art_Puzzle/level_resource/verion1/level0.zip
     private void startDownload(String url, String path,
                                DownLoadListener runnable,
                                DownLoadListener onFail) {
@@ -73,7 +73,7 @@ public class DeskDownload extends DownLoad {
                             FileHandle parent = file.parent();
                             String path1 = parent.file().getPath();
 
-                            randomFile = new RandomAccessFile(file.parent().file().getPath()+ "/" + file.name(), "rwd");
+                            randomFile = new RandomAccessFile(file.parent()+ "/" + file.name(), "rwd");
                             randomFile.setLength(todownsize);
                             randomFile.seek(0);
                             byte[] buffer = new byte[1024];

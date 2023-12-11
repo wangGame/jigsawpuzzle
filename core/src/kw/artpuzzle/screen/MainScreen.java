@@ -15,6 +15,7 @@ import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.scrollpane.ScrollPane;
 
+import kw.artpuzzle.data.CateBean;
 import kw.artpuzzle.down.GameStaticInstance;
 import kw.artpuzzle.group.game.GameView;
 import kw.artpuzzle.group.group.CateDetailGroup;
@@ -52,8 +53,8 @@ public class MainScreen extends BaseScreen {
             add(new CateView(new SignListener(){
                 @Override
                 public void sign(Object o) {
-                    if (o instanceof String){
-                        String cateName = (String)o;
+                    if (o instanceof CateBean){
+                        CateBean cateName = (CateBean)o;
                         CateDetailGroup cateDetailGroup = new CateDetailGroup(cateName);
                         cateDetailGroup.setY(1920 + offsetY ,Align.top);
                         content.addActor(cateDetailGroup);

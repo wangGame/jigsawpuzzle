@@ -14,6 +14,7 @@ import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.listener.OrdinaryButtonListener;
 
+import kw.artpuzzle.data.CateBean;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.listener.SignListener;
@@ -25,7 +26,7 @@ import kw.artpuzzle.listener.SignListener;
 public class CateDetailGroup extends Group {
     private ScrollPane detailScrollPanel;
 
-    public CateDetailGroup(String cateName){
+    public CateDetailGroup(CateBean cateBean){
         setDebug(true);
         setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 140);
         Image bg = new Image(new NinePatch(
@@ -48,40 +49,39 @@ public class CateDetailGroup extends Group {
         });
 
 
-        Label titleLabel = new Label(cateName+"",new Label.LabelStyle(){{
+        Label titleLabel = new Label(cateBean.getDesc()+"",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
         }});
         titleLabel.setFontScale(1.3f);
         addActor(titleLabel);
         titleLabel.setPosition(getWidth()/2.0f,getHeight() - 72, Align.center);
         titleLabel.setColor(Color.BLACK);
-        ArrayMap<Integer, LevelBean> levelBeanArrayMap = GameData.getInstance().readCateDetail(cateName);
-//        detailScrollPanel = new ScrollPane(new Table(){{
-//            for (int i = 1; i <= 10; i++) {
-//                add(new ItemGroup()).pad(15);
-//                if (i % 2 == 0) {
-//                    row();
-//                }
-//            }
-//            align(Align.top);
-//        }});
-        detailScrollPanel = new ScrollPane(new Table(){{
-            for (int i = 1; i <= levelBeanArrayMap.size; i++) {
-                LevelBean valueAt = levelBeanArrayMap.getValueAt(i-1);
-                add(new ItemGroup(valueAt, new Runnable() {
-                    @Override
-                    public void run() {
+        if (cateBean.getType().equals("COLLECTION")) {
+            ArrayMap<Integer, LevelBean> levelBeanArrayMap
+                    = GameData.getInstance().readCollectionCateDetail(cateBean.getDesc());
+            detailScrollPanel = new ScrollPane(new Table(){{
 
+            }});
+        }else {
+            ArrayMap<Integer, LevelBean> levelBeanArrayMap
+                    = GameData.getInstance().readCateDetail(cateBean.getDesc());
+            detailScrollPanel = new ScrollPane(new Table() {{
+                for (int i = 1; i <= levelBeanArrayMap.size; i++) {
+                    LevelBean valueAt = levelBeanArrayMap.getValueAt(i - 1);
+                    add(new ItemGroup(valueAt, new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    })).pad(15);
+                    if (i % 2 == 0) {
+                        row();
                     }
-                })).pad(15);
-                if (i % 2 == 0) {
-                    row();
                 }
-            }
-            align(Align.top);
-        }});
-        detailScrollPanel.setSize(getWidth(),getHeight() - 142.0f);
-        addActor(detailScrollPanel);
-
+                align(Align.top);
+            }});
+            detailScrollPanel.setSize(getWidth(), getHeight() - 142.0f);
+            addActor(detailScrollPanel);
+        }
     }
 }

@@ -82,7 +82,7 @@ public class CateItemGroup extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                listener.sign(cateBean.getDesc());
+                listener.sign(cateBean);
             }
         });
 

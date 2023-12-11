@@ -70,7 +70,10 @@ public class GameData {
 
     ArrayMap<Integer,LevelBean> cateDetailMap;
     public ArrayMap<Integer,LevelBean> readCateDetail(String name){
-        Array<LevelBean> common = CsvUtils.common("category/categorydetail/"+name+".csv", LevelBean.class);
+        cateDetailMap.clear();
+        Array<LevelBean> common = CsvUtils.common(
+                "category/categorydetail/"+name+".csv",
+                LevelBean.class);
         for (int i = 0; i < common.size; i++) {
             LevelBean levelBean = common.get(i);
             cateDetailMap.put(levelBean.getSortId(),levelBean);
@@ -89,4 +92,18 @@ public class GameData {
         }
         return selectItemBeanArrayMap;
     }
+
+    public ArrayMap<Integer, LevelBean> readCollectionCateDetail(String name) {
+        ArrayMap<Integer,LevelBean> cateDetailMap = new ArrayMap<>();
+        cateDetailMap.clear();
+        Array<LevelBean> common = CsvUtils.common(
+                "category/categorydetail/"+name+".csv",
+                LevelBean.class);
+        for (int i = 0; i < common.size; i++) {
+            LevelBean levelBean = common.get(i);
+            cateDetailMap.put(levelBean.getSortId(),levelBean);
+        }
+        return cateDetailMap;
+    }
+
 }

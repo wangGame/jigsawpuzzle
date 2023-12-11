@@ -17,6 +17,7 @@ import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.data.SelectItemBean;
+import kw.artpuzzle.group.group.SelectDiffItem;
 
 /**
  * @Auther jian xian si qi
@@ -29,6 +30,14 @@ public class SelectDifficultyDialog extends BaseDialog {
         super.show();
         Group pregroup = dialogGroup.findActor("pregroup");
         LevelBean levelIndex = LevelConfig.levelIndex;
+        Actor selectdifficultytitle = findActor("selectdifficultytitle");
+        float y = selectdifficultytitle.getY(Align.top);
+        float v = Constant.GAMEHIGHT - y - 96 - 126;
+        float v1 = Constant.GAMEWIDTH - 60;
+        float min = Math.min(v, v1);
+        pregroup.setSize(min,min);
+        pregroup.setY(Constant.GAMEHIGHT - 126 - min / 2.0f,Align.center);
+        pregroup.setX(540.0f,Align.center);
         Image preIamge = new Image(Asset.getAsset().getLocalTexture(
                 "finallevel/"+levelIndex.getVersion()
                         +"/"+levelIndex.getLevelUUID()+"/"
@@ -39,9 +48,14 @@ public class SelectDifficultyDialog extends BaseDialog {
 
         ScrollPane pane = new ScrollPane(new Table(){{
             ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
+            for (int i = 0; i < entries.size; i++) {
+                SelectItemBean valueAt = entries.getValueAt(i);
+                add(new SelectDiffItem(valueAt));
+            }
+            pack();
         }});
         Group itempanel = dialogGroup.findActor("itempanel");
         itempanel.addActor(pane);
-        pane.setSize(Constant.GAMEWIDTH,itempanel.getHeight());
+        pane.setSize(Constant.GAMEWIDTH,itempanel.getHeight()+100);
     }
 }
