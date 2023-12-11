@@ -15,6 +15,7 @@ import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.scrollpane.ScrollPane;
 
+import kw.artpuzzle.down.GameStaticInstance;
 import kw.artpuzzle.group.game.GameView;
 import kw.artpuzzle.group.group.CateDetailGroup;
 import kw.artpuzzle.group.mainview.CateView;
@@ -36,6 +37,7 @@ public class MainScreen extends BaseScreen {
     private Group content;
     public MainScreen(BaseGame game) {
         super(game);
+        GameStaticInstance.baseScreen = this;
     }
 
     @Override

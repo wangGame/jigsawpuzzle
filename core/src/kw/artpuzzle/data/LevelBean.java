@@ -10,9 +10,9 @@ public class LevelBean {
     private int sortId;
     private String levelUUID;
     private String levelId;
-    @Value("cateGory")
-    private String typecateGory;
-    private String unlockCost;
+    private String type;
+    private String cateGory;
+    private int unlockCost;
     private String version;
 
     public LevelBean(){
@@ -51,19 +51,27 @@ public class LevelBean {
         this.levelId = levelId;
     }
 
-    public String getTypecateGory() {
-        return typecateGory;
+    public void setCateGory(String cateGory) {
+        this.cateGory = cateGory;
     }
 
-    public void setTypecateGory(String typecateGory) {
-        this.typecateGory = typecateGory;
+    public String getCateGory() {
+        return cateGory;
     }
 
-    public String getUnlockCost() {
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getUnlockCost() {
         return unlockCost;
     }
 
-    public void setUnlockCost(String unlockCost) {
+    public void setUnlockCost(int unlockCost) {
         this.unlockCost = unlockCost;
     }
 
@@ -71,9 +79,12 @@ public class LevelBean {
     public String toString() {
         return "LevelBean{" +
                 "sortId=" + sortId +
+                ", levelUUID='" + levelUUID + '\'' +
                 ", levelId='" + levelId + '\'' +
-                ", typecateGory='" + typecateGory + '\'' +
-                ", unlockCost='" + unlockCost + '\'' +
+                ", type='" + type + '\'' +
+                ", cateGory='" + cateGory + '\'' +
+                ", unlockCost=" + unlockCost +
+                ", version='" + version + '\'' +
                 '}';
     }
 }

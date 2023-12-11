@@ -18,11 +18,19 @@ public class MainView extends BaseView {
     public MainView(Runnable runnable){
         ArrayMap<Integer, LevelBean> levelData = GameData.getInstance().getLevelSortData();
         levelScrollPanel = new ScrollPane(new Table(){{
+            int index = 0;
             for (int i = 1; i <= levelData.size; i++) {
                 LevelBean levelBean = levelData.get(i);
-                add(new ItemGroup(levelBean,runnable)).pad(15);
-                if (i%2 == 0){
+                if (levelBean.getType().equals("COLLECTION")){
+                    add(new ItemGroup(levelBean, runnable)).pad(15);
+                    add(new ItemGroup(levelBean, runnable)).pad(15);
                     row();
+                }else {
+                    index ++;
+                    add(new ItemGroup(levelBean, runnable)).pad(15);
+                    if (index % 2 == 0) {
+                        row();
+                    }
                 }
             }
             pack();

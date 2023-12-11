@@ -24,6 +24,7 @@ import kw.artpuzzle.down.GameStaticInstance;
 public class LoadingScreen extends BaseScreen {
     public LoadingScreen(BaseGame game) {
         super(game);
+        GameStaticInstance.baseScreen = this;
     }
 
     @Override
@@ -34,25 +35,6 @@ public class LoadingScreen extends BaseScreen {
         loadingbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         loadingbg.setPosition(540.0f,960.0f, Align.center);
         GameData.getInstance().loadLevel();
-
-//
-//        LevelBean levelBean = new LevelBean();
-//        levelBean.setLevelId("1");
-//        levelBean.setSortId(1);
-//        levelBean.setVersion("version1");
-//        DownLevelUtils downLevelUtils
-//                = new DownLevelUtils(levelBean, "level/out/", new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        }, new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
-//        downLevelUtils.downLoad();
     }
 
     @Override

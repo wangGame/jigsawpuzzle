@@ -27,6 +27,7 @@ import java.util.Collections;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
+import kw.artpuzzle.data.SaveHistoryBean;
 import kw.artpuzzle.group.group.BgTheme;
 import kw.artpuzzle.listener.MyClickListener;
 import kw.artpuzzle.utils.GameLogicUtils;
@@ -194,6 +195,7 @@ public class GameView extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                SaveHistoryBean saveHistoryBean = new SaveHistoryBean();
                 GameView.this.addAction(
                         Actions.sequence(
                                 Actions.fadeOut(0.2f),

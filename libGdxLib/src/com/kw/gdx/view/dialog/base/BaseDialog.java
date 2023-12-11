@@ -40,7 +40,7 @@ public class BaseDialog extends Group {
             dialogGroup = CocosResource.loadFile(viewpath);
         }else {
             dialogGroup = new Group();
-            dialogGroup.setSize(720,1280);
+            dialogGroup.setSize(Constant.WIDTH,Constant.HIGHT);
         }
         dialogSize.set(dialogGroup.getWidth(),dialogGroup.getHeight());
         setSize(dialogSize.x,dialogSize.y);
