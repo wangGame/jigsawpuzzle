@@ -25,26 +25,16 @@ public class ItemImage extends Group {
     private String levelPath;
     private String localStoragePath;
     private int status = 0; //
-    public ItemImage(LevelBean levelBean){
-        setSize(465.00f,465.00f);
+
+    public ItemImage(LevelBean levelBean) {
+        setSize(465.00f, 465.00f);
         this.levelBean = levelBean;
         localStoragePath = Gdx.files.getLocalStoragePath();
         levelPath = "finallevel/" + levelBean.getVersion() + "/" + levelBean.getLevelUUID();
-        if (Gdx.files.local(levelPath).exists()){
+        if (Gdx.files.local(levelPath).exists()) {
             if (PackZip.check(localStoragePath + levelPath)) {
-            status = 9;
-//                Image levelImage = new Image(Asset.getAsset().getLocalTexture());
-//                addActor(levelImage);
-//                levelImage.setSize(getWidth(),getHeight());
-            }else {
-                FileHandle local = Gdx.files.local(levelPath);
-                local.deleteDirectory();
-                downLoadImage();
+                status = 9;
             }
-        }else {
-            FileHandle local = Gdx.files.local(levelPath);
-            local.deleteDirectory();
-            downLoadImage();
         }
     }
 
@@ -57,12 +47,7 @@ public class ItemImage extends Group {
                     @Override
                     public void run() {
                         if (PackZip.check(localStoragePath + levelPath)) {
-                            status = 1;
-                            Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevelUUID()+".png");
-//
-//                            Image levelImage = new Image(Asset.getAsset().getLocalTexture(levelPath+"/"+levelBean.getLevelUUID()+".png"));
-//                            addActor(levelImage);
-//                            levelImage.setSize(getWidth(),getHeight());
+                            status = 9;
                         }
                     }
                 });
@@ -79,6 +64,10 @@ public class ItemImage extends Group {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        if (status == 0){
+            status = 8;
+            downLoadImage();
+        }
         if (status == 9){
             status = 1;
             Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevelUUID()+".png");
