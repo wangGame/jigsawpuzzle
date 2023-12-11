@@ -60,4 +60,42 @@ public class AndroidDownLoad extends DownLoad {
         baseDownloadTask1.setAutoRetryTimes(1);
         baseDownloadTask1.start();
     }
+
+    public void downloadOneFile(String siteusing,
+                                String toPath,
+                                DownLoadListener onComplete,
+                                DownLoadListener onFail) {
+        BaseDownloadTask baseDownloadTask1 = FileDownloader
+                .getImpl()
+                .create(siteusing)
+                .setPath(toPath);
+        if (Constant.realseDebug){
+
+        }
+        System.out.println("download url :"+siteusing+  "     "+ toPath);
+        FileDownloadSampleListener fileDownloadSampleListener = new FileDownloadSampleListener() {
+            @Override
+            protected void completed(BaseDownloadTask task) {
+                onComplete.downLoadCallBack();
+            }
+            @Override
+            protected void error(BaseDownloadTask task, Throwable e) {
+                e.printStackTrace();
+                byte status = task.getStatus();
+                onFail.downLoadCallBack(status);
+            }
+            @Override
+            protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                sofarSize = soFarBytes;
+                totalSize = totalBytes;
+                float perent = (sofarSize * 1.0F)/totalSize;
+                NLog.i((perent*100)+"");
+                BaseGame.setText("down load perent:"+(perent*100)+"");
+            }
+        };
+        baseDownloadTask1.setListener(fileDownloadSampleListener);
+        //尝试次数
+        baseDownloadTask1.setAutoRetryTimes(1);
+        baseDownloadTask1.start();
+    }
 }
