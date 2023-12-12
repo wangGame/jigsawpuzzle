@@ -15,6 +15,7 @@ import com.kw.gdx.constant.Constant;
 import com.kw.gdx.listener.OrdinaryButtonListener;
 
 import kw.artpuzzle.data.CateBean;
+import kw.artpuzzle.data.CollectionBean;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.listener.SignListener;
@@ -57,10 +58,17 @@ public class CateDetailGroup extends Group {
         titleLabel.setPosition(getWidth()/2.0f,getHeight() - 72, Align.center);
         titleLabel.setColor(Color.BLACK);
         if (cateBean.getType().equals("COLLECTION")) {
-            ArrayMap<Integer, LevelBean> levelBeanArrayMap
+            ArrayMap<Integer, CollectionBean> levelBeanArrayMap
                     = GameData.getInstance().readCollectionCateDetail(cateBean.getDesc());
             detailScrollPanel = new ScrollPane(new Table(){{
-
+                for (int i = 0; i < levelBeanArrayMap.size; i++) {
+                    Integer keyAt = levelBeanArrayMap.getKeyAt(i);
+                    CollectionBean collectionBean = levelBeanArrayMap.get(keyAt);
+                    BannerGroup group = new BannerGroup(collectionBean);
+                    add(group);
+                    row();
+                }
+                pack();
             }});
         }else {
             ArrayMap<Integer, LevelBean> levelBeanArrayMap
@@ -68,20 +76,22 @@ public class CateDetailGroup extends Group {
             detailScrollPanel = new ScrollPane(new Table() {{
                 for (int i = 1; i <= levelBeanArrayMap.size; i++) {
                     LevelBean valueAt = levelBeanArrayMap.getValueAt(i - 1);
-                    add(new ItemGroup(valueAt, new Runnable() {
+                    ItemGroup itemGroup = new ItemGroup(valueAt, new Runnable() {
                         @Override
                         public void run() {
 
                         }
-                    })).pad(15);
+                    });
+                    itemGroup.setType(cateBean.getType());
+                    add(itemGroup).pad(15);
                     if (i % 2 == 0) {
                         row();
                     }
                 }
                 align(Align.top);
             }});
-            detailScrollPanel.setSize(getWidth(), getHeight() - 142.0f);
-            addActor(detailScrollPanel);
         }
+        detailScrollPanel.setSize(getWidth(), getHeight() - 142.0f);
+        addActor(detailScrollPanel);
     }
 }

@@ -24,6 +24,7 @@ import kw.artpuzzle.group.ItemImage;
  */
 public class ItemGroup extends Group {
     private ItemImage itemGroup;
+    private String type;
     public ItemGroup(){
         Group group = CocosResource.loadFile("cocos/levelitemview.json");
         setSize(group.getWidth(),group.getHeight());
@@ -76,5 +77,12 @@ public class ItemGroup extends Group {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+    }
+
+    public void setType(String type) {
+        this.type = type;
+        if (type.equals("PAINT")){
+            itemGroup.setMys();
+        }
     }
 }

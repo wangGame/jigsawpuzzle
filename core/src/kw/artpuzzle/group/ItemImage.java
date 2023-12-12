@@ -19,6 +19,7 @@ import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.down.DownLevelUtils;
 import kw.artpuzzle.listener.LevelListener;
 import kw.artpuzzle.shader.CornersShader;
+import kw.artpuzzle.shader.MskShader;
 
 /**
  * @Auther jian xian si qi
@@ -88,8 +89,10 @@ public class ItemImage extends Group {
                     public void draw(Batch batch, float parentAlpha) {
                         if (program!=null) {
                             batch.setShader(program);
-                            float i = 100.0f / localTexture.getWidth();
-                            program.setUniformf("ra",i);
+                            if (!msk){
+                                float i = 100.0f / localTexture.getWidth();
+                                program.setUniformf("ra",i);
+                            }
                             batch.flush();
                             super.draw(batch, parentAlpha);
                             batch.setShader(null);
@@ -102,5 +105,11 @@ public class ItemImage extends Group {
                 levelImage.setSize(getWidth(),getHeight());
             }
         }
+    }
+
+    private boolean msk = false;
+    public void setMys() {
+        msk = true;
+        program = ShaderManager.getManager().getType(MskShader.class);
     }
 }

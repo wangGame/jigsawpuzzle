@@ -93,15 +93,15 @@ public class GameData {
         return selectItemBeanArrayMap;
     }
 
-    public ArrayMap<Integer, LevelBean> readCollectionCateDetail(String name) {
-        ArrayMap<Integer,LevelBean> cateDetailMap = new ArrayMap<>();
+    public ArrayMap<Integer, CollectionBean> readCollectionCateDetail(String name) {
+        ArrayMap<Integer,CollectionBean> cateDetailMap = new ArrayMap<>();
         cateDetailMap.clear();
-        Array<LevelBean> common = CsvUtils.common(
+        Array<CollectionBean> common = CsvUtils.common(
                 "category/categorydetail/"+name+".csv",
-                LevelBean.class);
+                CollectionBean.class);
         for (int i = 0; i < common.size; i++) {
-            LevelBean levelBean = common.get(i);
-            cateDetailMap.put(levelBean.getSortId(),levelBean);
+            CollectionBean collectionBean = common.get(i);
+            cateDetailMap.put(collectionBean.getSortId(),collectionBean);
         }
         return cateDetailMap;
     }
