@@ -5,16 +5,13 @@ import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.BaseGame;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
-import com.kw.gdx.net.DownLoad;
 import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.sound.AudioProcess;
 
 import kw.artpuzzle.audio.AudioType;
 import kw.artpuzzle.data.GameData;
-import kw.artpuzzle.data.LevelBean;
-import kw.artpuzzle.down.DownLevelUtils;
-import kw.artpuzzle.down.GameStaticInstance;
+import kw.artpuzzle.constant.GameStaticInstance;
 
 /**
  * @Auther jian xian si qi

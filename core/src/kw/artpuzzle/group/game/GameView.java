@@ -3,6 +3,7 @@ package kw.artpuzzle.group.game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -34,6 +37,7 @@ import kw.artpuzzle.fileutils.FileUtils;
 import kw.artpuzzle.group.group.BgTheme;
 import kw.artpuzzle.jigsawfile.Jigsawfile;
 import kw.artpuzzle.listener.MyClickListener;
+import kw.artpuzzle.pref.JigsawPreference;
 import kw.artpuzzle.utils.GameLogicUtils;
 import kw.artpuzzle.view.ModelGroup;
 import kw.artpuzzle.view.ModelUtils;
@@ -65,13 +69,19 @@ public class GameView extends Group {
         setPosition(Constant.GAMEWIDTH/2.0f,Constant.GAMEHIGHT/2.0f,Align.center);
         rootView = CocosResource.loadFile("cocos/gamegroup.json");
         addActor(rootView);
-        Actor gamebg = rootView.findActor("gamebg");
-        gamebg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
-        gamebg.setPosition(540.0f,960.0f,Align.center);
+//        if (JigsawPreference.getInstance().getTheme().equals(""))
+        if (JigsawPreference.getInstance().getTheme().equals("0")) {
+            rootView.findActor("gamebg").setColor(Color.valueOf("#C0C3C8"));
+        }else {
+            Image gamebg = rootView.findActor("gamebg");
+            ((NinePatchDrawable)(gamebg.getDrawable())).setPatch(new NinePatch(
+                    Asset.getAsset().getSprite("themebg/"+JigsawPreference.getInstance().getTheme())));
+        }
+
+        Image gamebg = rootView.findActor("gamebg");
+        gamebg.setSize(Constant.GAMEWIDTH, Constant.GAMEHIGHT);
+        gamebg.setPosition(540.0f, 960.0f, Align.center);
         rootView.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
-
-        rootView.findActor("gamebg").setColor(Color.valueOf("#C0C3C8"));
-
         Group gamebottom = rootView.findActor("gamebottom");
         gamebottom.setY(gamebottom.getY() - baseScreen.getOffsetY());
 

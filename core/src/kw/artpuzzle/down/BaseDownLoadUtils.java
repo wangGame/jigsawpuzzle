@@ -1,10 +1,9 @@
 package kw.artpuzzle.down;
 
-import com.kw.gdx.BaseGame;
 import com.kw.gdx.net.DownLoadListener;
 import com.kw.gdx.utils.log.NLog;
 
-import java.util.HashMap;
+import kw.artpuzzle.constant.GameStaticInstance;
 
 /**
  * @Auther jian xian si qi

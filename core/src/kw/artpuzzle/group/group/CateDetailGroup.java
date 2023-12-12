@@ -65,7 +65,7 @@ public class CateDetailGroup extends Group {
                     Integer keyAt = levelBeanArrayMap.getKeyAt(i);
                     CollectionBean collectionBean = levelBeanArrayMap.get(keyAt);
                     BannerGroup group = new BannerGroup(collectionBean);
-                    add(group);
+                    add(group).pad(30);
                     row();
                 }
                 pack();

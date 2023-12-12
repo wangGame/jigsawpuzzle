@@ -16,7 +16,7 @@ import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.data.CateBean;
-import kw.artpuzzle.down.GameStaticInstance;
+import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.group.game.GameView;
 import kw.artpuzzle.group.group.CateDetailGroup;
 import kw.artpuzzle.group.mainview.CateView;

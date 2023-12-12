@@ -1,7 +1,6 @@
 package kw.artpuzzle;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.kw.gdx.BaseGame;
 import com.kw.gdx.asset.Asset;
@@ -10,7 +9,7 @@ import com.kw.gdx.net.DownLoad;
 import com.kw.gdx.resource.annotation.GameInfo;
 import com.kw.gdx.utils.log.NLog;
 
-import kw.artpuzzle.down.GameStaticInstance;
+import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.listener.GameListener;
 import kw.artpuzzle.screen.LoadingScreen;
 

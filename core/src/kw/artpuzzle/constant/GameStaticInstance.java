@@ -1,4 +1,4 @@
-package kw.artpuzzle.down;
+package kw.artpuzzle.constant;
 
 import com.kw.gdx.net.DownLoad;
 import com.kw.gdx.screen.BaseScreen;

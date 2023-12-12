@@ -71,7 +71,9 @@ public class DeskDownload extends DownLoad {
                                 NLog.e("still exist " + file.exists());
                             }
                             FileHandle parent = file.parent();
-                            String path1 = parent.file().getPath();
+                            if (!parent.exists()) {
+                                parent.mkdirs();
+                            }
 
                             randomFile = new RandomAccessFile(file.parent()+ "/" + file.name(), "rwd");
                             randomFile.setLength(todownsize);

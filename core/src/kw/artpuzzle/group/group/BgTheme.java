@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -54,7 +55,15 @@ public class BgTheme extends Group {
                 int index = 0;
                 for (FileHandle fileHandle : internal.list()) {
                     index ++;
-                    add(new ThemeItem(fileHandle.name()));
+                    ThemeItem themeItem = new ThemeItem(fileHandle.name(),new Runnable(){
+                        @Override
+                        public void run() {
+                            for (Actor child : themeTable.getChildren()) {
+                                ((ThemeItem)(child)).hideIconSelect();
+                            }
+                        }
+                    });
+                    add(themeItem);
                     if (index % 3 == 0){
                         row();
                     }

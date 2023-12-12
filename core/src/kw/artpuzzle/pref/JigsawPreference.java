@@ -9,6 +9,16 @@ import com.badlogic.gdx.Preferences;
  */
 public class JigsawPreference {
     private Preferences preferences;
+
+    public String getTheme() {
+        return preferences.getString("theme",null);
+    }
+
+    public void saveTheme(String name){
+        preferences.putString("theme",name);
+        preferences.flush();
+    }
+
     private static class instance{
         private static final JigsawPreference jigsawPreference = new JigsawPreference();
     }

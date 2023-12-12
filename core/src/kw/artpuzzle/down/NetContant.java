@@ -6,4 +6,5 @@ package kw.artpuzzle.down;
  */
 public abstract class NetContant {
     public static String url = "http://192.168.1.192/jagsaw/level/";
+    public static String collectUrl = "http://192.168.1.192/jagsaw/collections/";
 }
