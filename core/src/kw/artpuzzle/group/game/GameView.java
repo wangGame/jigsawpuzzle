@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
@@ -24,11 +25,14 @@ import com.kw.gdx.scrollpane.ScrollPane;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import kw.artpuzzle.JigSawPuzzle;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.data.SaveHistoryBean;
+import kw.artpuzzle.fileutils.FileUtils;
 import kw.artpuzzle.group.group.BgTheme;
+import kw.artpuzzle.jigsawfile.Jigsawfile;
 import kw.artpuzzle.listener.MyClickListener;
 import kw.artpuzzle.utils.GameLogicUtils;
 import kw.artpuzzle.view.ModelGroup;
@@ -195,7 +199,19 @@ public class GameView extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                SaveHistoryBean saveHistoryBean = new SaveHistoryBean();
+                ArrayList<ModelGroup> finalModelGroup = GameView.this.finalModelGroup;
+                ArrayList<ModelGroup> modelGroups = new ArrayList<>(finalModelGroup);
+                int size = modelGroups.size();
+                if (size != 0) {
+                    SaveHistoryBean saveHistoryBean = new SaveHistoryBean();
+                    saveHistoryBean.setSplitNum(LevelConfig.splitnum);
+                    saveHistoryBean.setLeftNum(size);
+                    for (ModelGroup modelGroup : modelGroups) {
+                        saveHistoryBean.setLeftPicIndex(modelGroup.getModelIndex());
+                    }
+                    FileUtils jigsawfile = FileUtils.getJigsawfile();
+                    jigsawfile.saveHistoryPic(saveHistoryBean);
+                }
                 GameView.this.addAction(
                         Actions.sequence(
                                 Actions.fadeOut(0.2f),

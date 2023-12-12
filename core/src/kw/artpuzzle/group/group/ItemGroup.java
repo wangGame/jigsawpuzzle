@@ -60,7 +60,7 @@ public class ItemGroup extends Group {
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event, x, y);
                     LevelConfig.levelIndex = levelBean;
-                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog());
+                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
 //                    runnable.run();
                 }
             });

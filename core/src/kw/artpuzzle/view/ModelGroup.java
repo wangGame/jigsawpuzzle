@@ -127,4 +127,14 @@ public class ModelGroup extends Group {
     public void setUpdateSize(Runnable runnable){
 
     }
+
+    private int modelIndex;
+    public void setPicIndex(int modelIndex) {
+        this.modelIndex = modelIndex;
+        setName(""+modelIndex);
+    }
+
+    public int getModelIndex() {
+        return modelIndex;
+    }
 }

@@ -2,12 +2,15 @@ package kw.artpuzzle.dialog;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
+import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.resource.annotation.ScreenResource;
 import com.kw.gdx.resource.cocosload.CocosResource;
 import com.kw.gdx.scrollpane.ScrollPane;
@@ -25,6 +28,11 @@ import kw.artpuzzle.group.group.SelectDiffItem;
  */
 @ScreenResource("cocos/selectsplitpage.json")
 public class SelectDifficultyDialog extends BaseDialog {
+    private Runnable runnable;
+    public SelectDifficultyDialog(Runnable runnable) {
+        this.runnable = runnable;
+    }
+
     @Override
     public void show() {
         super.show();
@@ -52,10 +60,50 @@ public class SelectDifficultyDialog extends BaseDialog {
                 SelectItemBean valueAt = entries.getValueAt(i);
                 add(new SelectDiffItem(valueAt));
             }
+            align(Align.bottom);
             pack();
         }});
         Group itempanel = dialogGroup.findActor("itempanel");
         itempanel.addActor(pane);
         pane.setSize(Constant.GAMEWIDTH,itempanel.getHeight()+100);
+        dialogGroup.findActor("btncontinue").addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                runnable.run();
+                LevelConfig.splitnum = 6;
+                dialogManager.closeDialog(SelectDifficultyDialog.this);
+            }
+        });
+    }
+
+    @Override
+    public void enterAnimation() {
+        dialogGroup.setY(-1920);
+        dialogGroup.addAction(Actions.moveToAligned(
+                dialogGroup.getX(Align.center),
+                960,
+                Align.center,
+                0.4f
+        ));
+    }
+
+    @Override
+    public void close() {
+//        super.close();
+
+        dialogGroup.addAction(
+                Actions.sequence(
+                        Actions.moveToAligned(
+                        dialogGroup.getX(Align.center),
+                        0,
+                        Align.top,
+                        0.4f
+                        ),
+                        Actions.run(()->{
+                            SelectDifficultyDialog.this.remove();
+                        })
+                )
+        );
     }
 }

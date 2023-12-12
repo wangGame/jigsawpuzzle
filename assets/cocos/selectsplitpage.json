@@ -71,6 +71,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5,
@@ -400,6 +402,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5
@@ -496,6 +500,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {},
             "Position": {
@@ -553,10 +559,10 @@
                   "X": 0.1,
                   "Y": 0.1102
                 },
-                "LeftMargin": 485.9998,
-                "RightMargin": 486.0002,
-                "TopMargin": -6.08,
-                "BottomMargin": 321.08,
+                "LeftMargin": 486.0032,
+                "RightMargin": 485.9968,
+                "TopMargin": -6.0802,
+                "BottomMargin": 321.0802,
                 "Tag": 121,
                 "ActionTag": -451551240,
                 "Size": {
@@ -569,7 +575,6 @@
               {
                 "ClipAble": false,
                 "BackColorAlpha": 102,
-                "ComboBoxIndex": 1,
                 "SingleColor": {
                   "R": 150,
                   "G": 200
@@ -582,11 +587,13 @@
                 "ColorVector": {
                   "ScaleY": 1.0
                 },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
                 "TouchEnable": true,
                 "AnchorPoint": {},
                 "Position": {
                   "X": 0.0,
-                  "Y": 75.0
+                  "Y": 52.0
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -596,19 +603,19 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
-                  "Y": 0.2119
+                  "Y": 0.1469
                 },
                 "PreSize": {
                   "X": 1.0,
-                  "Y": 0.565
+                  "Y": 0.7684
                 },
-                "TopMargin": 79.0,
-                "BottomMargin": 75.0,
+                "TopMargin": 30.0,
+                "BottomMargin": 52.0,
                 "Tag": 132,
                 "ActionTag": 1372786353,
                 "Size": {
                   "X": 1080.0,
-                  "Y": 200.0
+                  "Y": 272.0
                 },
                 "Name": "itempanel",
                 "ctype": "PanelObjectData"
@@ -625,7 +632,7 @@
                 },
                 "Position": {
                   "X": 540.0,
-                  "Y": 0.0
+                  "Y": -10.0
                 },
                 "Scale": {
                   "ScaleX": 1.5,
@@ -639,7 +646,7 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.5,
-                  "Y": 0.0
+                  "Y": -0.0282
                 },
                 "PreSize": {
                   "X": 0.112,
@@ -647,7 +654,8 @@
                 },
                 "LeftMargin": 479.5,
                 "RightMargin": 479.5,
-                "TopMargin": 315.0,
+                "TopMargin": 325.0,
+                "BottomMargin": -10.0,
                 "Tag": 126,
                 "ActionTag": 807659577,
                 "Size": {

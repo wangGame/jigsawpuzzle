@@ -12,7 +12,7 @@ public class SaveHistoryBean {
     //剩下的
     private int leftNum;
 
-    private Array<Integer> leftPicIndex;
+    private Array<Integer> leftPicIndex = new Array<>();
 
     public void setLeftNum(int leftNum) {
         this.leftNum = leftNum;
@@ -22,8 +22,8 @@ public class SaveHistoryBean {
         return leftNum;
     }
 
-    public void setLeftPicIndex(Array<Integer> leftPicIndex) {
-        this.leftPicIndex = leftPicIndex;
+    public void setLeftPicIndex(int leftPicIndex) {
+        this.leftPicIndex.add(leftPicIndex);
     }
 
     public Array<Integer> getLeftPicIndex() {

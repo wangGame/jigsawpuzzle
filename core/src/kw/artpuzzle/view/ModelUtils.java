@@ -28,7 +28,7 @@ public class ModelUtils {
                 modelIndex ++;
                 ModelGroup maskImage = new ModelGroup("out1/"+modelIndex+".png");
                 maskImage.setTexure(texture);
-                maskImage.setName(""+modelIndex);
+                maskImage.setPicIndex(modelIndex);
                 Actor actor = tempView.findActor(modelIndex+"");
                 maskImage.setImageSize(actor.getWidth(), actor.getHeight());
                 maskImage.setPosX((actor.getX(Align.center)+actor.getWidth()/4.0f));

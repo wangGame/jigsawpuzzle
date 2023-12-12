@@ -8,4 +8,5 @@ import kw.artpuzzle.data.LevelBean;
  */
 public class LevelConfig {
     public static LevelBean levelIndex;
+    public static int splitnum;
 }
