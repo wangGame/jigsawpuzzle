@@ -27,6 +27,7 @@ public class ModelGroup extends Group {
     private Image image;
     private float currentScale;
     private Texture texture;
+    private boolean freeStatus;
 
     public ModelGroup(String maskName){
         setSize(266,266);
@@ -137,5 +138,13 @@ public class ModelGroup extends Group {
 
     public int getModelIndex() {
         return modelIndex;
+    }
+
+    public void setFree(boolean b) {
+        freeStatus = b;
+    }
+
+    public boolean isFreeStatus() {
+        return freeStatus;
     }
 }

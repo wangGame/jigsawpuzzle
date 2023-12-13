@@ -146,7 +146,7 @@ public class GameView extends Group {
             setY(100);
         }});
         bottomPanelScrollPanel.setTouchable(Touchable.childrenOnly);
-        bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,260);
         bottomPanelScrollPanel.setDebug(true);
         bottomPanelScrollPanel.setY(150);
         gamebottom.addActor(bottomPanelScrollPanel);
@@ -312,31 +312,48 @@ public class GameView extends Group {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (successMove)return;
-                if (isDragged || ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&(Math.abs(x - startV.x) * Math.abs(x - startV.x) +
-                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>200))){
-                    isDragged = true;
-                    ModelGroup group = getGroup();
-                    convert.set(x,y);
+                System.out.println(event.getStageY());
+                ModelGroup group = getGroup();
+
+                if (group.isFreeStatus() ||isDragged || ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&(Math.abs(x - startV.x) * Math.abs(x - startV.x) +
+                        Math.abs(y - startV.y) * Math.abs(y - startV.y)>200))) {
                     bottomPanelScrollPanel.cancel();
-                    group.localToStageCoordinates(convert);
-                    group.setImagePosition(x,y);
-                    Vector2 vector2 = group.imageVector();
-                    logicUtils.convertTarget(vector2);
-                    if (logicUtils.check(targetPos,vector2)) {
-                        successMove = true;
-                        finalModelGroup.remove(group);
-                        group.addAction(Actions.moveToAligned(targetPos.x,targetPos.y,Align.center,0.1f));
+                    if (event.getStageY()>400) {
+                        isDragged = true;
+                        group = getGroup();
+                        convert.set(x, y);
+                        group.localToStageCoordinates(convert);
+                        group.setImagePosition(x, y);
+                        Vector2 vector2 = group.imageVector();
+                        logicUtils.convertTarget(vector2);
+
                         Vector2 vector21 = group.imageVector();
                         logicUtils.convertTarget(vector21);
                         group.resetPosition();
-                        group.setX(vector21.x,Align.center);
-                        group.setY(vector21.y,Align.center);
-                        group.clearListeners();
+                        group.setX(vector21.x, Align.center);
+                        group.setY(vector21.y, Align.center);
+//                        group.clearListeners();
                         group.setImageScale(1.0f);
                         logicUtils.addActor(group);
+                        group.setFree(true);
+
+
+                        if (logicUtils.check(targetPos, vector2)) {
+                            successMove = true;
+                            finalModelGroup.remove(group);
+                            group.clearListeners();
+                            group.addAction(Actions.moveToAligned(targetPos.x, targetPos.y, Align.center, 0.1f));
+                         }
+                    }else {
+                        if (isDragged) {
+                            group = getGroup();
+                            group.setFree(false);
+                            bottomModelTable.add(group);
+                            bottomModelTable.pack();
+                            group.resetScale();
+
+                        }
                     }
-                }else {
-                    return;
                 }
             }
 
@@ -344,9 +361,9 @@ public class GameView extends Group {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
                 if (successMove)return;
-                ModelGroup group = getGroup();
-                group.resetPosition();
-                group.resetScale();
+//                ModelGroup group = getGroup();
+//                group.resetPosition();
+//                group.resetScale();
             }
         };
     }

@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -57,6 +60,13 @@ public class BgTheme extends Group {
         themefinish.setScale(1.5f);
         themefinish.setPosition(getWidth() - 30,getHeight() - 70,Align.right);
         themefinish.setColor(Color.RED);
+        themefinish.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
         pane = new ScrollPane(themeTable = new Table(){
             {
                 FileHandle internal = Gdx.files.internal("themebg");
@@ -82,9 +92,15 @@ public class BgTheme extends Group {
         });
         pane.setSize(getWidth(),getHeight() - 140);
         addActor(pane);
-        Image backBtn = new Image(Asset.getAsset().getLocalTexture("common/back.png"));
-        addActor(backBtn);
-        backBtn.setPosition(30,getHeight() - 70,Align.left);
-        backBtn.addListener(new OrdinaryButtonListener());
+    }
+
+    private void enterAnimation(){
+        setY(-Constant.GAMEHIGHT);
+//        addAction(
+//                Actions.sequence(Actions.moveTo()));
+    }
+
+    private void exitAnimation(){
+
     }
 }
