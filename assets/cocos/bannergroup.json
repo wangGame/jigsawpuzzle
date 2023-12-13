@@ -29,6 +29,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {},
             "Position": {
@@ -54,14 +56,14 @@
               {
                 "FileData": {
                   "Type": "MarkedSubImage",
-                  "Path": "banner/awards_imgTableViewFullBg@3x.png",
-                  "Plist": "plist/bannerplist.plist"
+                  "Path": "gamepic/white.png",
+                  "Plist": "plist/gameplist.plist"
                 },
                 "Scale9Enable": true,
-                "Scale9OriginX": 29,
-                "Scale9OriginY": 43,
-                "Scale9Width": 32,
-                "Scale9Height": 46,
+                "Scale9OriginX": 6,
+                "Scale9OriginY": 6,
+                "Scale9Width": 8,
+                "Scale9Height": 8,
                 "AnchorPoint": {},
                 "Position": {
                   "X": 0.0,
@@ -89,7 +91,7 @@
                 "ActionTag": 644552884,
                 "Size": {
                   "X": 990.0,
-                  "Y": 420.0
+                  "Y": 495.0
                 },
                 "Name": "bg",
                 "ctype": "ImageViewObjectData"
@@ -109,6 +111,8 @@
                 "ColorVector": {
                   "ScaleY": 1.0
                 },
+                "Scale9Width": 1,
+                "Scale9Height": 1,
                 "TouchEnable": true,
                 "AnchorPoint": {},
                 "Position": {
@@ -133,7 +137,7 @@
                 "ActionTag": -676989810,
                 "Size": {
                   "X": 990.0,
-                  "Y": 420.0
+                  "Y": 495.0
                 },
                 "Name": "bannerbg",
                 "ctype": "PanelObjectData"
@@ -162,13 +166,13 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0,
-                  "Y": -0.0024
+                  "Y": -0.002
                 },
                 "PreSize": {
                   "X": 1.0,
-                  "Y": 0.3429
+                  "Y": 0.2909
                 },
-                "TopMargin": 277.0,
+                "TopMargin": 352.0,
                 "BottomMargin": -1.0,
                 "Tag": 124,
                 "ActionTag": 1145810362,
@@ -200,7 +204,7 @@
                 "AnchorPoint": {},
                 "Position": {
                   "X": 885.0,
-                  "Y": 317.0
+                  "Y": 396.0
                 },
                 "Scale": {
                   "ScaleX": 1.0,
@@ -210,16 +214,16 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.8939,
-                  "Y": 0.7548
+                  "Y": 0.8
                 },
                 "PreSize": {
                   "X": 0.0646,
-                  "Y": 0.1524
+                  "Y": 0.1293
                 },
                 "LeftMargin": 885.0,
                 "RightMargin": 41.0,
-                "TopMargin": 39.0,
-                "BottomMargin": 317.0,
+                "TopMargin": 35.0,
+                "BottomMargin": 396.0,
                 "Tag": 115,
                 "Children": [
                   {
@@ -348,15 +352,15 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.0384,
-                  "Y": 0.0905
+                  "Y": 0.0768
                 },
                 "PreSize": {
                   "X": 0.0606,
-                  "Y": 0.1429
+                  "Y": 0.1212
                 },
                 "LeftMargin": 38.0,
                 "RightMargin": 892.0,
-                "TopMargin": 322.0,
+                "TopMargin": 397.0,
                 "BottomMargin": 38.0,
                 "Tag": 119,
                 "ActionTag": 267350772,
@@ -389,15 +393,15 @@
                 "IconVisible": false,
                 "PrePosition": {
                   "X": 0.1253,
-                  "Y": 0.1548
+                  "Y": 0.1313
                 },
                 "PreSize": {
                   "X": 0.2465,
-                  "Y": 0.0929
+                  "Y": 0.0788
                 },
                 "LeftMargin": 124.0,
                 "RightMargin": 622.0,
-                "TopMargin": 335.5,
+                "TopMargin": 410.5,
                 "BottomMargin": 45.5,
                 "Tag": 120,
                 "ActionTag": 1020610554,
@@ -412,7 +416,7 @@
             "ActionTag": -768389699,
             "Size": {
               "X": 990.0,
-              "Y": 420.0
+              "Y": 495.0
             },
             "Name": "banner",
             "ctype": "PanelObjectData"
@@ -420,7 +424,7 @@
         ],
         "Size": {
           "X": 990.0,
-          "Y": 420.0
+          "Y": 495.0
         },
         "Name": "Scene",
         "ctype": "SingleNodeObjectData"
@@ -430,6 +434,8 @@
         "font/inter-semi-32.png",
         "plist/bannerplist.plist",
         "plist/bannerplist.png",
+        "plist/gameplist.plist",
+        "plist/gameplist.png",
         "plist/levelplist.plist",
         "plist/levelplist.png"
       ],

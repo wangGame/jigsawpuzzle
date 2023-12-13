@@ -106,9 +106,10 @@ public class BannerGroup extends Group {
 //                    }
                 };
 
+
                 Group bannerbg = rootView.findActor("bannerbg");
                 bannerbg.addActor(levelImage);
-//                levelImage.setSize(getWidth(),getHeight());
+                levelImage.setSize(getWidth(),getHeight());
                 levelImage.setPosition(bannerbg.getWidth()/2.0f,bannerbg.getHeight()/2.0f, Align.center);
             }
         }
