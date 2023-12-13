@@ -73,10 +73,12 @@
             "Scale9Width": 1,
             "Scale9Height": 1,
             "TouchEnable": true,
-            "AnchorPoint": {},
+            "AnchorPoint": {
+              "ScaleY": 1.0
+            },
             "Position": {
               "X": 0.0,
-              "Y": 260.0
+              "Y": 1780.0
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -86,14 +88,14 @@
             "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
-              "Y": 0.1354
+              "Y": 0.9271
             },
             "PreSize": {
               "X": 1.0,
-              "Y": 0.7917
+              "Y": 0.7135
             },
             "TopMargin": 140.0,
-            "BottomMargin": 260.0,
+            "BottomMargin": 410.0,
             "Tag": 539,
             "Children": [
               {
@@ -128,8 +130,9 @@
                 },
                 "PreSize": {
                   "X": 1.0,
-                  "Y": 1.0
+                  "Y": 1.1095
                 },
+                "TopMargin": -150.0,
                 "Tag": 542,
                 "ActionTag": 525934550,
                 "Size": {
@@ -143,7 +146,7 @@
             "ActionTag": -1556898873,
             "Size": {
               "X": 1080.0,
-              "Y": 1520.0
+              "Y": 1370.0
             },
             "Name": "gamemiddle",
             "ctype": "PanelObjectData"
@@ -892,9 +895,9 @@
             },
             "PreSize": {
               "X": 1.0,
-              "Y": 0.1354
+              "Y": 0.2125
             },
-            "TopMargin": 1660.0,
+            "TopMargin": 1512.0,
             "Tag": 540,
             "Children": [
               {
@@ -931,7 +934,7 @@
                 "ActionTag": 1138701704,
                 "Size": {
                   "X": 1080.0,
-                  "Y": 260.0
+                  "Y": 408.0
                 },
                 "Name": "bottombg",
                 "ctype": "ImageViewObjectData"
@@ -940,7 +943,7 @@
             "ActionTag": 203042338,
             "Size": {
               "X": 1080.0,
-              "Y": 260.0
+              "Y": 408.0
             },
             "Name": "gamebottom",
             "ctype": "PanelObjectData"

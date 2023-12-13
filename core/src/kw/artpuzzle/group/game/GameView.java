@@ -148,9 +148,9 @@ public class GameView extends Group {
         bottomPanelScrollPanel.setTouchable(Touchable.childrenOnly);
         bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         bottomPanelScrollPanel.setDebug(true);
-        bottomPanelScrollPanel.setY(50);
+        bottomPanelScrollPanel.setY(150);
         gamebottom.addActor(bottomPanelScrollPanel);
-
+        gamebottom.toFront();
         Group picGroup = new Group();
         picGroup.setSize(1050,1050);
         TempView view = modelUtils.getTempView();

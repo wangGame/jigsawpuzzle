@@ -47,8 +47,8 @@ public class TempView extends Group {
         addActor(playImg);
         playImg.setSize(getWidth(),getHeight());
         playImg.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
-        playImg.setColor(Color.valueOf("AAAAAA"));
-        playImg.getColor().a = 0.3f;
+        playImg.setColor(Color.valueOf("000000"));
+        playImg.getColor().a = 0.2f;
     }
 
     @Override

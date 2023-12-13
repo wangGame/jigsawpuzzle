@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
+import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 /**
@@ -36,8 +37,12 @@ public class BgTheme extends Group {
         });
         addActor(themeTitle);
         themeTitle.setColor(Color.BLACK);
+        themeTitle.setAlignment(Align.center);
         themeTitle.setText("change theme");
         themeTitle.pack();
+        themeTitle.setOrigin(Align.center);
+        themeTitle.setScale(1.5f);
+        themeTitle.setDebug(true);
         themeTitle.setPosition(getWidth()/2.0f,getHeight() - 70,Align.center);
         Label themefinish = new Label("",new Label.LabelStyle(){
             {
@@ -45,8 +50,11 @@ public class BgTheme extends Group {
             }
         });
         addActor(themefinish);
+        themefinish.setAlignment(Align.center);
         themefinish.setText("finish");
         themefinish.pack();
+        themefinish.setOrigin(Align.center);
+        themefinish.setScale(1.5f);
         themefinish.setPosition(getWidth() - 30,getHeight() - 70,Align.right);
         themefinish.setColor(Color.RED);
         pane = new ScrollPane(themeTable = new Table(){
@@ -74,5 +82,9 @@ public class BgTheme extends Group {
         });
         pane.setSize(getWidth(),getHeight() - 140);
         addActor(pane);
+        Image backBtn = new Image(Asset.getAsset().getLocalTexture("common/back.png"));
+        addActor(backBtn);
+        backBtn.setPosition(30,getHeight() - 70,Align.left);
+        backBtn.addListener(new OrdinaryButtonListener());
     }
 }

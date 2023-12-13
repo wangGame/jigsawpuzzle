@@ -29,7 +29,8 @@ public class ModelGroup extends Group {
     private Texture texture;
 
     public ModelGroup(String maskName){
-        setSize(200,200);
+        setSize(266,266);
+        setDebug(true);
         image = new Image(Asset.getAsset().getTexture(maskName)){
             @Override
             public void draw(Batch batch, float parentAlpha) {
@@ -65,7 +66,7 @@ public class ModelGroup extends Group {
     public void setImageSize(float imageWidth,float imageHight){
         image.setSize(imageWidth,imageHight);
         image.setOrigin(Align.center);
-        currentScale = getWidth() / imageWidth;
+        currentScale = getWidth() / (imageWidth - 130);
         image.setScale(currentScale);
         image.setPosition(getWidth()/2.0f,getHeight()/2.0f, Align.center);
     }
