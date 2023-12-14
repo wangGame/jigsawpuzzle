@@ -28,7 +28,6 @@ public class CateDetailGroup extends Group {
     private ScrollPane detailScrollPanel;
 
     public CateDetailGroup(CateBean cateBean){
-        setDebug(true);
         setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 140);
         Image bg = new Image(new NinePatch(
                 Asset.getAsset().getTexture("white.png"),

@@ -24,9 +24,9 @@ import com.kw.gdx.scrollpane.ScrollPane;
  */
 public class BgTheme extends Group {
     private ScrollPane pane;
-    Table themeTable;
-    public BgTheme(){
-        setDebug(true);
+    private Table themeTable;
+    private Runnable runnable;
+    public BgTheme(Runnable runnable){
         setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         Image bg = new Image(new NinePatch(
                 Asset.getAsset().getTexture("white.png"),
@@ -45,7 +45,6 @@ public class BgTheme extends Group {
         themeTitle.pack();
         themeTitle.setOrigin(Align.center);
         themeTitle.setScale(1.5f);
-        themeTitle.setDebug(true);
         themeTitle.setPosition(getWidth()/2.0f,getHeight() - 70,Align.center);
         Label themefinish = new Label("",new Label.LabelStyle(){
             {
@@ -64,7 +63,7 @@ public class BgTheme extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-
+                runnable.run();
             }
         });
         pane = new ScrollPane(themeTable = new Table(){
@@ -92,6 +91,13 @@ public class BgTheme extends Group {
         });
         pane.setSize(getWidth(),getHeight() - 140);
         addActor(pane);
+        themefinish.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                BgTheme.this.remove();
+            }
+        });
     }
 
     private void enterAnimation(){

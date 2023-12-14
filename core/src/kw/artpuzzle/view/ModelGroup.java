@@ -31,7 +31,6 @@ public class ModelGroup extends Group {
 
     public ModelGroup(String maskName){
         setSize(266,266);
-        setDebug(true);
         image = new Image(Asset.getAsset().getTexture(maskName)){
             @Override
             public void draw(Batch batch, float parentAlpha) {

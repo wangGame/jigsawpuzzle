@@ -70,21 +70,13 @@ public class GameView extends Group {
         rootView = CocosResource.loadFile("cocos/gamegroup.json");
         addActor(rootView);
 //        if (JigsawPreference.getInstance().getTheme().equals(""))
-        if (JigsawPreference.getInstance().getTheme().equals("0")) {
-            rootView.findActor("gamebg").setColor(Color.valueOf("#C0C3C8"));
-        }else {
-            Image gamebg = rootView.findActor("gamebg");
-            ((NinePatchDrawable)(gamebg.getDrawable())).setPatch(new NinePatch(
-                    Asset.getAsset().getSprite("themebg/"+JigsawPreference.getInstance().getTheme())));
-        }
-
-        Image gamebg = rootView.findActor("gamebg");
-        gamebg.setSize(Constant.GAMEWIDTH, Constant.GAMEHIGHT);
-        gamebg.setPosition(540.0f, 960.0f, Align.center);
+        changeBg();
         rootView.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Group gamebottom = rootView.findActor("gamebottom");
         gamebottom.setY(gamebottom.getY() - baseScreen.getOffsetY());
-
+        Actor bottombg = gamebottom.findActor("bottombg");
+        bottombg.setWidth(Constant.GAMEWIDTH);
+        bottombg.setX(540,Align.center);
         Group gamemiddle = rootView.findActor("gamemiddle");
         Actor middlebg = gamemiddle.findActor("middlebg");
         middlebg.setVisible(false);
@@ -100,6 +92,9 @@ public class GameView extends Group {
         Actor tipbtn = gametop.findActor("tipbtn");
         Actor prebtn = gametop.findActor("prebtn");
         Actor themebtn = gametop.findActor("themebtn");
+        Actor topbg = gametop.findActor("topbg");
+        topbg.setWidth(Constant.GAMEWIDTH);
+        topbg.setX(540,Align.center);
         ArrayList<Actor> actors = new ArrayList<>();
         actors.add(topback);
         actors.add(egebtn);
@@ -115,7 +110,7 @@ public class GameView extends Group {
         themebtn.setOrigin(Align.center);
 
         float v = Constant.GAMEWIDTH / 6.0f;
-        float v1 = v / 2.0f;
+        float v1 = v / 2.0f - baseScreen.getOffsetX();
         for (int i = 0; i < actors.size(); i++) {
             Actor actor = actors.get(i);
             actor.setX(v1 + v * i,Align.center);
@@ -147,8 +142,8 @@ public class GameView extends Group {
         }});
         bottomPanelScrollPanel.setTouchable(Touchable.childrenOnly);
         bottomPanelScrollPanel.setSize(Constant.GAMEWIDTH,260);
-        bottomPanelScrollPanel.setDebug(true);
         bottomPanelScrollPanel.setY(150);
+        bottomPanelScrollPanel.setX(-baseScreen.getOffsetX());
         gamebottom.addActor(bottomPanelScrollPanel);
         gamebottom.toFront();
         Group picGroup = new Group();
@@ -205,6 +200,13 @@ public class GameView extends Group {
 //        addActor(group);
 //        group.setPosition(200,200);
 //        group.setScale(0.4f);
+        tipbtn.addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                clearModel();
+            }
+        });
         topback.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -232,6 +234,7 @@ public class GameView extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                showBorder = !showBorder;
                 showBorder();
             }
         });
@@ -250,11 +253,25 @@ public class GameView extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                BgTheme bgTheme = new BgTheme();
+                BgTheme bgTheme = new BgTheme(new Runnable(){
+                    @Override
+                    public void run() {
+                        changeBg();
+                    }
+                });
+                bgTheme.setPosition(540,960,Align.center);
                 addActor(bgTheme);
 
             }
         });
+    }
+
+    public void changeBg(){
+        Image gamebg = rootView.findActor("gamebg");
+        ((NinePatchDrawable)(gamebg.getDrawable())).setPatch(new NinePatch(
+                    Asset.getAsset().getSprite("themebg/"+JigsawPreference.getInstance().getTheme())));
+        gamebg.setSize(Constant.GAMEWIDTH, Constant.GAMEHIGHT);
+        gamebg.setPosition(540.0f, 960.0f, Align.center);
     }
 
     private void gameSuccess(Group picGroup,TempView view) {
@@ -369,9 +386,11 @@ public class GameView extends Group {
     }
 
     public void showBorder() {
-        showBorder = !showBorder;
         bottomModelTable.clear();
         for (ModelGroup modelGroup : finalModelGroup) {
+            if (modelGroup.isFreeStatus())continue;
+            modelGroup.resetPosition();
+            modelGroup.resetScale();
             if (showBorder) {
                 ArrayList<ModelGroup> borderModels = modelUtils.getBorderModels();
                 if (borderModels.contains(modelGroup)) {
@@ -383,5 +402,14 @@ public class GameView extends Group {
         }
         bottomModelTable.pack();
         bottomModelTable.align(Align.bottomLeft);
+    }
+
+    public void clearModel(){
+        for (ModelGroup modelGroup : finalModelGroup) {
+            if (modelGroup.isFreeStatus()) {
+                modelGroup.setFree(false);
+            }
+        }
+        showBorder();
     }
 }
