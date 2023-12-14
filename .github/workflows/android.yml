@@ -39,6 +39,6 @@ jobs:
         run: ./gradlew :app:assembleDebug
 
       - uses: actions/upload-artifact@v2
-          with:
-            name: Package
-            path: app/build/outputs/apk/debug/
+        with:
+          name: Package
+          path: app/build/outputs/apk/debug/
