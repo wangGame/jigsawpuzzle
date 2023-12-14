@@ -15,7 +15,7 @@ public abstract class BaseView extends Group {
     protected Label infoLabel;
     protected final String TAG = getClass().getSimpleName();
     public BaseView(){
-        setSize(1080, Constant.GAMEHIGHT - 142 - 142);
+        setSize(Constant.GAMEWIDTH, Constant.GAMEHIGHT - 142 - 142);
         infoLabel = new Label("",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
         }});

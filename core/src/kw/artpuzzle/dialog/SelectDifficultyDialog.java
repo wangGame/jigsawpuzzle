@@ -3,6 +3,7 @@ package kw.artpuzzle.dialog;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -66,6 +67,7 @@ public class SelectDifficultyDialog extends BaseDialog {
         Group itempanel = dialogGroup.findActor("itempanel");
         itempanel.addActor(pane);
         pane.setSize(Constant.GAMEWIDTH,itempanel.getHeight()+100);
+        pane.setX(540,Align.center);
         dialogGroup.findActor("btncontinue").addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -73,6 +75,23 @@ public class SelectDifficultyDialog extends BaseDialog {
                 runnable.run();
                 LevelConfig.splitnum = 6;
                 dialogManager.closeDialog(SelectDifficultyDialog.this);
+            }
+        });
+
+        Group selecttop = findActor("selecttop");
+        selecttop.setY(selecttop.getY()+offsetY);
+        Actor cancelbtn = selecttop.findActor("cancelbtn");
+        cancelbtn.setX(cancelbtn.getX(Align.center) + offsetX,Align.center);
+        Actor selectbg = findActor("selectbg");
+        selectbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        selectbg.setPosition(540,960,Align.center);
+
+        findActor("cancelbtn").setTouchable(Touchable.enabled);
+        findActor("cancelbtn").addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                closeDialog();
             }
         });
     }

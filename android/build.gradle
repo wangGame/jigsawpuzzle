@@ -53,11 +53,8 @@ android {
 
     packagingOptions {
         exclude 'META-INF/*.kotlin_module'
-
-
-            doNotStrip '**/mips/*.so'
-            doNotStrip '**/mips64/*.so'
-
+        doNotStrip '**/mips/*.so'
+        doNotStrip '**/mips64/*.so'
     }
 
 }

@@ -11,7 +11,7 @@ public class JigsawPreference {
     private Preferences preferences;
 
     public String getTheme() {
-        return preferences.getString("theme",null);
+        return preferences.getString("theme","0");
     }
 
     public void saveTheme(String name){
