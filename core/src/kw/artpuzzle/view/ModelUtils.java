@@ -19,6 +19,9 @@ public class ModelUtils {
         borderModels = new ArrayList<>();
         insetModels = new ArrayList<>();
         texture = Asset.getAsset().getLocalTexture(targetTextureName);
+        if (texture == null){
+            texture = Asset.getAsset().getTexture("61a0bd0f50a6b7268b7113de.png");
+        }
         int width = texture.getWidth();
         int height = texture.getHeight();
         int modelIndex = -1;

@@ -1,5 +1,6 @@
 package kw.artpuzzle.dialog;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -47,10 +48,17 @@ public class SelectDifficultyDialog extends BaseDialog {
         pregroup.setSize(min,min);
         pregroup.setY(Constant.GAMEHIGHT - 126 - min / 2.0f,Align.center);
         pregroup.setX(540.0f,Align.center);
-        Image preIamge = new Image(Asset.getAsset().getLocalTexture(
-                "finallevel/"+levelIndex.getVersion()
-                        +"/"+levelIndex.getLevelUUID()+"/"
-                        +levelIndex.getLevelUUID()+".png"));
+        Texture localTexture = Asset.getAsset().getLocalTexture(
+                "finallevel/" + levelIndex.getVersion()
+                        + "/" + levelIndex.getLevelUUID() + "/"
+                        + levelIndex.getLevelUUID() + ".png");
+        Image preIamge ;
+        if (localTexture == null){
+            preIamge = new Image();
+        }else {
+            preIamge = new Image(localTexture);
+        }
+
         pregroup.addActor(preIamge);
         preIamge.setSize(pregroup.getWidth(),pregroup.getHeight());
         preIamge.setPosition(pregroup.getWidth()/2.0f,pregroup.getHeight()/2.0f, Align.center);

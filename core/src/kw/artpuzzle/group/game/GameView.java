@@ -330,17 +330,17 @@ public class GameView extends Group {
     private void gameSuccess(Group picGroup,TempView view) {
         Actor gametop1 = rootView.findActor("gametop");
         Actor gamebottom1 = rootView.findActor("gamebottom");
-        gamebottom1.setVisible(false);
-        gametop1.setVisible(false);
-        view.setScale(0.56f);
+        gamebottom1.addAction(Actions.fadeOut(0.2f));
+        gametop1.addAction(Actions.fadeOut(0.2f));
+        view.addAction(Actions.scaleTo(0.56f,0.56f,0.2f));
 //        view.addAction(Actions.scaleTo(0.52f,0.52f,0.2f));
         Image image = new Image(new NinePatch(
                 Asset.getAsset().getTexture("common/success.png"),
-                16,16,16,16));
+                46,46,46,46));
         picGroup.addActor(image);
         image.getColor().a = 0.0f;
-        image.addAction(Actions.sequence(Actions.delay(0.4f),Actions.fadeIn(0.3f)));
-        image.setSize(1200,1200);
+        image.addAction(Actions.sequence(Actions.delay(0.2F),Actions.fadeIn(0.3f)));
+        image.setSize(1220,1220);
         image.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.0f - 80,Align.center);
         picGroup.setOrigin(Align.center);
         Image successBg = new Image(
@@ -352,12 +352,14 @@ public class GameView extends Group {
         successBg.toBack();
         successBg.setColor(Color.valueOf("#0a8518"));
         successBg.getColor().a = 0;
-        successBg.addAction(Actions.fadeIn(0.4f));
+        successBg.addAction(Actions.sequence(
+                Actions.delay(1.0f),
+                Actions.fadeIn(0.4f)));
         Image gamebg = rootView.findActor("gamebg");
         gamebg.toBack();
         successBg.setPosition(540,960,Align.center);
         picGroup.addAction(Actions.sequence(
-                Actions.delay(2,
+                Actions.delay(1.0F,
                         Actions.scaleTo(0.798f,0.798f,0.3f)),
                 Actions.run(()->{
 
@@ -365,6 +367,7 @@ public class GameView extends Group {
                     addActor(group);
                     group.getColor().a = 0;
                     group.addAction(Actions.fadeIn(0.3f));
+                    group.setOrigin(Align.center);
                     group.setPosition(getWidth()/2.0f,200 - baseScreen.getOffsetY(),Align.bottom);
                     group.addListener(new OrdinaryButtonListener(){
                         @Override
