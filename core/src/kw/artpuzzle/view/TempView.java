@@ -2,7 +2,9 @@ package kw.artpuzzle.view;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
@@ -41,7 +43,7 @@ public class TempView extends Group {
         setSize(splitPicGroup.getWidth(),splitPicGroup.getHeight());
         preImage.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         addActor(preImage);
-        preImage.setVisible(false);
+        preImage.getColor().a = 0;
         splitPicGroup.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Image playImg = new Image(Asset.getAsset().getTexture("white.png"));
         addActor(playImg);
@@ -59,7 +61,12 @@ public class TempView extends Group {
     }
 
     public void setShowPre(boolean isShowPre) {
-        preImage.setVisible(isShowPre);
+        preImage.clearActions();
+        if (isShowPre){
+            preImage.addAction(Actions.fadeIn(0.2f));
+        }else {
+            preImage.addAction(Actions.fadeOut(0.2f));
+        }
     }
 
     public void addFindActor(Group group){

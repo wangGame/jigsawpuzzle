@@ -41,7 +41,7 @@ public class BgTheme extends Group {
         addActor(themeTitle);
         themeTitle.setColor(Color.BLACK);
         themeTitle.setAlignment(Align.center);
-        themeTitle.setText("change theme");
+        themeTitle.setText("Change Theme");
         themeTitle.pack();
         themeTitle.setOrigin(Align.center);
         themeTitle.setScale(1.5f);
@@ -52,13 +52,13 @@ public class BgTheme extends Group {
             }
         });
         addActor(themefinish);
-        themefinish.setAlignment(Align.center);
-        themefinish.setText("finish");
+        themefinish.setAlignment(Align.right);
+        themefinish.setText("Done");
         themefinish.pack();
-        themefinish.setOrigin(Align.center);
+        themefinish.setOrigin(Align.right);
         themefinish.setScale(1.5f);
-        themefinish.setPosition(getWidth() - 30,getHeight() - 70,Align.right);
-        themefinish.setColor(Color.RED);
+        themefinish.setPosition(getWidth() - 40,getHeight() - 70,Align.right);
+        themefinish.setColor(Color.valueOf("#34c765"));
         themefinish.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

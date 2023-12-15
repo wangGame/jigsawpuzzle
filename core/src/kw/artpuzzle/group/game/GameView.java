@@ -27,6 +27,7 @@ import com.kw.gdx.scrollpane.ScrollPane;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import kw.artpuzzle.JigSawPuzzle;
 import kw.artpuzzle.constant.LevelConfig;
@@ -58,6 +59,8 @@ public class GameView extends Group {
     //因为排序
     private ArrayList<ModelGroup> finalModelGroup;
     private boolean showBorder;
+    private  Group picGroup;
+    private TempView view;
 
     public GameView(BaseScreen baseScreen){
        this.baseScreen = baseScreen;
@@ -86,12 +89,12 @@ public class GameView extends Group {
         middlebg.setPosition(vector2,Align.center);
         Group gametop = rootView.findActor("gametop");
         gametop.setY(gametop.getY() + baseScreen.getOffsetY());
-        Actor topback = gametop.findActor("topback");
-        Actor egebtn = gametop.findActor("egebtn");
-        Actor clearbtn = gametop.findActor("clearbtn");
-        Actor tipbtn = gametop.findActor("tipbtn");
-        Actor prebtn = gametop.findActor("prebtn");
-        Actor themebtn = gametop.findActor("themebtn");
+        Group topback = gametop.findActor("topback");
+        Group egebtn = gametop.findActor("egebtn");
+        Group clearbtn = gametop.findActor("clearbtn");
+        Group tipbtn = gametop.findActor("tipbtn");
+        Group prebtn = gametop.findActor("prebtn");
+        Group themebtn = gametop.findActor("themebtn");
         Actor topbg = gametop.findActor("topbg");
         topbg.setWidth(Constant.GAMEWIDTH);
         topbg.setX(540,Align.center);
@@ -148,7 +151,7 @@ public class GameView extends Group {
         gamebottom.toFront();
         Group picGroup = new Group();
         picGroup.setSize(1050,1050);
-        TempView view = modelUtils.getTempView();
+        view = modelUtils.getTempView();
         picGroup.addActor(view);
         gamemiddle.addActor(picGroup);
         view.setOrigin(Align.center);
@@ -200,13 +203,47 @@ public class GameView extends Group {
 //        addActor(group);
 //        group.setPosition(200,200);
 //        group.setScale(0.4f);
-        tipbtn.addListener(new OrdinaryButtonListener(){
+        clearbtn.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 clearModel();
             }
         });
+
+        tipbtn.addListener(new OrdinaryButtonListener(){
+            @SuppressWarnings("NewApi")
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                ArrayList<ModelGroup> modelGroups = new ArrayList<>();
+                modelGroups.addAll(finalModelGroup);
+                modelGroups.sort(new Comparator<ModelGroup>() {
+                    @Override
+                    public int compare(ModelGroup group, ModelGroup t1) {
+                        return group.getModelIndex() - t1.getModelIndex();
+                    }
+                });
+                for (ModelGroup modelGroup : modelGroups) {
+                    if (!modelGroup.isFreeStatus()){
+                        Vector2 targetPos = logicUtils.findTargetPos(modelGroup.getName());
+                        finalModelGroup.remove(modelGroup);
+                        logicUtils.addActor(modelGroup);
+                        modelGroup.clearListeners();
+                        modelGroup.setImageScale(1.0f);
+                        modelGroup.setPosition(targetPos.x, targetPos.y, Align.center);
+
+                        if (finalModelGroup.size()<=0){
+                            addAction(Actions.delay(0.4f,Actions.run(()->{
+                                gameSuccess(picGroup,view);
+                            })));
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+
         topback.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -235,15 +272,31 @@ public class GameView extends Group {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 showBorder = !showBorder;
+                if (showBorder) {
+                    egebtn.findActor("egebtnIcon").setColor(Color.valueOf("#44cb66"));
+                }else {
+                    egebtn.findActor("egebtnIcon").setColor(Color.valueOf("#868d9d"));
+                }
                 showBorder();
             }
         });
+
 //        gameSuccess(picGroup,view);
         prebtn.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 isShowPre = !isShowPre;
+                gamebottom.clearActions();
+                if (isShowPre) {
+                    prebtn.findActor("prebtnicon").setColor(Color.valueOf("#44cb66"));
+                    gamebottom.addAction(Actions.fadeOut(0.2f));
+                    gamebottom.setTouchable(Touchable.disabled);
+                }else {
+                    prebtn.findActor("prebtnicon").setColor(Color.valueOf("#868d9d"));
+                    gamebottom.addAction(Actions.fadeIn(0.2f));
+                    gamebottom.setTouchable(Touchable.enabled);
+                }
                 //绘制
                 view.setShowPre(isShowPre);
             }
@@ -282,29 +335,48 @@ public class GameView extends Group {
         view.setScale(0.56f);
 //        view.addAction(Actions.scaleTo(0.52f,0.52f,0.2f));
         Image image = new Image(new NinePatch(
-                Asset.getAsset().getTexture("common/success_border.png"),
+                Asset.getAsset().getTexture("common/success.png"),
                 16,16,16,16));
         picGroup.addActor(image);
-        image.setSize(1050,1050);
-        image.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.0f,Align.center);
+        image.getColor().a = 0.0f;
+        image.addAction(Actions.sequence(Actions.delay(0.4f),Actions.fadeIn(0.3f)));
+        image.setSize(1200,1200);
+        image.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.0f - 80,Align.center);
         picGroup.setOrigin(Align.center);
+        Image successBg = new Image(
+                new NinePatch(
+                        Asset.getAsset().getTexture("white.png"),
+                        5,5,5,5));
+        successBg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
+        rootView.addActor(successBg);
+        successBg.toBack();
+        successBg.setColor(Color.valueOf("#0a8518"));
+        successBg.getColor().a = 0;
+        successBg.addAction(Actions.fadeIn(0.4f));
+        Image gamebg = rootView.findActor("gamebg");
+        gamebg.toBack();
+        successBg.setPosition(540,960,Align.center);
         picGroup.addAction(Actions.sequence(
                 Actions.delay(2,
-                        Actions.scaleTo(0.798f,0.798f,0.3f))));
+                        Actions.scaleTo(0.798f,0.798f,0.3f)),
+                Actions.run(()->{
 
-        Group group = CocosResource.loadFile("cocos/btn.json");
-        addActor(group);
-        group.setPosition(getWidth()/2.0f,200 - baseScreen.getOffsetY(),Align.bottom);
-        group.addListener(new OrdinaryButtonListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                GameView.this.addAction(Actions.sequence(
-                        Actions.fadeOut(0.4f),
-                        Actions.removeActor()
-                ));
-            }
-        });
+                    Group group = CocosResource.loadFile("cocos/btn.json");
+                    addActor(group);
+                    group.getColor().a = 0;
+                    group.addAction(Actions.fadeIn(0.3f));
+                    group.setPosition(getWidth()/2.0f,200 - baseScreen.getOffsetY(),Align.bottom);
+                    group.addListener(new OrdinaryButtonListener(){
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            super.clicked(event, x, y);
+                            GameView.this.addAction(Actions.sequence(
+                                    Actions.fadeOut(0.4f),
+                                    Actions.removeActor()
+                            ));
+                        }
+                    });
+                })));
     }
 
     private boolean successMove = false;
@@ -360,6 +432,12 @@ public class GameView extends Group {
                             finalModelGroup.remove(group);
                             group.clearListeners();
                             group.addAction(Actions.moveToAligned(targetPos.x, targetPos.y, Align.center, 0.1f));
+
+                            if (finalModelGroup.size()<=0){
+                                addAction(Actions.delay(0.4f,Actions.run(()->{
+                                    gameSuccess(picGroup,view);
+                                })));
+                            }
                          }
                     }else {
                         if (isDragged) {
