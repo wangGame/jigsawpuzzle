@@ -225,7 +225,7 @@ public class GameView extends Group {
                     }
                 });
                 for (ModelGroup modelGroup : modelGroups) {
-                    if (!modelGroup.isFreeStatus()){
+
                         Vector2 targetPos = logicUtils.findTargetPos(modelGroup.getName());
                         finalModelGroup.remove(modelGroup);
                         logicUtils.addActor(modelGroup);
@@ -239,7 +239,7 @@ public class GameView extends Group {
                             })));
                         }
                         break;
-                    }
+
                 }
             }
         });
