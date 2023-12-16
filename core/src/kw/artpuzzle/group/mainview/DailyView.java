@@ -35,7 +35,7 @@ public class DailyView extends BaseView {
             @Override
             public void act(float delta) {
                 super.act(delta);
-                if (getScrollPercentY()>0.7f){
+                if (getScrollPercentY()>0.9f){
                     addOneMonthData(false);
                     scrollPane.layout();
                     scrollPane.validate();
@@ -94,4 +94,5 @@ public class DailyView extends BaseView {
         DailyUtils.subMonth(dateBean);
         currentMonthDays = DailyUtils.currentMonthDay(dateBean.getYear(), dateBean.getMonth());
     }
+
 }

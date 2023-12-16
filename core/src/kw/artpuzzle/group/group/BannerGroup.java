@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
+import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.resource.cocosload.CocosResource;
 import com.kw.gdx.shader.ShaderManager;
 import com.kw.gdx.zip.PackZip;
@@ -47,6 +49,14 @@ public class BannerGroup extends Group {
                 status = 9;
             }
         }
+
+        addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
     }
 
 

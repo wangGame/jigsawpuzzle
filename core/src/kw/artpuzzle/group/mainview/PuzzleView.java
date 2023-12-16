@@ -25,8 +25,10 @@ import kw.artpuzzle.group.group.MyPuzzleGroup;
 public class PuzzleView extends BaseView {
     private Group contentGroup;
     private Image selectbg;
+    private Group contentTitleGroup;
+
     public PuzzleView(){
-        Group contentTitleGroup = new Group();
+        contentTitleGroup = new Group();
         addActor(contentTitleGroup);
         contentTitleGroup.setSize(990,92);
         selectbg = new Image(
@@ -35,7 +37,7 @@ public class PuzzleView extends BaseView {
                         10,10,0,0));
         selectbg.setWidth(320);
         selectbg.setY(46,Align.center);
-        selectbg.setColor(Color.RED);
+        selectbg.setColor(Color.valueOf("#34bd59"));
         Image contentTitleBg = new Image(Asset.getAsset().getTexture("common/btnbg.png"));
         contentTitleGroup.addActor(contentTitleBg);
         contentTitleGroup.addActor(selectbg);
@@ -51,8 +53,12 @@ public class PuzzleView extends BaseView {
             Label labelTitle = new Label("",new Label.LabelStyle(){{
                 font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
             }});
+            labelTitle.setAlignment(Align.center);
             labelTitle.setText(str[i]);
             labelTitle.pack();
+            labelTitle.setName("label"+i);
+            labelTitle.setOrigin(Align.center);
+            labelTitle.setScale(1.5f);
             labelTitle.setColor(Color.BLACK);
             groupTemp.setSize(330.0f,92.0f);
             groupTemp.addActor(labelTitle);
@@ -88,6 +94,13 @@ public class PuzzleView extends BaseView {
         selectbg.clearActions();
         selectbg.addAction(Actions.moveToAligned(165 + page * 330.f,46,Align.center,0.2f));
         contentGroup.clear();
+        for (int i = 0; i < 3; i++) {
+            if (page == i) {
+                contentTitleGroup.findActor("label" + i).setColor(Color.WHITE);
+            }else {
+                contentTitleGroup.findActor("label" + i).setColor(Color.valueOf("#73798c"));
+            }
+        }
         if (page == 0){
             contentGroup.addActor(MyPuzzleGroup.getInstance());
         }else if (page == 1){

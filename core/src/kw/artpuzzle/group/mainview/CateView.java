@@ -7,7 +7,10 @@ import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.data.CateBean;
 import kw.artpuzzle.data.GameData;
+import kw.artpuzzle.data.LevelBean;
+import kw.artpuzzle.group.group.CateDetailGroup;
 import kw.artpuzzle.group.group.CateItemGroup;
+import kw.artpuzzle.group.group.ItemGroup;
 import kw.artpuzzle.listener.SignListener;
 
 /**
@@ -16,21 +19,50 @@ import kw.artpuzzle.listener.SignListener;
  */
 public class CateView extends BaseView {
     private ScrollPane cateScrollpane;
-    public CateView(SignListener listener){
-        ArrayMap<String, CateBean> entries = GameData.getInstance().readCate();
-        cateScrollpane = new ScrollPane(new Table(){{
-            for (int i = 0; i < entries.size; i++) {
-                String keyAt = entries.getKeyAt(i);
-                CateBean cateBean = entries.get(keyAt);
-                CateItemGroup cateGroup = new CateItemGroup(cateBean);
-                add(cateGroup).padLeft(10).padRight(10).padTop(28).padBottom(28);
-                cateGroup.setSignListener(listener);
-                row();
+    private Table contentTable;
+    private ArrayMap<String, CateBean> cateDataMap;
+    public CateView(){
+        cateDataMap = GameData.getInstance().readCate();
+        cateScrollpane = new ScrollPane(contentTable = new Table(){{
+              align(Align.top);
+        }}){
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                if (getScrollPercentY()>0.8f) {
+                    addLevelItem();
+                    contentTable.pack();
+                    cateScrollpane.validate();
+                }
             }
-            pack();
-            align(Align.top);
-        }});
+        };
+        for (int i = 0; i < initNumber*4; i++) {
+            addLevelItem();
+        }
+        contentTable.pack();
+        contentTable.validate();
         cateScrollpane.setSize(getWidth(),getHeight());
         addActor(cateScrollpane);
+    }
+
+    public void addLevelItem(){
+        if (levelIndex>=cateDataMap.size)return;
+        String keyAt = cateDataMap.getKeyAt(levelIndex);
+        levelIndex ++;
+        CateBean cateBean = cateDataMap.get(keyAt);
+        CateItemGroup cateGroup = new CateItemGroup(cateBean);
+        contentTable.add(cateGroup).padLeft(10).padRight(10).padTop(28).padBottom(28);
+        cateGroup.setSignListener(new SignListener() {
+            @Override
+            public void sign(Object o) {
+                CateBean cateName = (CateBean)o;
+                CateDetailGroup cateDetailGroup = new CateDetailGroup(cateName);
+                cateDetailGroup.setY(1920-142,Align.top);
+                CateView.this.addActor(cateDetailGroup);
+            }
+        });
+        if (levelIndex % 2 == 0) {
+            contentTable.row();
+        }
     }
 }

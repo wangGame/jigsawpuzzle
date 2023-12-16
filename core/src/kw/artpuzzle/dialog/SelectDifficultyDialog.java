@@ -81,7 +81,7 @@ public class SelectDifficultyDialog extends BaseDialog {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 runnable.run();
-                LevelConfig.splitnum = 6;
+                LevelConfig.splitnum = 1;
                 dialogManager.closeDialog(SelectDifficultyDialog.this);
             }
         });

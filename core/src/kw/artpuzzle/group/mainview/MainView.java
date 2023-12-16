@@ -17,37 +17,42 @@ import kw.artpuzzle.group.group.ItemGroup;
  * @Date 2023/12/4 19:54
  */
 public class MainView extends BaseView {
+    private ArrayMap<Integer, LevelBean> levelData;
     private ScrollPane levelScrollPanel;
+    private Table contentTable;
+    private Runnable runnable;
     public MainView(Runnable runnable){
-        ArrayMap<Integer, LevelBean> levelData = GameData.getInstance().getLevelSortData();
-        levelScrollPanel = new ScrollPane(new Table(){{
-            int index = 0;
-            for (int i = 1; i <= levelData.size; i++) {
-                LevelBean levelBean = levelData.get(i);
-                if (levelBean.getType().equals("COLLECTION")){
-//                    ItemGroup itemGroup = new ItemGroup(levelBean, runnable);
-//                    for (Actor child : itemGroup.getChildren()) {
-//                        child.setVisible(false);
-//                    }
-//
-////                    BannerGroup group = new BannerGroup(collectionBean);
-//                    add(itemGroup).pad(15);
-//                    add(new ItemGroup(levelBean, runnable)).pad(15);
-//                    row();
-                    continue;
-                }else {
-                    index ++;
-                    add(new ItemGroup(levelBean, runnable)).pad(15);
-                    if (index % 2 == 0) {
-                        row();
-                    }
+        this.runnable = runnable;
+        levelData = GameData.getInstance().getLevelSortData();
+        levelScrollPanel = new ScrollPane(contentTable = new Table(){{
+        }}){
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                if (getScrollPercentY()>0.75) {
+                    addLevelItem();
+                    contentTable.pack();
+                    levelScrollPanel.validate();
                 }
             }
-            pack();
-            align(Align.top);
-        }});
+        };
+        for (int i = 0; i < initNumber; i++) {
+            addLevelItem();
+        }
+        contentTable.pack();
+        contentTable.align(Align.top);
         levelScrollPanel.setSize(getWidth(),getHeight());
         levelScrollPanel.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         addActor(levelScrollPanel);
+    }
+
+    public void addLevelItem(){
+        if (levelIndex>levelData.size)return;
+        levelIndex ++;
+        LevelBean levelBean = levelData.get(levelIndex);
+        contentTable.add(new ItemGroup(levelBean, runnable)).pad(15);
+        if (levelIndex % 2 == 0) {
+            contentTable.row();
+        }
     }
 }

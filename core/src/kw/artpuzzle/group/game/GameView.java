@@ -1,5 +1,6 @@
 package kw.artpuzzle.group.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -35,6 +36,7 @@ import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.data.SaveHistoryBean;
+import kw.artpuzzle.data.SelectItemBean;
 import kw.artpuzzle.fileutils.FileUtils;
 import kw.artpuzzle.group.group.BgTheme;
 import kw.artpuzzle.jigsawfile.Jigsawfile;
@@ -254,7 +256,9 @@ public class GameView extends Group {
                 int size = modelGroups.size();
                 if (size != 0) {
                     SaveHistoryBean saveHistoryBean = new SaveHistoryBean();
-                    saveHistoryBean.setSplitNum(LevelConfig.splitnum);
+                    ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
+                    SelectItemBean selectItemBean = entries.get(LevelConfig.splitnum);
+                    saveHistoryBean.setSplitNum(selectItemBean.getPiecesnum());
                     saveHistoryBean.setLeftNum(size);
                     for (ModelGroup modelGroup : modelGroups) {
                         saveHistoryBean.setLeftPicIndex(modelGroup.getModelIndex());
@@ -380,6 +384,9 @@ public class GameView extends Group {
                         }
                     });
                 })));
+        ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
+        SelectItemBean selectItemBean = entries.get(LevelConfig.splitnum);
+        JigsawPreference.getInstance().saveCoinNum(selectItemBean.getRewardcoin());
     }
 
     private boolean successMove = false;
@@ -416,7 +423,6 @@ public class GameView extends Group {
                         convert.set(x, y);
                         group.localToStageCoordinates(convert);
                         group.setImagePosition(x, y);
-
                         Vector2 vector21 = group.imageVector();
                         logicUtils.convertTarget(vector21);
                         group.resetPosition();

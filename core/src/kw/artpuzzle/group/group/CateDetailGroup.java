@@ -26,15 +26,20 @@ import kw.artpuzzle.listener.SignListener;
  */
 public class CateDetailGroup extends Group {
     private ScrollPane detailScrollPanel;
+    private int levelIndex;
+    private Table contentTable;
+    private ArrayMap<Integer, CollectionBean> collectionBeanArrayMap;
+    private ArrayMap<Integer, LevelBean> levelBeanArrayMap;
+    private CateBean cateBean;
 
     public CateDetailGroup(CateBean cateBean){
+        this.cateBean = cateBean;
         setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 140);
         Image bg = new Image(new NinePatch(
                 Asset.getAsset().getTexture("white.png"),
                 2,2,2,2));
         addActor(bg);
         bg.setSize(getWidth(),getHeight());
-
 
         Image back = new Image(Asset.getAsset().getTexture("common/back.png"));
         addActor(back);
@@ -57,40 +62,73 @@ public class CateDetailGroup extends Group {
         titleLabel.setPosition(getWidth()/2.0f,getHeight() - 72, Align.center);
         titleLabel.setColor(Color.BLACK);
         if (cateBean.getType().equals("COLLECTION")) {
-            ArrayMap<Integer, CollectionBean> levelBeanArrayMap
+            collectionBeanArrayMap
                     = GameData.getInstance().readCollectionCateDetail(cateBean.getDesc());
-            detailScrollPanel = new ScrollPane(new Table(){{
-                for (int i = 0; i < levelBeanArrayMap.size; i++) {
-                    Integer keyAt = levelBeanArrayMap.getKeyAt(i);
-                    CollectionBean collectionBean = levelBeanArrayMap.get(keyAt);
-                    BannerGroup group = new BannerGroup(collectionBean);
-                    add(group).pad(30);
-                    row();
-                }
+            detailScrollPanel = new ScrollPane(contentTable = new Table(){{
                 pack();
-            }});
-        }else {
-            ArrayMap<Integer, LevelBean> levelBeanArrayMap
-                    = GameData.getInstance().readCateDetail(cateBean.getDesc());
-            detailScrollPanel = new ScrollPane(new Table() {{
-                for (int i = 1; i <= levelBeanArrayMap.size; i++) {
-                    LevelBean valueAt = levelBeanArrayMap.getValueAt(i - 1);
-                    ItemGroup itemGroup = new ItemGroup(valueAt, new Runnable() {
-                        @Override
-                        public void run() {
-
-                        }
-                    });
-                    itemGroup.setType(cateBean.getType());
-                    add(itemGroup).pad(15);
-                    if (i % 2 == 0) {
-                        row();
+                align(Align.top);
+            }}){
+                @Override
+                public void act(float delta) {
+                    super.act(delta);
+                    if (getScrollPercentY()>0.9f){
+                        addCollection();
                     }
                 }
+            };
+            for (int i = 0; i < 10; i++) {
+                addCollection();
+            }
+        }else {
+            levelBeanArrayMap
+                    = GameData.getInstance().readCateDetail(cateBean.getDesc());
+            detailScrollPanel = new ScrollPane(contentTable = new Table() {{
                 align(Align.top);
-            }});
+            }}){
+                @Override
+                public void act(float delta) {
+                    super.act(delta);
+                    if (getScrollPercentY()>0.9f){
+                        addLevel();
+                    }
+                }
+            };
+            for (int i = 0; i < 10; i++) {
+                addLevel();
+            }
         }
         detailScrollPanel.setSize(getWidth(), getHeight() - 142.0f);
         addActor(detailScrollPanel);
+    }
+
+    public void addCollection(){
+        if (levelIndex>=collectionBeanArrayMap.size)return;
+        Integer keyAt = collectionBeanArrayMap.getKeyAt(levelIndex);
+        levelIndex++;
+        CollectionBean collectionBean = collectionBeanArrayMap.get(keyAt);
+        BannerGroup group = new BannerGroup(collectionBean);
+        contentTable.add(group).pad(30);
+        contentTable.row();
+        contentTable.pack();
+        detailScrollPanel.validate();
+    }
+
+    public void addLevel(){
+        if (levelIndex>=levelBeanArrayMap.size)return;
+        LevelBean valueAt = levelBeanArrayMap.getValueAt(levelIndex);
+        ItemGroup itemGroup = new ItemGroup(valueAt, new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+        levelIndex++;
+        itemGroup.setType(cateBean.getType());
+        contentTable.add(itemGroup).pad(15);
+        if (levelIndex % 2 == 0) {
+            contentTable.row();
+        }
+        contentTable.pack();
+        detailScrollPanel.validate();
     }
 }

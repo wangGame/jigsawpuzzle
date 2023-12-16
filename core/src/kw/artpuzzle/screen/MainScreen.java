@@ -50,22 +50,13 @@ public class MainScreen extends BaseScreen {
         mainScrollPane = new ScrollPane(new Table(){{
             add(new MainView(runnable));
             add(new DailyView(runnable));
-            add(new CateView(new SignListener(){
-                @Override
-                public void sign(Object o) {
-                    if (o instanceof CateBean){
-                        CateBean cateName = (CateBean)o;
-                        CateDetailGroup cateDetailGroup = new CateDetailGroup(cateName);
-                        cateDetailGroup.setY(1920 + offsetY ,Align.top);
-                        content.addActor(cateDetailGroup);
-                    }
-                }
-            }));
+            add(new CateView());
             add(new PuzzleView());
             pack();
+            align(Align.bottom);
         }});
-        mainScrollPane.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 142 - 142);
-        mainScrollPane.setPosition(540.0f,960.0f,Align.center);
+        mainScrollPane.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 142);
+        mainScrollPane.setPosition(540.0f,142,Align.bottom);
         mainScrollPane.setRectangle(0,0,0,0);
         content.addActor(mainScrollPane);
         Actor maintop = rootView.findActor("maintop");

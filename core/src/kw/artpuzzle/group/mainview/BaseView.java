@@ -13,6 +13,8 @@ import com.kw.gdx.constant.Constant;
  */
 public abstract class BaseView extends Group {
     protected Label infoLabel;
+    protected int levelIndex;
+    protected int initNumber = 10;
     protected final String TAG = getClass().getSimpleName();
     public BaseView(){
         setSize(Constant.GAMEWIDTH, Constant.GAMEHIGHT - 142 - 142);
