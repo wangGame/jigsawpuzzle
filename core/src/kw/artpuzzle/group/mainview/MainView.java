@@ -1,5 +1,7 @@
 package kw.artpuzzle.group.mainview;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -7,6 +9,7 @@ import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
+import kw.artpuzzle.group.group.BannerGroup;
 import kw.artpuzzle.group.group.ItemGroup;
 
 /**
@@ -22,9 +25,16 @@ public class MainView extends BaseView {
             for (int i = 1; i <= levelData.size; i++) {
                 LevelBean levelBean = levelData.get(i);
                 if (levelBean.getType().equals("COLLECTION")){
-                    add(new ItemGroup(levelBean, runnable)).pad(15);
-                    add(new ItemGroup(levelBean, runnable)).pad(15);
-                    row();
+//                    ItemGroup itemGroup = new ItemGroup(levelBean, runnable);
+//                    for (Actor child : itemGroup.getChildren()) {
+//                        child.setVisible(false);
+//                    }
+//
+////                    BannerGroup group = new BannerGroup(collectionBean);
+//                    add(itemGroup).pad(15);
+//                    add(new ItemGroup(levelBean, runnable)).pad(15);
+//                    row();
+                    continue;
                 }else {
                     index ++;
                     add(new ItemGroup(levelBean, runnable)).pad(15);
