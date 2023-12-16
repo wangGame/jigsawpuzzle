@@ -25,8 +25,8 @@ import com.kw.gdx.scrollpane.ScrollPane;
 public class BgTheme extends Group {
     private ScrollPane pane;
     private Table themeTable;
-    private Runnable runnable;
     public BgTheme(Runnable runnable){
+        setDebug(true);
         setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         Image bg = new Image(new NinePatch(
                 Asset.getAsset().getTexture("white.png"),
@@ -55,7 +55,7 @@ public class BgTheme extends Group {
         themefinish.setAlignment(Align.right);
         themefinish.setText("Done");
         themefinish.pack();
-        themefinish.setOrigin(Align.right);
+        themefinish.setOrigin(Align.center);
         themefinish.setScale(1.5f);
         themefinish.setPosition(getWidth() - 40,getHeight() - 70,Align.right);
         themefinish.setColor(Color.valueOf("#34c765"));
@@ -64,6 +64,7 @@ public class BgTheme extends Group {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 runnable.run();
+                exitAnimation();
             }
         });
         pane = new ScrollPane(themeTable = new Table(){
@@ -91,22 +92,24 @@ public class BgTheme extends Group {
         });
         pane.setSize(getWidth(),getHeight() - 140);
         addActor(pane);
-        themefinish.addListener(new OrdinaryButtonListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                BgTheme.this.remove();
-            }
-        });
+        enterAnimation();
     }
 
     private void enterAnimation(){
         setY(-Constant.GAMEHIGHT);
-//        addAction(
-//                Actions.sequence(Actions.moveTo()));
+        setPosition(Constant.GAMEWIDTH/2.0f,
+                -(Constant.GAMEHIGHT - Constant.HIGHT) / 2.0f,Align.top);
+        getColor().a = 0.0f;
+        addAction(Actions.fadeIn(0.3f));
+        addAction(Actions.moveToAligned(540.0f,960.0f,Align.center,0.3f));
     }
 
     private void exitAnimation(){
-
+        getColor().a = 1.0f;
+        addAction(Actions.sequence(
+                Actions.fadeOut(0.3f),
+                Actions.removeActor()));
+        addAction(Actions.moveToAligned(540.0f,
+                -(Constant.GAMEHIGHT - Constant.HIGHT) / 2.0f,Align.center,0.3f));
     }
 }

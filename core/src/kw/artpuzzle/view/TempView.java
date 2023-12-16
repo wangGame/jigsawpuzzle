@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
@@ -43,6 +44,7 @@ public class TempView extends Group {
         setSize(splitPicGroup.getWidth(),splitPicGroup.getHeight());
         preImage.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         addActor(preImage);
+        preImage.setTouchable(Touchable.disabled);
         preImage.getColor().a = 0;
         splitPicGroup.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Image playImg = new Image(Asset.getAsset().getTexture("white.png"));

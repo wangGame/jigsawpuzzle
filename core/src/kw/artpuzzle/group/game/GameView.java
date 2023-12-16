@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
 import com.kw.gdx.listener.OrdinaryButtonListener;
@@ -239,8 +240,8 @@ public class GameView extends Group {
                             })));
                         }
                         break;
+                    }
 
-                }
             }
         });
 
@@ -312,7 +313,6 @@ public class GameView extends Group {
                         changeBg();
                     }
                 });
-                bgTheme.setPosition(540,960,Align.center);
                 addActor(bgTheme);
 
             }
@@ -416,8 +416,6 @@ public class GameView extends Group {
                         convert.set(x, y);
                         group.localToStageCoordinates(convert);
                         group.setImagePosition(x, y);
-                        Vector2 vector2 = group.imageVector();
-                        logicUtils.convertTarget(vector2);
 
                         Vector2 vector21 = group.imageVector();
                         logicUtils.convertTarget(vector21);
@@ -428,28 +426,39 @@ public class GameView extends Group {
                         group.setImageScale(1.0f);
                         logicUtils.addActor(group);
                         group.setFree(true);
-
-
-                        if (logicUtils.check(targetPos, vector2)) {
-                            successMove = true;
-                            finalModelGroup.remove(group);
-                            group.clearListeners();
-                            group.addAction(Actions.moveToAligned(targetPos.x, targetPos.y, Align.center, 0.1f));
-
-                            if (finalModelGroup.size()<=0){
-                                addAction(Actions.delay(0.4f,Actions.run(()->{
-                                    gameSuccess(picGroup,view);
-                                })));
-                            }
-                         }
                     }else {
                         if (isDragged) {
                             group = getGroup();
                             group.setFree(false);
-                            bottomModelTable.add(group);
+                            float stageX = event.getStageX();
+                            Vector2 vector2 = new Vector2();
+                            vector2.set(stageX,0);
+                            bottomModelTable.stageToLocalCoordinates(vector2);
+                            float scrollX = bottomPanelScrollPanel.getScrollX();
+                            int v = (int) ((scrollX+vector2.x) / group.getWidth())-1;
+                            if (v<0){
+                                v = 0;
+                            }
+                            SnapshotArray<Actor> children = bottomModelTable.getChildren();
+                            Array<Actor> array = new Array<>();
+                            boolean success = false;
+                            for (int i = 0; i < children.size; i++) {
+                                array.add(children.get(i));
+                                if (i == v){
+                                    success = true;
+                                    array.add(group);
+                                }
+                            }
+                            if (!success){
+                                array.add(group);
+                            }
+                            bottomModelTable.clear();
+                            for (Actor actor : array) {
+                                bottomModelTable.add(actor);
+                            }
+                            bottomModelTable.pack();
                             bottomModelTable.pack();
                             group.resetScale();
-
                         }
                     }
                 }
@@ -458,7 +467,21 @@ public class GameView extends Group {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-                if (successMove)return;
+                ModelGroup group = getGroup();
+                Vector2 vector2 = group.imageVector();
+                logicUtils.convertTarget(vector2);
+                if (logicUtils.check(targetPos, vector2)) {
+                    successMove = true;
+                    finalModelGroup.remove(group);
+                    group.clearListeners();
+                    group.addAction(Actions.moveToAligned(targetPos.x, targetPos.y, Align.center, 0.1f));
+
+                    if (finalModelGroup.size()<=0){
+                        addAction(Actions.delay(0.4f,Actions.run(()->{
+                            gameSuccess(picGroup,view);
+                        })));
+                    }
+                }
 //                ModelGroup group = getGroup();
 //                group.resetPosition();
 //                group.resetScale();

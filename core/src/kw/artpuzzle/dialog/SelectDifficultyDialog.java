@@ -46,7 +46,7 @@ public class SelectDifficultyDialog extends BaseDialog {
         float v1 = Constant.GAMEWIDTH - 60;
         float min = Math.min(v, v1);
         pregroup.setSize(min,min);
-        pregroup.setY(Constant.GAMEHIGHT - 126 - min / 2.0f,Align.center);
+        pregroup.setY(1920 - 126 - min / 2.0f + (Constant.GAMEHIGHT - 1920.0f)/2.0f,Align.center);
         pregroup.setX(540.0f,Align.center);
         Texture localTexture = Asset.getAsset().getLocalTexture(
                 "finallevel/" + levelIndex.getVersion()
@@ -54,7 +54,7 @@ public class SelectDifficultyDialog extends BaseDialog {
                         + levelIndex.getLevelUUID() + ".png");
         Image preIamge ;
         if (localTexture == null){
-            preIamge = new Image();
+            preIamge = new Image(Asset.getAsset().getTexture("61a0bd0f50a6b7268b7113de.png"));
         }else {
             preIamge = new Image(localTexture);
         }

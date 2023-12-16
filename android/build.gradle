@@ -15,7 +15,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.tony.my"
+        applicationId "com.tony.puzzle"
         minSdkVersion 14
         targetSdkVersion 33
         versionCode 1
@@ -49,12 +49,8 @@ android {
         abortOnError false
     }
 
-    ndkVersion "24.0.8215888"
-
     packagingOptions {
         exclude 'META-INF/*.kotlin_module'
-        doNotStrip '**/mips/*.so'
-        doNotStrip '**/mips64/*.so'
     }
 
 }
