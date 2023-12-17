@@ -17,8 +17,8 @@ import kw.artpuzzle.screen.LoadingScreen;
 public class JigSawPuzzle extends BaseGame {
     public JigSawPuzzle(DownLoad deskDownload, GameListener listener){
         Gdx.isJiami = true;
+        GameStaticInstance.gameListener = listener;
         listener.changeLocalPath();
-
         Asset.enterGameClear();
         NLog.isLog = false;
         Constant.viewColor.set(Color.WHITE);

@@ -17,6 +17,7 @@ import com.kw.gdx.listener.OrdinaryButtonListener;
 import kw.artpuzzle.group.group.MyPicListGroup;
 import kw.artpuzzle.group.group.MyPlayingGroup;
 import kw.artpuzzle.group.group.MyPuzzleGroup;
+import kw.artpuzzle.group.group.MyPzBaseGroup;
 
 /**
  * @Auther jian xian si qi
@@ -110,5 +111,12 @@ public class PuzzleView extends BaseView {
         }else {
             contentGroup.addActor(MyPuzzleGroup.getInstance());
         }
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        MyPzBaseGroup instance = MyPuzzleGroup.getInstance();
+        instance.update();
     }
 }

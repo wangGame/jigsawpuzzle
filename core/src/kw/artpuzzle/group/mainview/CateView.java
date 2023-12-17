@@ -46,6 +46,7 @@ public class CateView extends BaseView {
     }
 
     public void addLevelItem(){
+        super.addLevelItem();
         if (levelIndex>=cateDataMap.size)return;
         String keyAt = cateDataMap.getKeyAt(levelIndex);
         levelIndex ++;

@@ -93,6 +93,8 @@ public class DailyView extends BaseView {
         contentTable.pack();
         DailyUtils.subMonth(dateBean);
         currentMonthDays = DailyUtils.currentMonthDay(dateBean.getYear(), dateBean.getMonth());
+
+        System.out.println(levelIndex);
     }
 
 }

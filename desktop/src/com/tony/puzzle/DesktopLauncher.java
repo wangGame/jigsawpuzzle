@@ -41,6 +41,11 @@ public class DesktopLauncher {
                         }
 
                     }
+
+                    @Override
+                    public void toastShow() {
+                        System.out.println("no More Coin");
+                    }
                 }),config);
     }
 }

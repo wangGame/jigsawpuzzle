@@ -65,13 +65,30 @@ public class SelectDifficultyDialog extends BaseDialog {
 
         ScrollPane pane = new ScrollPane(new Table(){{
             ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
+            Group group = new Group();
+            group.setWidth(Constant.GAMEWIDTH/2.0f);
+            add(group);
             for (int i = 0; i < entries.size; i++) {
                 SelectItemBean valueAt = entries.getValueAt(i);
                 add(new SelectDiffItem(valueAt));
             }
+            group = new Group();
+            group.setWidth(Constant.GAMEWIDTH/2.0f);
+            add(group);
             align(Align.bottom);
             pack();
-        }});
+        }}){
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                if (isFlickScrollTouchUp()) {
+                    float scrollX = getScrollX();
+                    float v2 = scrollX - Constant.GAMEWIDTH / 2.0f;
+                    float v3 = v2 / 220;
+
+                }
+            }
+        };
         Group itempanel = dialogGroup.findActor("itempanel");
         itempanel.addActor(pane);
         pane.setSize(Constant.GAMEWIDTH,itempanel.getHeight()+100);

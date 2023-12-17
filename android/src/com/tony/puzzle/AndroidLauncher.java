@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
+
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.kw.gdx.constant.Configuration;
 import com.kw.gdx.constant.Constant;
@@ -47,6 +49,16 @@ public class AndroidLauncher extends BaseApplication{
                     @Override
                     public void changeLocalPath() {
 
+                    }
+
+                    @Override
+                    public void toastShow() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AndroidLauncher.this,"No more coin",Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 });
         initialize(jigSawPuzzle,configuration);

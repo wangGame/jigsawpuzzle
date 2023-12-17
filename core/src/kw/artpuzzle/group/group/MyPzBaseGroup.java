@@ -11,10 +11,17 @@ import com.kw.gdx.scrollpane.ScrollPane;
  * @Date 2023/12/5 15:01
  */
 public abstract class MyPzBaseGroup extends Group {
-    private ScrollPane levelListScrollPanel;
+    protected ScrollPane levelListScrollPanel;
     private Table contentTable;
     public MyPzBaseGroup(){
         levelListScrollPanel = new ScrollPane(contentTable = new Table(){{
+            for (int i = 0; i < 2; i++) {
+                Group group = new Group();
+                group.setSize(465,0);
+                add(group);
+            }
+            pack();
+            row();
             align(Align.top);
         }});
         addActor(levelListScrollPanel);
@@ -31,4 +38,6 @@ public abstract class MyPzBaseGroup extends Group {
     public static MyPzBaseGroup getInstance() {
         return null;
     }
+
+    public void update(){}
 }

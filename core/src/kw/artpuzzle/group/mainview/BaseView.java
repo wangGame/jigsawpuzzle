@@ -27,4 +27,10 @@ public abstract class BaseView extends Group {
         infoLabel.pack();
         infoLabel.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
     }
+
+    public void addLevelItem(){
+        System.out.println(levelIndex);
+    }
+
+    public void update(){}
 }

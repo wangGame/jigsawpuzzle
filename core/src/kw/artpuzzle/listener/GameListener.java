@@ -6,4 +6,5 @@ package kw.artpuzzle.listener;
  */
 public interface GameListener {
     public void changeLocalPath();
+    public void toastShow();
 }

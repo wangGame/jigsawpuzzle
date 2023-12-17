@@ -123,6 +123,7 @@ public class CateDetailGroup extends Group {
             }
         });
         levelIndex++;
+        System.out.println(levelIndex);
         itemGroup.setType(cateBean.getType());
         contentTable.add(itemGroup).pad(15);
         if (levelIndex % 2 == 0) {

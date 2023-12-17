@@ -43,6 +43,8 @@ public class GetPicDialog extends BaseDialog {
                 if (JigsawPreference.getInstance().getCoinNum()>levelBean.getUnlockCost()){
                     runnable.run();
                     JigsawPreference.getInstance().saveCoinNum(-levelBean.getUnlockCost());
+                }else {
+
                 }
             }
         });

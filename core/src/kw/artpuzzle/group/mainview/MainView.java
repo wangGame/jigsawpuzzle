@@ -47,6 +47,7 @@ public class MainView extends BaseView {
     }
 
     public void addLevelItem(){
+        super.addLevelItem();
         if (levelIndex>levelData.size)return;
         levelIndex ++;
         LevelBean levelBean = levelData.get(levelIndex);

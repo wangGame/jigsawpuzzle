@@ -41,6 +41,7 @@ public class GameData {
         for (int i = 0; i < common.size; i++) {
             LevelBean levelBean = common.get(i);
             levelSortData.put(levelBean.getSortId(),levelBean);
+            levelUUIDMap.put(levelBean.getLevelUUID(),levelBean);
         }
     }
 

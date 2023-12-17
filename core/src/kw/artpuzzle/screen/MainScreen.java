@@ -19,11 +19,13 @@ import kw.artpuzzle.data.CateBean;
 import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.group.game.GameView;
 import kw.artpuzzle.group.group.CateDetailGroup;
+import kw.artpuzzle.group.mainview.BaseView;
 import kw.artpuzzle.group.mainview.CateView;
 import kw.artpuzzle.group.mainview.DailyView;
 import kw.artpuzzle.group.mainview.MainView;
 import kw.artpuzzle.group.mainview.PuzzleView;
 import kw.artpuzzle.listener.SignListener;
+import kw.artpuzzle.pref.JigsawPreference;
 import kw.artpuzzle.utils.DailyUtils;
 import kw.artpuzzle.utils.DateBean;
 
@@ -36,6 +38,7 @@ public class MainScreen extends BaseScreen {
     private ScrollPane mainScrollPane;
     private int pageIndex;
     private Group content;
+    private Table contentTable;
     public MainScreen(BaseGame game) {
         super(game);
         GameStaticInstance.baseScreen = this;
@@ -47,7 +50,7 @@ public class MainScreen extends BaseScreen {
         content = rootView.findActor("content");
         rootView.findActor("maintop").setTouchable(Touchable.childrenOnly);
         content.setTouchable(Touchable.childrenOnly);
-        mainScrollPane = new ScrollPane(new Table(){{
+        mainScrollPane = new ScrollPane(contentTable = new Table(){{
             add(new MainView(runnable));
             add(new DailyView(runnable));
             add(new CateView());
@@ -61,10 +64,12 @@ public class MainScreen extends BaseScreen {
         content.addActor(mainScrollPane);
         Actor maintop = rootView.findActor("maintop");
         maintop.setY(maintop.getY()+offsetY);
-        Actor fontgroup = rootView.findActor("fontgroup");
+        Group fontgroup = rootView.findActor("fontgroup");
         fontgroup.setY(fontgroup.getY()+offsetY);
         Actor mainbottom = rootView.findActor("mainbottom");
         mainbottom.setY(mainbottom.getY()-offsetY);
+        Label coinnumlabel = fontgroup.findActor("coinnumlabel");
+        coinnumlabel.setText(JigsawPreference.getInstance().getCoinNum());
     }
 
     @Override
@@ -131,6 +136,9 @@ public class MainScreen extends BaseScreen {
         resetBtn();
         mainScrollPane.setScrollX(Constant.GAMEWIDTH * pageIndex);
         mainScrollPane.updateVisualScroll();
+        for (Actor child : contentTable.getChildren()) {
+            ((BaseView)(child)).update();
+        }
         changeColor(librarybtn,"#30ca58");
         Label dailynum = librarybtn.findActor("dailynum");
         if (dailynum!=null) {

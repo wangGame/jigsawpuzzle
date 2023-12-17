@@ -39,7 +39,9 @@ import kw.artpuzzle.data.SaveHistoryBean;
 import kw.artpuzzle.data.SelectItemBean;
 import kw.artpuzzle.fileutils.FileUtils;
 import kw.artpuzzle.group.group.BgTheme;
+import kw.artpuzzle.jigsawfile.EnterLevelFile;
 import kw.artpuzzle.jigsawfile.Jigsawfile;
+import kw.artpuzzle.jigsawfile.PlayedLevelFile;
 import kw.artpuzzle.listener.MyClickListener;
 import kw.artpuzzle.pref.JigsawPreference;
 import kw.artpuzzle.utils.GameLogicUtils;
@@ -72,6 +74,7 @@ public class GameView extends Group {
 
     public void initView(){
         setSize(1080,1920);
+        EnterLevelFile.getJigsawfile().saveLevelId(LevelConfig.levelIndex.getLevelUUID());
         setPosition(Constant.GAMEWIDTH/2.0f,Constant.GAMEHIGHT/2.0f,Align.center);
         rootView = CocosResource.loadFile("cocos/gamegroup.json");
         addActor(rootView);
@@ -332,6 +335,7 @@ public class GameView extends Group {
     }
 
     private void gameSuccess(Group picGroup,TempView view) {
+        PlayedLevelFile.getJigsawfile().saveMapV(LevelConfig.levelIndex.getLevelUUID(),true);
         Actor gametop1 = rootView.findActor("gametop");
         Actor gamebottom1 = rootView.findActor("gamebottom");
         gamebottom1.addAction(Actions.fadeOut(0.2f));
