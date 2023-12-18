@@ -62,8 +62,6 @@ public class CateView extends BaseView {
                 CateView.this.addActor(cateDetailGroup);
             }
         });
-        if (levelIndex % 2 == 0) {
-            contentTable.row();
-        }
+        contentTable.row();
     }
 }

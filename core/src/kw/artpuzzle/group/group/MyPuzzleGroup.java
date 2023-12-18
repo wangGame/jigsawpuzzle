@@ -41,6 +41,7 @@ public class MyPuzzleGroup extends MyPzBaseGroup{
         Table contentTable = getContentTable();
         String keyAt = (String) mapV.getKeyAt(index);
         LevelBean levelBean = levelUUIDMap.get(keyAt);
+        if (levelBean == null)return;
         contentTable.add(new ItemGroup(levelBean, new Runnable() {
             @Override
             public void run() {

@@ -3,21 +3,29 @@ package kw.artpuzzle.group.group;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.jigsawfile.EnterLevelFile;
+import kw.artpuzzle.jigsawfile.PlayedLevelFile;
 
 /**
  * @Auther jian xian si qi
  * @Date 2023/12/5 14:51
  */
 public class MyPlayingGroup extends MyPzBaseGroup {
-    private ArrayMap mapV;
+    private ArrayMap<String,String> mapV;
     private int index;
     private ArrayMap<String, LevelBean> levelUUIDMap;
     public MyPlayingGroup(){
-//        Array<String  mapV = EnterLevelFile.getJigsawfile().getMapV();
+        mapV = new ArrayMap<>();
+        ArrayMap<String,String> mapVAll = EnterLevelFile.getJigsawfile().getMapV(true);
+        ArrayMap<String,String> mapVPalyed = PlayedLevelFile.getJigsawfile().getMapV();
+        for (ObjectMap.Entry<String, String> stringStringEntry : mapVAll) {
+            if (mapVPalyed.containsKey(stringStringEntry.key))continue;
+            mapV.put(stringStringEntry.key,stringStringEntry.value);
+        }
         levelUUIDMap = GameData.getInstance().levelUUIDMap;
     }
 

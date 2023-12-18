@@ -27,9 +27,15 @@ public class BaseFile<T,E> {
     }
 
     public ArrayMap<T,E> getMapV(){
+        return getMapV(false);
+    }
+
+    public ArrayMap<T,E> getMapV(boolean update){
         FileHandle file = getFile();
-        if (file == null)return arrayMap;
-        if (!file.exists())return arrayMap;
+        if (file == null) return arrayMap;
+        if (!update) {
+            if (!file.exists()) return arrayMap;
+        }
         String s = file.readString();
         String[] split = s.split(",");
         arrayMap.clear();
