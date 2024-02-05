@@ -47,10 +47,14 @@ public class GameData {
 
     public ArrayMap<Integer,LevelBean> readyDaily(String yearAndMonth){
         ArrayMap<Integer,LevelBean> levelBeanArrayMap = new ArrayMap<>();
-        Array<LevelBean> common = CsvUtils.common("daily/"+yearAndMonth, LevelBean.class, true);
-        for (int i = 1; i <= common.size; i++) {
-            LevelBean levelBean = common.get(i-1);
-            levelBeanArrayMap.put(i,levelBean);
+        try {
+            Array<LevelBean> common = CsvUtils.common("daily/"+yearAndMonth, LevelBean.class, true);
+            for (int i = 1; i <= common.size; i++) {
+                LevelBean levelBean = common.get(i-1);
+                levelBeanArrayMap.put(i,levelBean);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return levelBeanArrayMap;
     }

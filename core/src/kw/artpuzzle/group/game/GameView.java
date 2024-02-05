@@ -168,13 +168,16 @@ public class GameView extends Group {
             private float touchDownScale;
             private float minScale;
             private float maxScale;
+
             @Override
             public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
+
                 touchDownScale = view.getScaleX();
                 minScale = (1080.0f * 0.6f) / view.getWidth();
                 maxScale = (1080.0f * 1.2f) / view.getWidth();
             }
+
 
             @Override
             public void zoom(InputEvent event, float initialDistance, float distance) {
@@ -191,12 +194,91 @@ public class GameView extends Group {
                 view.setScale(v1);
             }
 
+        });
+
+        view.addListener(new ActorGestureListener(){
+            private float touchDownX;
+            private float touchDownY;
+            @Override
+            public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                touchDownX = x;
+                touchDownY = y;
+            }
+
+            @Override
+            public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
+                super.pan(event, x, y, deltaX, deltaY);
+                float finalX = -touchDownX + x;
+                float finalY = -touchDownY + y;
+                Group contentGroup = view.getContentGroup();
+                Vector2 c = new Vector2(finalX,finalY);
+//                contentGroup.getParent().localToStageCoordinates(c);
+//                view.getParent().setDebug(true);
+//                view.getParent().stageToLocalCoordinates(c);
+
+//                if (c.x > Constant.GAMEWIDTH+100){
+//                    c.x = Constant.GAMEWIDTH+100;
+//                }
+//                if (c.x < -100){
+//                    c.x = -100;
+//                }
+//                if (c.y > Constant.GAMEHIGHT+100){
+//                    c.y = Constant.GAMEHIGHT+100;
+//                }
+//                if (c.y < -100){
+//                    c.y = -100;
+//                }
+//
+                view.getParent().localToStageCoordinates(c);
+                contentGroup.getParent().stageToLocalCoordinates(c);
+                view.getContentGroup().setPosition(c.x,c.y);
+            }
+
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-
+                Group contentGroup = view.getContentGroup();
+                float x1 = contentGroup.getX(Align.center);
+                float y1 = contentGroup.getY(Align.center);
+                Vector2 c = new Vector2(x1,y1);
+                contentGroup.getParent().localToStageCoordinates(c);
+                view.getParent().setDebug(true);
+                view.getParent().stageToLocalCoordinates(c);
+                contentGroup.setPosition(0,0);
+                view.setPosition(c.x,c.y,Align.center);
             }
         });
+
+//        view.getSplitPicGroup().addListener(new ActorGestureListener(){
+//            private float touchX;
+//            private float touchY;
+//            @Override
+//            public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                super.touchDown(event, x, y, pointer, button);
+//                touchX = x ;
+//                touchY = y;
+//            }
+//
+//            @Override
+//            public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
+//                super.pan(event, x, y, deltaX, deltaY);
+//                float finalx = x;
+//                float finalY = y;
+//                if (finalx<=-100){
+//                    finalx = 100;
+//                }else if (finalx>=Constant.GAMEWIDTH+100){
+//                    finalx = Constant.GAMEWIDTH+100;
+//                }
+//                if (y<=-100){
+//                    finalY = 100;
+//                }else if (y>=Constant.GAMEHIGHT+100){
+//                    finalY = Constant.GAMEHIGHT+100;
+//                }
+//
+//                view.setPosition(finalx,finalY,Align.center);
+//            }
+//        });
         view.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.f,Align.center);
         bottomPanelScrollPanel.setRectangle(0,0,getWidth(),220);
         Texture texture = modelUtils.getTexture();

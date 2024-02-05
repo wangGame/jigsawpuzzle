@@ -15,10 +15,13 @@ import kw.artpuzzle.constant.GameConstant;
 public class TempView extends Group {
     private Image preImage;
     private Group splitPicGroup;
+    private Group contentGroup;
     public TempView(Texture texture){
+        contentGroup = new Group();
         preImage = new Image(texture);
         splitPicGroup = new Group();
-        addActor(splitPicGroup);
+        contentGroup.addActor(splitPicGroup);
+        addActor(contentGroup);
         Texture textureTemp = Asset.getAsset().getTexture("out1/" + 0 + ".png");
         float startX = -textureTemp.getWidth() / 4.0f;
         float startY = -textureTemp.getHeight() / 4.0f;
@@ -42,18 +45,23 @@ public class TempView extends Group {
         splitPicGroup.setOrigin(Align.center);
 
         setSize(splitPicGroup.getWidth(),splitPicGroup.getHeight());
+        contentGroup.setSize(getWidth(),getHeight());
         preImage.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
-        addActor(preImage);
+        contentGroup.addActor(preImage);
         preImage.setTouchable(Touchable.disabled);
         preImage.getColor().a = 0;
         splitPicGroup.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Image playImg = new Image(Asset.getAsset().getTexture("white.png"));
-        addActor(playImg);
+        contentGroup.addActor(playImg);
         playImg.setSize(getWidth(),getHeight());
         playImg.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         playImg.setColor(Color.valueOf("000000"));
         playImg.getColor().a = 0.2f;
         playImg.toBack();
+    }
+
+    public Group getContentGroup() {
+        return contentGroup;
     }
 
     @Override

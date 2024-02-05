@@ -44,7 +44,7 @@ public class DailyView extends BaseView {
         };
         scrollPane.layout();
         scrollPane.validate();
-        addOneMonthData(true);
+//        addOneMonthData(true);
         scrollPane.setSize(getWidth(),getHeight());
         addActor(scrollPane);
     }
