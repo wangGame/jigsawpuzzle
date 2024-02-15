@@ -9,6 +9,7 @@ import com.kw.gdx.net.DownLoad;
 import com.kw.gdx.resource.annotation.GameInfo;
 import com.kw.gdx.utils.log.NLog;
 
+import kw.artpuzzle.config.GameConfig;
 import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.down.DownLevelFileUtils;
@@ -19,18 +20,14 @@ import kw.artpuzzle.screen.LoadingScreen;
 @GameInfo(width = 1080,height = 1920,batch = Constant.COUPOLYGONBATCH)
 public class JigSawPuzzle extends BaseGame {
     public JigSawPuzzle(DownLoad deskDownload, GameListener listener){
-        Gdx.isJiami = true;
         GameStaticInstance.gameListener = listener;
-        listener.changeLocalPath();
-        Asset.enterGameClear();
-        NLog.isLog = false;
-        Constant.viewColor.set(Color.WHITE);
         GameStaticInstance.downLoad = deskDownload;
+        new GameConfig();
+        listener.changeLocalPath();
     }
 
     @Override
     protected void loadingView() {
-        NetContant.levelConfigUrl = LevelConfig.monthConfigUrl;
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
@@ -42,19 +39,8 @@ public class JigSawPuzzle extends BaseGame {
     }
 
     @Override
-    public void resize(int width, int height) {
-        super.resize(width, height);
-    }
-
-    @Override
     public void render() {
         Asset.getAsset().assetManagerUpdate();
         super.render();
-    }
-
-    @Override
-    public void resume() {
-        super.resume();
-
     }
 }

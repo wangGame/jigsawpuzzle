@@ -34,7 +34,6 @@ public class LoadingScreen extends BaseScreen {
         loadingbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         loadingbg.setPosition(540.0f,960.0f, Align.center);
         GameData.getInstance().loadLevel();
-
     }
 
     @Override
@@ -44,7 +43,6 @@ public class LoadingScreen extends BaseScreen {
         if (Asset.getAsset().getProcess()>=1.0f){
             AudioProcess.loadFinished();
             setScreen(MainScreen.class);
-
         }
     }
 }

@@ -8,8 +8,8 @@ uniform sampler2D u_texture;
 uniform float ra;
 
 void main() {
-    vec2 boxPos= vec2(0.5f, 0.5f);
-    vec2 boxBnd = vec2(0.5f - ra, 0.5f - ra);
+    vec2 boxPos= vec2(0.5, 0.5);
+    vec2 boxBnd = vec2(0.5 - ra, 0.5 - ra);
     vec4 tc = v_color * texture2D(u_texture, v_textCoords);
     vec3 col = tc.rgb;
     float alpha = length(max(abs(v_textCoords - boxPos) - boxBnd, 0.0)) - ra;
