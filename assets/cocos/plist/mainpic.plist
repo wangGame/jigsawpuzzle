@@ -7,7 +7,7 @@
 			<key>mainpic/cateIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{75,250},{66,72}}</string>
+				<string>{{606,2},{66,72}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -18,7 +18,7 @@
 			<key>mainpic/collectionsIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,323},{60,60}}</string>
+				<string>{{314,75},{60,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -29,7 +29,7 @@
 			<key>mainpic/dailyIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{159,151},{72,75}}</string>
+				<string>{{84,146},{72,75}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -40,7 +40,7 @@
 			<key>mainpic/libraryIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{129,78},{69,69}}</string>
+				<string>{{314,2},{69,69}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -51,7 +51,7 @@
 			<key>mainpic/myPuzzleIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{202,78},{69,69}}</string>
+				<string>{{387,2},{69,69}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -62,7 +62,7 @@
 			<key>mainpic/reward.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{129,2},{78,72}}</string>
+				<string>{{2,146},{78,72}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -73,7 +73,7 @@
 			<key>mainpic/mainSettingsIcon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{211,2},{72,72}}</string>
+				<string>{{2,222},{72,72}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -84,7 +84,7 @@
 			<key>mainpic/puzzlecoin.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{159,230},{69,69}}</string>
+				<string>{{460,2},{69,69}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -95,18 +95,18 @@
 			<key>mainpic/toggle-back.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,153},{153,93}}</string>
+				<string>{{2,2},{181,140}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false />
 				<key>sourceSize</key>
-				<string>{153,93}</string>
+				<string>{181,140}</string>
 			</dict>
 			<key>mainpic/popUpContentBg.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,2},{123,147}}</string>
+				<string>{{187,2},{123,147}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -117,7 +117,7 @@
 			<key>mainpic/addicon.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{2,250},{69,69}}</string>
+				<string>{{533,2},{69,69}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -135,14 +135,14 @@
 			<key>realTextureFileName</key>
 			<string>mainpic.png</string>
 			<key>size</key>
-			<string>{285,385}</string>
+			<string>{674,296}</string>
 		</dict>
 		<key>texture</key>
 		<dict>
 			<key>width</key>
-			<integer>285</integer>
+			<integer>674</integer>
 			<key>height</key>
-			<integer>385</integer>
+			<integer>296</integer>
 		</dict>
 	</dict>
 </plist>

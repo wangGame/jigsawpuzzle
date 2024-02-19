@@ -48,11 +48,9 @@
               "Y": 0.0
             },
             "PreSize": {
-              "X": 2.3226,
-              "Y": 4.129
+              "X": 1.0,
+              "Y": 1.0
             },
-            "RightMargin": -615.0,
-            "TopMargin": -1455.0,
             "Tag": 23,
             "Children": [
               {
@@ -131,10 +129,10 @@
                       "Y": 0.0
                     },
                     "PreSize": {
-                      "X": 0.25,
+                      "X": 0.3333,
                       "Y": 0.9965
                     },
-                    "RightMargin": 810.0,
+                    "RightMargin": 720.0,
                     "TopMargin": 0.5,
                     "Tag": 25,
                     "Children": [
@@ -153,7 +151,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 136.0,
+                          "X": 180.0,
                           "Y": 93.0
                         },
                         "Scale": {
@@ -163,15 +161,15 @@
                         "CColor": {},
                         "IconVisible": false,
                         "PrePosition": {
-                          "X": 0.5037,
+                          "X": 0.5,
                           "Y": 0.6549
                         },
                         "PreSize": {
-                          "X": 0.2556,
+                          "X": 0.1917,
                           "Y": 0.4859
                         },
-                        "LeftMargin": 101.5,
-                        "RightMargin": 99.5,
+                        "LeftMargin": 145.5,
+                        "RightMargin": 145.5,
                         "TopMargin": 14.5,
                         "BottomMargin": 58.5,
                         "Tag": 26,
@@ -195,7 +193,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 136.0,
+                          "X": 180.0,
                           "Y": 33.0
                         },
                         "Scale": {
@@ -205,15 +203,15 @@
                         "CColor": {},
                         "IconVisible": false,
                         "PrePosition": {
-                          "X": 0.5037,
+                          "X": 0.5,
                           "Y": 0.2324
                         },
                         "PreSize": {
-                          "X": 0.2741,
+                          "X": 0.2056,
                           "Y": 0.2746
                         },
-                        "LeftMargin": 99.0,
-                        "RightMargin": 97.0,
+                        "LeftMargin": 143.0,
+                        "RightMargin": 143.0,
                         "TopMargin": 89.5,
                         "BottomMargin": 13.5,
                         "Tag": 125,
@@ -228,7 +226,7 @@
                     ],
                     "ActionTag": 1434759397,
                     "Size": {
-                      "X": 270.0,
+                      "X": 360.0,
                       "Y": 142.0
                     },
                     "Name": "librarybtn",
@@ -254,7 +252,7 @@
                     "TouchEnable": true,
                     "AnchorPoint": {},
                     "Position": {
-                      "X": 270.0,
+                      "X": 360.0,
                       "Y": 0.0
                     },
                     "Scale": {
@@ -264,15 +262,15 @@
                     "CColor": {},
                     "IconVisible": false,
                     "PrePosition": {
-                      "X": 0.25,
+                      "X": 0.3333,
                       "Y": 0.0
                     },
                     "PreSize": {
-                      "X": 0.25,
+                      "X": 0.3333,
                       "Y": 0.9965
                     },
-                    "LeftMargin": 270.0,
-                    "RightMargin": 540.0,
+                    "LeftMargin": 360.0,
+                    "RightMargin": 360.0,
                     "TopMargin": 0.5,
                     "Tag": 33,
                     "Children": [
@@ -291,7 +289,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 136.0,
+                          "X": 180.0,
                           "Y": 93.0
                         },
                         "Scale": {
@@ -301,15 +299,15 @@
                         "CColor": {},
                         "IconVisible": false,
                         "PrePosition": {
-                          "X": 0.5037,
+                          "X": 0.5,
                           "Y": 0.6549
                         },
                         "PreSize": {
-                          "X": 0.2667,
+                          "X": 0.2,
                           "Y": 0.5282
                         },
-                        "LeftMargin": 100.0,
-                        "RightMargin": 98.0,
+                        "LeftMargin": 144.0,
+                        "RightMargin": 144.0,
                         "TopMargin": 11.5,
                         "BottomMargin": 55.5,
                         "Tag": 34,
@@ -333,7 +331,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 136.0,
+                          "X": 180.0,
                           "Y": 33.0
                         },
                         "Scale": {
@@ -343,15 +341,15 @@
                         "CColor": {},
                         "IconVisible": false,
                         "PrePosition": {
-                          "X": 0.5037,
+                          "X": 0.5,
                           "Y": 0.2324
                         },
                         "PreSize": {
-                          "X": 0.2815,
+                          "X": 0.2111,
                           "Y": 0.2746
                         },
-                        "LeftMargin": 98.0,
-                        "RightMargin": 96.0,
+                        "LeftMargin": 142.0,
+                        "RightMargin": 142.0,
                         "TopMargin": 89.5,
                         "BottomMargin": 13.5,
                         "Tag": 128,
@@ -375,7 +373,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 136.0,
+                          "X": 180.0,
                           "Y": 81.0
                         },
                         "Scale": {
@@ -385,15 +383,15 @@
                         "CColor": {},
                         "IconVisible": false,
                         "PrePosition": {
-                          "X": 0.5037,
+                          "X": 0.5,
                           "Y": 0.5704
                         },
                         "PreSize": {
-                          "X": 0.0778,
+                          "X": 0.0583,
                           "Y": 0.2746
                         },
-                        "LeftMargin": 125.5,
-                        "RightMargin": 123.5,
+                        "LeftMargin": 169.5,
+                        "RightMargin": 169.5,
                         "TopMargin": 41.5,
                         "BottomMargin": 61.5,
                         "Tag": 132,
@@ -408,7 +406,7 @@
                     ],
                     "ActionTag": -2002495531,
                     "Size": {
-                      "X": 270.0,
+                      "X": 360.0,
                       "Y": 142.0
                     },
                     "Name": "dailybtn",
@@ -434,7 +432,7 @@
                     "TouchEnable": true,
                     "AnchorPoint": {},
                     "Position": {
-                      "X": 540.0,
+                      "X": 720.0,
                       "Y": 0.0
                     },
                     "Scale": {
@@ -444,152 +442,14 @@
                     "CColor": {},
                     "IconVisible": false,
                     "PrePosition": {
-                      "X": 0.5,
+                      "X": 0.6667,
                       "Y": 0.0
                     },
                     "PreSize": {
-                      "X": 0.25,
+                      "X": 0.3333,
                       "Y": 0.9965
                     },
-                    "LeftMargin": 540.0,
-                    "RightMargin": 270.0,
-                    "TopMargin": 0.5,
-                    "Tag": 35,
-                    "Children": [
-                      {
-                        "FileData": {
-                          "Type": "MarkedSubImage",
-                          "Path": "mainpic/cateIcon.png",
-                          "Plist": "plist/mainpic.plist"
-                        },
-                        "BlendFunc": {
-                          "Src": 1,
-                          "Dst": 771
-                        },
-                        "AnchorPoint": {
-                          "ScaleX": 0.5,
-                          "ScaleY": 0.5
-                        },
-                        "Position": {
-                          "X": 136.0,
-                          "Y": 93.0
-                        },
-                        "Scale": {
-                          "ScaleX": 1.0,
-                          "ScaleY": 1.0
-                        },
-                        "CColor": {},
-                        "IconVisible": false,
-                        "PrePosition": {
-                          "X": 0.5037,
-                          "Y": 0.6549
-                        },
-                        "PreSize": {
-                          "X": 0.2444,
-                          "Y": 0.507
-                        },
-                        "LeftMargin": 103.0,
-                        "RightMargin": 101.0,
-                        "TopMargin": 13.0,
-                        "BottomMargin": 57.0,
-                        "Tag": 36,
-                        "ActionTag": 946217383,
-                        "Size": {
-                          "X": 66.0,
-                          "Y": 72.0
-                        },
-                        "Name": "cateIcon",
-                        "ctype": "SpriteObjectData"
-                      },
-                      {
-                        "LabelText": "Category",
-                        "LabelBMFontFile_CNB": {
-                          "Type": "Normal",
-                          "Path": "font/inter-semi-32.fnt",
-                          "Plist": ""
-                        },
-                        "AnchorPoint": {
-                          "ScaleX": 0.5,
-                          "ScaleY": 0.5
-                        },
-                        "Position": {
-                          "X": 136.0,
-                          "Y": 33.0
-                        },
-                        "Scale": {
-                          "ScaleX": 1.0,
-                          "ScaleY": 1.0
-                        },
-                        "CColor": {},
-                        "IconVisible": false,
-                        "PrePosition": {
-                          "X": 0.5037,
-                          "Y": 0.2324
-                        },
-                        "PreSize": {
-                          "X": 0.537,
-                          "Y": 0.2746
-                        },
-                        "LeftMargin": 63.5,
-                        "RightMargin": 61.5,
-                        "TopMargin": 89.5,
-                        "BottomMargin": 13.5,
-                        "Tag": 129,
-                        "ActionTag": -202026634,
-                        "Size": {
-                          "X": 145.0,
-                          "Y": 39.0
-                        },
-                        "Name": "btnlabel",
-                        "ctype": "TextBMFontObjectData"
-                      }
-                    ],
-                    "ActionTag": -1034148719,
-                    "Size": {
-                      "X": 270.0,
-                      "Y": 142.0
-                    },
-                    "Name": "categorybtn",
-                    "ctype": "PanelObjectData"
-                  },
-                  {
-                    "ClipAble": false,
-                    "BackColorAlpha": 102,
-                    "SingleColor": {
-                      "R": 150,
-                      "G": 200
-                    },
-                    "FirstColor": {
-                      "R": 150,
-                      "G": 200
-                    },
-                    "EndColor": {},
-                    "ColorVector": {
-                      "ScaleY": 1.0
-                    },
-                    "Scale9Width": 1,
-                    "Scale9Height": 1,
-                    "TouchEnable": true,
-                    "AnchorPoint": {},
-                    "Position": {
-                      "X": 810.0,
-                      "Y": 0.0
-                    },
-                    "Scale": {
-                      "ScaleX": 1.0,
-                      "ScaleY": 1.0
-                    },
-                    "CColor": {},
-                    "IconVisible": false,
-                    "PrePosition": {
-                      "X": 0.75,
-                      "Y": 0.0
-                    },
-                    "PreSize": {
-                      "X": 0.25,
-                      "Y": 0.9965
-                    },
-                    "LeftMargin": 810.0,
+                    "LeftMargin": 720.0,
                     "TopMargin": 0.5,
                     "Tag": 37,
                     "Children": [
@@ -608,7 +468,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 135.0,
+                          "X": 180.0,
                           "Y": 93.0
                         },
                         "Scale": {
@@ -622,11 +482,11 @@
                           "Y": 0.6549
                         },
                         "PreSize": {
-                          "X": 0.2556,
+                          "X": 0.1917,
                           "Y": 0.4859
                         },
-                        "LeftMargin": 100.5,
-                        "RightMargin": 100.5,
+                        "LeftMargin": 145.5,
+                        "RightMargin": 145.5,
                         "TopMargin": 14.5,
                         "BottomMargin": 58.5,
                         "Tag": 38,
@@ -650,7 +510,7 @@
                           "ScaleY": 0.5
                         },
                         "Position": {
-                          "X": 136.0,
+                          "X": 180.0,
                           "Y": 33.0
                         },
                         "Scale": {
@@ -660,15 +520,15 @@
                         "CColor": {},
                         "IconVisible": false,
                         "PrePosition": {
-                          "X": 0.5037,
+                          "X": 0.5,
                           "Y": 0.2324
                         },
                         "PreSize": {
-                          "X": 0.5556,
+                          "X": 0.4167,
                           "Y": 0.2746
                         },
-                        "LeftMargin": 61.0,
-                        "RightMargin": 59.0,
+                        "LeftMargin": 105.0,
+                        "RightMargin": 105.0,
                         "TopMargin": 89.5,
                         "BottomMargin": 13.5,
                         "Tag": 131,
@@ -683,7 +543,7 @@
                     ],
                     "ActionTag": 317243417,
                     "Size": {
-                      "X": 270.0,
+                      "X": 360.0,
                       "Y": 142.0
                     },
                     "Name": "collectbtn",
@@ -722,6 +582,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {
               "ScaleX": 0.5
@@ -737,16 +599,16 @@
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 1.1613,
-              "Y": 3.871
+              "X": 0.5,
+              "Y": 0.9375
             },
             "PreSize": {
-              "X": 0.6452,
-              "Y": 0.2022
+              "X": 0.2778,
+              "Y": 0.049
             },
             "LeftMargin": 390.0,
-            "RightMargin": -225.0,
-            "TopMargin": -1429.0,
+            "RightMargin": 390.0,
+            "TopMargin": 26.0,
             "BottomMargin": 1800.0,
             "Tag": 444,
             "Children": [
@@ -799,10 +661,10 @@
                       "Plist": "plist/mainpic.plist"
                     },
                     "Scale9Enable": true,
-                    "Scale9OriginX": 50,
-                    "Scale9OriginY": 30,
-                    "Scale9Width": 53,
-                    "Scale9Height": 33,
+                    "Scale9OriginX": 59,
+                    "Scale9OriginY": 16,
+                    "Scale9Width": 32,
+                    "Scale9Height": 55,
                     "AnchorPoint": {
                       "ScaleY": 0.5
                     },
@@ -821,14 +683,15 @@
                       "Y": 0.4947
                     },
                     "PreSize": {
-                      "X": 1.0,
+                      "X": 0.9733,
                       "Y": 0.9894
                     },
+                    "RightMargin": 8.0,
                     "TopMargin": 1.0,
                     "Tag": 62,
                     "ActionTag": -1790992994,
                     "Size": {
-                      "X": 300.0,
+                      "X": 292.0,
                       "Y": 93.0
                     },
                     "Name": "coinbg",
@@ -1003,6 +866,8 @@
             "ColorVector": {
               "ScaleY": 1.0
             },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
             "TouchEnable": true,
             "AnchorPoint": {},
             "Position": {
@@ -1020,11 +885,10 @@
               "Y": 0.0
             },
             "PreSize": {
-              "X": 2.3226,
-              "Y": 4.129
+              "X": 1.0,
+              "Y": 1.0
             },
-            "RightMargin": -615.0,
-            "TopMargin": -1454.9995,
+            "TopMargin": 0.0005,
             "BottomMargin": -0.0005,
             "Tag": 445,
             "ActionTag": -1229429160,
@@ -1068,61 +932,15 @@
             "IconVisible": false,
             "PrePosition": {
               "X": 0.0,
-              "Y": 4.129
+              "Y": 1.0
             },
             "PreSize": {
-              "X": 2.3226,
-              "Y": 0.3054
+              "X": 1.0,
+              "Y": 0.074
             },
-            "RightMargin": -615.0,
-            "TopMargin": -1455.0,
             "BottomMargin": 1778.0,
             "Tag": 52,
             "Children": [
-              {
-                "FileData": {
-                  "Type": "MarkedSubImage",
-                  "Path": "mainpic/reward.png",
-                  "Plist": "plist/mainpic.plist"
-                },
-                "BlendFunc": {
-                  "Src": 1,
-                  "Dst": 771
-                },
-                "AnchorPoint": {
-                  "ScaleY": 0.5
-                },
-                "Position": {
-                  "X": 813.0,
-                  "Y": 71.0
-                },
-                "Scale": {
-                  "ScaleX": 1.0,
-                  "ScaleY": 1.0
-                },
-                "CColor": {},
-                "IconVisible": false,
-                "PrePosition": {
-                  "X": 0.7528,
-                  "Y": 0.5
-                },
-                "PreSize": {
-                  "X": 0.0759,
-                  "Y": 0.5352
-                },
-                "LeftMargin": 813.0,
-                "RightMargin": 185.0,
-                "TopMargin": 33.0,
-                "BottomMargin": 33.0,
-                "Tag": 66,
-                "ActionTag": 306936245,
-                "Size": {
-                  "X": 82.0,
-                  "Y": 76.0
-                },
-                "Name": "reward",
-                "ctype": "SpriteObjectData"
-              },
               {
                 "FileData": {
                   "Type": "MarkedSubImage",

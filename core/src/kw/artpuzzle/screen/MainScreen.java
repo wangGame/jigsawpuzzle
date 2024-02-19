@@ -53,7 +53,6 @@ public class MainScreen extends BaseScreen {
         mainScrollPane = new ScrollPane(contentTable = new Table(){{
             add(new MainView(runnable));
             add(new DailyView(runnable));
-            add(new CateView());
             add(new PuzzleView());
             pack();
             align(Align.bottom);
@@ -77,12 +76,10 @@ public class MainScreen extends BaseScreen {
         super.initListener();
         Group librarybtn = rootView.findActor("librarybtn");
         Group dailybtn = rootView.findActor("dailybtn");
-        Group categorybtn = rootView.findActor("categorybtn");
         Group collectbtn = rootView.findActor("collectbtn");
         extracted(librarybtn,0);
         extracted(dailybtn,1);
-        extracted(categorybtn,2);
-        extracted(collectbtn,3);
+        extracted(collectbtn,2);
         updatePage(librarybtn);
         Label dailynum = dailybtn.findActor("dailynum");
         if (dailynum!=null) {
@@ -94,12 +91,10 @@ public class MainScreen extends BaseScreen {
     public void resetBtn(){
         Group librarybtn = rootView.findActor("librarybtn");
         Group dailybtn = rootView.findActor("dailybtn");
-        Group categorybtn = rootView.findActor("categorybtn");
         Group collectbtn = rootView.findActor("collectbtn");
 //        868e9d
         changeColor(librarybtn,"#868e9d");
         changeColor(dailybtn,"#868e9d");
-        changeColor(categorybtn,"#868e9d");
         changeColor(collectbtn,"#868e9d");
         dailybtn.findActor("dailynum").setColor(Color.valueOf("#868e9d"));
     }
