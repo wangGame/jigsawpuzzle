@@ -37,7 +37,7 @@ public class ItemImage extends Group {
         program = ShaderManager.getManager().getType(CornersShader.class);
         this.levelBean = levelBean;
         localStoragePath = Gdx.files.getLocalStoragePath();
-        levelPath = "finallevel/" + levelBean.getVersion() + "/" + levelBean.getLevelUUID();
+        levelPath = "finallevel/" + levelBean.getVersion() + "/" + levelBean.getLevel_num();
         if (Gdx.files.local(levelPath).exists()) {
             if (PackZip.check(localStoragePath + levelPath)) {
                 status = 9;
@@ -77,13 +77,13 @@ public class ItemImage extends Group {
         }
         if (status == 9){
             status = 1;
-            Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevelUUID()+".png");
+            Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevel_id()+".png");
         }
         if (status == 1){
             if (Asset.getAsset().isLocalAssetManagerLoaded(
-                    levelPath+"/"+levelBean.getLevelUUID()+".png")){
+                    levelPath+"/"+levelBean.getLevel_id()+".png")){
                 status = 2;
-                Texture localTexture = Asset.getAsset().getLocalTexture(levelPath + "/" + levelBean.getLevelUUID() + ".png");
+                Texture localTexture = Asset.getAsset().getLocalTexture(levelPath + "/" + levelBean.getLevel_id() + ".png");
                 Image levelImage = new Image(localTexture){
                     @Override
                     public void draw(Batch batch, float parentAlpha) {

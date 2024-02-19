@@ -10,8 +10,10 @@ import com.kw.gdx.screen.BaseScreen;
 import com.kw.gdx.sound.AudioProcess;
 
 import kw.artpuzzle.audio.AudioType;
+import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.constant.GameStaticInstance;
+import kw.artpuzzle.down.NetContant;
 
 /**
  * @Auther jian xian si qi
@@ -32,6 +34,7 @@ public class LoadingScreen extends BaseScreen {
         loadingbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         loadingbg.setPosition(540.0f,960.0f, Align.center);
         GameData.getInstance().loadLevel();
+        NetContant.levelConfigUrl = LevelConfig.monthConfigUrl;
     }
 
     @Override
@@ -41,6 +44,7 @@ public class LoadingScreen extends BaseScreen {
         if (Asset.getAsset().getProcess()>=1.0f){
             AudioProcess.loadFinished();
             setScreen(MainScreen.class);
+
         }
     }
 }

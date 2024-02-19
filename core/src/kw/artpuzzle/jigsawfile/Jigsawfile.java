@@ -20,7 +20,7 @@ public class Jigsawfile extends BaseFile {
     }
 
     public void saveHistoryPic(SaveHistoryBean bean){
-        FileHandle local = Gdx.files.local("history/" + LevelConfig.levelIndex.getLevelUUID() + ".txt");
+        FileHandle local = Gdx.files.local("history/" + LevelConfig.levelIndex.getLevel_id() + ".txt");
         if (local.exists()) {
             local.delete();
         }

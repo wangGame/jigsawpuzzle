@@ -21,11 +21,11 @@ public class MainView extends BaseView {
     private ScrollPane levelScrollPanel;
     private Table contentTable;
     private Runnable runnable;
+
     public MainView(Runnable runnable){
         this.runnable = runnable;
         levelData = GameData.getInstance().getLevelSortData();
-        levelScrollPanel = new ScrollPane(contentTable = new Table(){{
-        }}){
+        levelScrollPanel = new ScrollPane(contentTable = new Table()){
             @Override
             public void act(float delta) {
                 super.act(delta);

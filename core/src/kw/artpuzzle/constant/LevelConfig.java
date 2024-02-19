@@ -9,4 +9,7 @@ import kw.artpuzzle.data.LevelBean;
 public class LevelConfig {
     public static LevelBean levelIndex;
     public static int splitnum;
+
+    public static String monthConfigUrl = "https://dx39txtr91.execute-api.us-east-1.amazonaws.com/default/Art-Puzzle";
+    public static String url = "https://gaoshanren.cdn-doodlemobile.com/Art_Puzzle/level_resource/";
 }

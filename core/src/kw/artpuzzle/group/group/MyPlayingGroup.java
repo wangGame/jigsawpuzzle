@@ -26,7 +26,7 @@ public class MyPlayingGroup extends MyPzBaseGroup {
             if (mapVPalyed.containsKey(stringStringEntry.key))continue;
             mapV.put(stringStringEntry.key,stringStringEntry.value);
         }
-        levelUUIDMap = GameData.getInstance().levelUUIDMap;
+//        levelUUIDMap = GameData.getInstance().levelUUIDMap;
     }
 
     public void initPanel(){

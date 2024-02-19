@@ -18,13 +18,10 @@ import com.kw.gdx.scrollpane.ScrollPane;
 import kw.artpuzzle.data.CateBean;
 import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.group.game.GameView;
-import kw.artpuzzle.group.group.CateDetailGroup;
 import kw.artpuzzle.group.mainview.BaseView;
-import kw.artpuzzle.group.mainview.CateView;
 import kw.artpuzzle.group.mainview.DailyView;
 import kw.artpuzzle.group.mainview.MainView;
 import kw.artpuzzle.group.mainview.PuzzleView;
-import kw.artpuzzle.listener.SignListener;
 import kw.artpuzzle.pref.JigsawPreference;
 import kw.artpuzzle.utils.DailyUtils;
 import kw.artpuzzle.utils.DateBean;
@@ -39,6 +36,7 @@ public class MainScreen extends BaseScreen {
     private int pageIndex;
     private Group content;
     private Table contentTable;
+
     public MainScreen(BaseGame game) {
         super(game);
         GameStaticInstance.baseScreen = this;

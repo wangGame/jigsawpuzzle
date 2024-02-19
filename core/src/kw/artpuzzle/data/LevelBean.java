@@ -7,83 +7,50 @@ import com.kw.gdx.resource.csvanddata.Value;
  * @Date 2023/12/8 12:11
  */
 public class LevelBean {
-    private int sortId;
-    private String levelUUID;
-    private String levelId;
-    private String type;
-    private String cateGory;
-    private int unlockCost;
+//    game_sort,level_id,level_num,version
+    private int game_sort;
+    private String level_id;
+    private int level_num;
     private String version;
 
-    public LevelBean(){
-        version = "error";
+    public int getGame_sort() {
+        return game_sort;
     }
 
-    public void setLevelUUID(String levelUUID) {
-        this.levelUUID = levelUUID;
+    public void setGame_sort(int game_sort) {
+        this.game_sort = game_sort;
     }
 
-    public String getLevelUUID() {
-        return levelUUID;
+    public String getLevel_id() {
+        return level_id;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setLevel_id(String level_id) {
+        this.level_id = level_id;
+    }
+
+    public int getLevel_num() {
+        return level_num;
+    }
+
+    public void setLevel_num(int level_num) {
+        this.level_num = level_num;
     }
 
     public String getVersion() {
         return version;
     }
 
-    public int getSortId() {
-        return sortId;
-    }
-
-    public void setSortId(int sortId) {
-        this.sortId = sortId;
-    }
-
-    public String getLevelId() {
-        return levelId;
-    }
-
-    public void setLevelId(String levelId) {
-        this.levelId = levelId;
-    }
-
-    public void setCateGory(String cateGory) {
-        this.cateGory = cateGory;
-    }
-
-    public String getCateGory() {
-        return cateGory;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public int getUnlockCost() {
-        return unlockCost;
-    }
-
-    public void setUnlockCost(int unlockCost) {
-        this.unlockCost = unlockCost;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     @Override
     public String toString() {
         return "LevelBean{" +
-                "sortId=" + sortId +
-                ", levelUUID='" + levelUUID + '\'' +
-                ", levelId='" + levelId + '\'' +
-                ", type='" + type + '\'' +
-                ", cateGory='" + cateGory + '\'' +
-                ", unlockCost=" + unlockCost +
+                "game_sort=" + game_sort +
+                ", level_id='" + level_id + '\'' +
+                ", level_num=" + level_num +
                 ", version='" + version + '\'' +
                 '}';
     }

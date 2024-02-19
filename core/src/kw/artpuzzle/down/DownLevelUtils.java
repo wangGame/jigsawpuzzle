@@ -23,9 +23,9 @@ public class DownLevelUtils extends BaseDownLoadUtils{
         this.levelBean = levelBean;
         this.siteusing = NetContant.url
                 +levelBean.getVersion()
-                +"/"+levelBean.getLevelUUID()+".zip";
+                +"/"+levelBean.getLevel_id()+".zip";
         String localStoragePath = Gdx.files.getLocalStoragePath();
-        this.toPath = localStoragePath +outPath+levelBean.getLevelUUID()+".zip";
+        this.toPath = localStoragePath +outPath+levelBean.getLevel_id()+".zip";
     }
 
     protected void downFile() {
@@ -37,13 +37,13 @@ public class DownLevelUtils extends BaseDownLoadUtils{
                     @Override
                     public void run() {
                         String localStoragePath = Gdx.files.getLocalStoragePath();
-                        Gdx.files.local(outPath+levelBean.getLevelUUID()+".zip").copyTo(
-                                Gdx.files.local(append("/level/temp/"+levelBean.getLevelUUID()+"/"+levelBean.getLevelUUID()+".zip")));
+                        Gdx.files.local(outPath+levelBean.getLevel_id()+".zip").copyTo(
+                                Gdx.files.local(append("/level/temp/"+levelBean.getLevel_id()+"/"+levelBean.getLevel_id()+".zip")));
                         reDownLoad(PackZip.unpackZip(
-                                append( localStoragePath+"level/temp/"+levelBean.getLevelUUID()+"/"+levelBean.getLevelUUID()+".zip"),
+                                append( localStoragePath+"level/temp/"+levelBean.getLevel_id()+"/"+levelBean.getLevel_id()+".zip"),
                                 append( localStoragePath+"level/md5/")));
-                        reDownLoad(PackZip.check(append(localStoragePath+"level/md5/"+levelBean.getLevelUUID())));
-                        Gdx.files.local(append("level/md5/"+levelBean.getLevelUUID()+"/"))
+                        reDownLoad(PackZip.check(append(localStoragePath+"level/md5/"+levelBean.getLevel_id())));
+                        Gdx.files.local(append("level/md5/"+levelBean.getLevel_id()+"/"))
                                 .copyTo(Gdx.files.local("finallevel/"+levelBean.getVersion()+"/"));
                         runnable.run();
                     }

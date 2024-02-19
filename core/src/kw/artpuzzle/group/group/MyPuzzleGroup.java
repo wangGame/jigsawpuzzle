@@ -14,11 +14,11 @@ import kw.artpuzzle.jigsawfile.PlayedLevelFile;
  */
 public class MyPuzzleGroup extends MyPzBaseGroup{
     private ArrayMap mapV;
-    private ArrayMap<String, LevelBean> levelUUIDMap;
+
     private int index;
     public MyPuzzleGroup(){
         mapV = EnterLevelFile.getJigsawfile().getMapV();
-        levelUUIDMap = GameData.getInstance().levelUUIDMap;
+
     }
 
     public void initPanel(){
@@ -40,14 +40,8 @@ public class MyPuzzleGroup extends MyPzBaseGroup{
         if (index >= mapV.size)return;
         Table contentTable = getContentTable();
         String keyAt = (String) mapV.getKeyAt(index);
-        LevelBean levelBean = levelUUIDMap.get(keyAt);
-        if (levelBean == null)return;
-        contentTable.add(new ItemGroup(levelBean, new Runnable() {
-            @Override
-            public void run() {
 
-            }
-        })).pad(25);
+
         index++;
         if (index % 2 == 0){
             contentTable.row();

@@ -55,4 +55,5 @@ public abstract class BaseDownLoadUtils {
     protected void clearDir() {
 
     }
+
 }

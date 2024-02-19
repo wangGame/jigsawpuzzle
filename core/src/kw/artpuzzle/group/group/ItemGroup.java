@@ -13,7 +13,6 @@ import com.kw.gdx.resource.cocosload.CocosResource;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.dialog.GetPicDialog;
-import kw.artpuzzle.dialog.SelectDifficultyDialog;
 import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.group.ItemImage;
 
@@ -44,38 +43,43 @@ public class ItemGroup extends Group {
         itemGroup.setPosition(group.getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Actor lock = group.findActor("lock");
         lock.toFront();
-        if (levelBean.getUnlockCost() > 0) {
-            lock.setVisible(true);
-            addListener(new OrdinaryButtonListener(){
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    super.clicked(event, x, y);
-                    GameStaticInstance.baseScreen.showDialog(new GetPicDialog(levelBean,runnable));
-                }
-            });
-        }else {
-            lock.setVisible(false);
-            addListener(new OrdinaryButtonListener(){
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    super.clicked(event, x, y);
-                    LevelConfig.levelIndex = levelBean;
-                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
+//        if (levelBean.getUnlockCost() > 0) {
+//            lock.setVisible(true);
+//            addListener(new OrdinaryButtonListener(){
+//                @Override
+//                public void clicked(InputEvent event, float x, float y) {
+//                    super.clicked(event, x, y);
+//                    GameStaticInstance.baseScreen.showDialog(new GetPicDialog(levelBean,runnable));
+//                }
+//            });
+//        }else {
+//            lock.setVisible(false);
+//            addListener(new OrdinaryButtonListener(){
+//                @Override
+//                public void clicked(InputEvent event, float x, float y) {
+//                    super.clicked(event, x, y);
+//                    LevelConfig.levelIndex = levelBean;
+//                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
+////                    runnable.run();
+//                }
+//            });
+//        }
+        lock.setVisible(false);
+        addListener(new OrdinaryButtonListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                LevelConfig.levelIndex = levelBean;
+//                GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
 //                    runnable.run();
-                }
-            });
-        }
+            }
+        });
         Group process = group.findActor("process");
         process.setVisible(false);
         process.toFront();
         Label processlabel = process.findActor("processlabel");
         processlabel.setColor(Color.valueOf("#AAAAAA"));
 
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
     }
 
     public void setType(String type) {

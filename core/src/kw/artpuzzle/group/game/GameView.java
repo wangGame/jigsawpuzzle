@@ -74,7 +74,7 @@ public class GameView extends Group {
 
     public void initView(){
         setSize(1080,1920);
-        EnterLevelFile.getJigsawfile().saveLevelId(LevelConfig.levelIndex.getLevelUUID());
+        EnterLevelFile.getJigsawfile().saveLevelId(LevelConfig.levelIndex.getLevel_id());
         setPosition(Constant.GAMEWIDTH/2.0f,Constant.GAMEHIGHT/2.0f,Align.center);
         rootView = CocosResource.loadFile("cocos/gamegroup.json");
         addActor(rootView);
@@ -126,8 +126,8 @@ public class GameView extends Group {
         }
         LevelBean levelBean = LevelConfig.levelIndex;
         modelUtils = new ModelUtils("finallevel/"
-                +levelBean.getVersion()+"/"+levelBean.getLevelUUID()
-                +"/"+levelBean.getLevelUUID()+".png",6,6);
+                +levelBean.getVersion()+"/"+levelBean.getLevel_id()
+                +"/"+levelBean.getLevel_id()+".png",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         finalModelGroup.addAll(allModels);
         Collections.shuffle(finalModelGroup);
@@ -339,18 +339,18 @@ public class GameView extends Group {
                 ArrayList<ModelGroup> finalModelGroup = GameView.this.finalModelGroup;
                 ArrayList<ModelGroup> modelGroups = new ArrayList<>(finalModelGroup);
                 int size = modelGroups.size();
-                if (size != 0) {
-                    SaveHistoryBean saveHistoryBean = new SaveHistoryBean();
-                    ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
-                    SelectItemBean selectItemBean = entries.get(LevelConfig.splitnum);
-                    saveHistoryBean.setSplitNum(selectItemBean.getPiecesnum());
-                    saveHistoryBean.setLeftNum(size);
-                    for (ModelGroup modelGroup : modelGroups) {
-                        saveHistoryBean.setLeftPicIndex(modelGroup.getModelIndex());
-                    }
-                    FileUtils jigsawfile = FileUtils.getJigsawfile();
-                    jigsawfile.saveHistoryPic(saveHistoryBean);
-                }
+//                if (size != 0) {
+//                    SaveHistoryBean saveHistoryBean = new SaveHistoryBean();
+//                    ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
+//                    SelectItemBean selectItemBean = entries.get(LevelConfig.splitnum);
+//                    saveHistoryBean.setSplitNum(selectItemBean.getPiecesnum());
+//                    saveHistoryBean.setLeftNum(size);
+//                    for (ModelGroup modelGroup : modelGroups) {
+//                        saveHistoryBean.setLeftPicIndex(modelGroup.getModelIndex());
+//                    }
+//                    FileUtils jigsawfile = FileUtils.getJigsawfile();
+//                    jigsawfile.saveHistoryPic(saveHistoryBean);
+//                }
                 GameView.this.addAction(
                         Actions.sequence(
                                 Actions.fadeOut(0.2f),
@@ -417,7 +417,7 @@ public class GameView extends Group {
     }
 
     private void gameSuccess(Group picGroup,TempView view) {
-        PlayedLevelFile.getJigsawfile().saveMapV(LevelConfig.levelIndex.getLevelUUID(),true);
+        PlayedLevelFile.getJigsawfile().saveMapV(LevelConfig.levelIndex.getLevel_id(),true);
         Actor gametop1 = rootView.findActor("gametop");
         Actor gamebottom1 = rootView.findActor("gamebottom");
         gamebottom1.addAction(Actions.fadeOut(0.2f));
@@ -470,9 +470,9 @@ public class GameView extends Group {
                         }
                     });
                 })));
-        ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
-        SelectItemBean selectItemBean = entries.get(LevelConfig.splitnum);
-        JigsawPreference.getInstance().saveCoinNum(selectItemBean.getRewardcoin());
+//        ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
+//        SelectItemBean selectItemBean = entries.get(LevelConfig.splitnum);
+//        JigsawPreference.getInstance().saveCoinNum(selectItemBean.getRewardcoin());
     }
 
     private boolean successMove = false;
