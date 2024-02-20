@@ -152,16 +152,16 @@
                       "Plist": "plist/mainpic.plist"
                     },
                     "Scale9Enable": true,
-                    "Scale9OriginX": 50,
-                    "Scale9OriginY": 30,
-                    "Scale9Width": 53,
-                    "Scale9Height": 33,
+                    "Scale9OriginX": 70,
+                    "Scale9OriginY": 33,
+                    "Scale9Width": 29,
+                    "Scale9Height": 73,
                     "AnchorPoint": {
                       "ScaleY": 0.5
                     },
                     "Position": {
-                      "X": 0.0,
-                      "Y": 46.5
+                      "X": -32.0,
+                      "Y": 35.5
                     },
                     "Scale": {
                       "ScaleX": 1.0,
@@ -170,19 +170,22 @@
                     "CColor": {},
                     "IconVisible": false,
                     "PrePosition": {
-                      "X": 0.0,
-                      "Y": 0.4947
+                      "X": -0.1067,
+                      "Y": 0.3777
                     },
                     "PreSize": {
-                      "X": 1.0,
-                      "Y": 0.9894
+                      "X": 1.19,
+                      "Y": 1.5638
                     },
-                    "TopMargin": 1.0,
+                    "LeftMargin": -32.0,
+                    "RightMargin": -25.0,
+                    "TopMargin": -15.0,
+                    "BottomMargin": -38.0,
                     "Tag": 111,
                     "ActionTag": 1468077667,
                     "Size": {
-                      "X": 300.0,
-                      "Y": 93.0
+                      "X": 357.0,
+                      "Y": 147.0
                     },
                     "Name": "coinbg",
                     "ctype": "ImageViewObjectData"

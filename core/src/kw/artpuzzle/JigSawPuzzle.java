@@ -10,6 +10,9 @@ import com.kw.gdx.resource.annotation.GameInfo;
 import com.kw.gdx.utils.log.NLog;
 
 import kw.artpuzzle.constant.GameStaticInstance;
+import kw.artpuzzle.constant.LevelConfig;
+import kw.artpuzzle.down.DownLevelFileUtils;
+import kw.artpuzzle.down.NetContant;
 import kw.artpuzzle.listener.GameListener;
 import kw.artpuzzle.screen.LoadingScreen;
 
@@ -27,6 +30,14 @@ public class JigSawPuzzle extends BaseGame {
 
     @Override
     protected void loadingView() {
+        NetContant.levelConfigUrl = LevelConfig.monthConfigUrl;
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                DownLevelFileUtils utils = new DownLevelFileUtils();
+                utils.check();
+            }
+        });
         setScreen(new LoadingScreen(this));
     }
 
@@ -39,5 +50,11 @@ public class JigSawPuzzle extends BaseGame {
     public void render() {
         Asset.getAsset().assetManagerUpdate();
         super.render();
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+
     }
 }

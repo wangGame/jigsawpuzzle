@@ -1,23 +1,17 @@
 package kw.artpuzzle.group;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
-import com.kw.gdx.listener.OrdinaryButtonListener;
-import com.kw.gdx.resource.cocosload.CocosResource;
 import com.kw.gdx.shader.ShaderManager;
 import com.kw.gdx.zip.PackZip;
 
 import kw.artpuzzle.data.LevelBean;
-import kw.artpuzzle.down.DownLevelUtils;
-import kw.artpuzzle.listener.LevelListener;
+import kw.artpuzzle.down.DownLevelPreUtils;
 import kw.artpuzzle.shader.CornersShader;
 import kw.artpuzzle.shader.MskShader;
 
@@ -46,8 +40,8 @@ public class ItemImage extends Group {
     }
 
     public void downLoadImage(){
-        DownLevelUtils downLevelUtils
-                = new DownLevelUtils(levelBean, "level/out/", new Runnable() {
+        DownLevelPreUtils downLevelUtils
+                = new DownLevelPreUtils(levelBean, "level/out/", new Runnable() {
             @Override
             public void run() {
                 Gdx.app.postRunnable(new Runnable() {
@@ -77,20 +71,20 @@ public class ItemImage extends Group {
         }
         if (status == 9){
             status = 1;
-            Asset.getAsset().localAssetManagerLoad(levelPath+"/"+levelBean.getLevel_id()+".png");
+            Asset.getAsset().localAssetManagerLoad(levelPath+"/pre.png");
         }
         if (status == 1){
             if (Asset.getAsset().isLocalAssetManagerLoaded(
-                    levelPath+"/"+levelBean.getLevel_id()+".png")){
+                    levelPath+"/pre.png")){
                 status = 2;
-                Texture localTexture = Asset.getAsset().getLocalTexture(levelPath + "/" + levelBean.getLevel_id() + ".png");
+                Texture localTexture = Asset.getAsset().getLocalTexture(levelPath +"/pre.png");
                 Image levelImage = new Image(localTexture){
                     @Override
                     public void draw(Batch batch, float parentAlpha) {
                         if (program!=null) {
                             batch.setShader(program);
                             if (!msk){
-                                float i = 100.0f / localTexture.getWidth();
+                                float i = 10.0f / localTexture.getWidth();
                                 program.setUniformf("ra",i);
                             }
                             batch.flush();

@@ -60,7 +60,7 @@ public class DeskDownload extends DownLoad {
                         RandomAccessFile randomFile = null;
                         try {
                             is = httpResponse.getResultAsStream();
-                            FileHandle file = Gdx.files.local(path);
+                            FileHandle file = Gdx.files.absolute(path);
                             if (!file.parent().exists()) {
                                 file.parent().mkdirs();
                             }
@@ -70,11 +70,6 @@ public class DeskDownload extends DownLoad {
                                 file.delete();
                                 NLog.e("still exist " + file.exists());
                             }
-                            FileHandle parent = file.parent();
-                            if (!parent.exists()) {
-                                parent.mkdirs();
-                            }
-
                             randomFile = new RandomAccessFile(file.parent()+ "/" + file.name(), "rwd");
                             randomFile.setLength(todownsize);
                             randomFile.seek(0);

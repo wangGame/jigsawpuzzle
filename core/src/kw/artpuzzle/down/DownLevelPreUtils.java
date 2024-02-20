@@ -1,6 +1,9 @@
 package kw.artpuzzle.down;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.kw.gdx.BaseGame;
 import com.kw.gdx.net.DownLoadListener;
 import com.kw.gdx.zip.PackZip;
 
@@ -10,10 +13,10 @@ import kw.artpuzzle.data.LevelBean;
  * @Auther jian xian si qi
  * @Date 2023/12/8 15:56
  */
-public class DownLevelUtils extends BaseDownLoadUtils{
+public class DownLevelPreUtils extends BaseDownLoadUtils{
     protected String outPath;
     protected LevelBean levelBean;
-    public DownLevelUtils(LevelBean levelBean, String outPath, Runnable successRunnable
+    public DownLevelPreUtils(LevelBean levelBean, String outPath, Runnable successRunnable
             , Runnable reTryRunnable) {
         super(successRunnable,reTryRunnable);
         this.outPath = outPath;

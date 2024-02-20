@@ -6,16 +6,14 @@ import com.kw.gdx.BaseGame;
 import com.kw.gdx.net.DownLoadListener;
 
 public class LevelOrderDownload  extends BaseDownLoadUtils{
-    public LevelOrderDownload(BaseGame game, String name
-            , Runnable runnable) {
+    public LevelOrderDownload(String name, Runnable runnable) {
         super(runnable, new Runnable() {
             @Override
             public void run() {
-                System.out.println("-------------------------");
+
             }
         });
-        this.siteusing = NetContant.url;
-        this.fromPath = "csv/"+name;
+        this.siteusing = NetContant.url+"csv/"+name;
         String toPath = Gdx.files.getLocalStoragePath();
         String append = append(toPath,"csv/temp/");
         this.toPath = append+name;

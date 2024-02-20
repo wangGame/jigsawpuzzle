@@ -34,7 +34,7 @@ public class LoadingScreen extends BaseScreen {
         loadingbg.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT);
         loadingbg.setPosition(540.0f,960.0f, Align.center);
         GameData.getInstance().loadLevel();
-        NetContant.levelConfigUrl = LevelConfig.monthConfigUrl;
+
     }
 
     @Override

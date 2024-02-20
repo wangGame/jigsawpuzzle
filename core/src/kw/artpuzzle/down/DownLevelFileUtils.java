@@ -14,10 +14,14 @@ import java.util.Map;
 
 import kw.artpuzzle.constant.GameStaticInstance;
 import kw.artpuzzle.data.LevelBean;
+import kw.artpuzzle.pref.JigsawPreference;
 
 /**
  * @Auther jian xian si qi
  * @Date 2023/12/8 15:56
+ *
+ *
+ * 下载csv
  */
 public class DownLevelFileUtils {
     private boolean alreadyUpdate;
@@ -38,16 +42,14 @@ public class DownLevelFileUtils {
                     String levelPreOrder = result.getString("normalLevelPreOrder");
                     Constant.severLevelOrder = levelOrder;
                     Constant.severLevelPreOrder = levelPreOrder;
-                    if (!levelOrder.equals("")) {
+                    if (levelOrder!=null&&!levelOrder.equals("")) {
                         if (!Gdx.files.internal("csv/level/" + levelOrder + ".csv").exists())
                             if (!Gdx.files.local("csv/level/" + levelOrder + ".csv").exists()) {
-                                //存储old
                                 //下载完成  将old放在固定文件
-                                LevelOrderDownload levelOrderDownload = new LevelOrderDownload(GameStaticInstance.gameInstance,
+                                LevelOrderDownload levelOrderDownload = new LevelOrderDownload(
                                         levelOrder+".csv", new Runnable() {
                                     @Override
                                     public void run() {
-
                                         Gdx.app.postRunnable(new Runnable() {
                                             @Override
                                             public void run() {
@@ -55,17 +57,15 @@ public class DownLevelFileUtils {
                                                     FileHandle local = Gdx.files.local("csv/temp/" + levelOrder+".csv");
                                                     FileHandle local1 = Gdx.files.local("csv/level/"+ levelOrder+".csv");
                                                     local.moveTo(local1);
-                                                    DailyLevelMap.getInstance().saveDownloadLevelTemp(levelOrder);
-                                                    //
+                                                    JigsawPreference.getInstance().saveDownloadLevelTemp(levelOrder);
                                                     if (Constant.severLevelOrder!=null && Constant.severLevelPreOrder!=null){
-                                                        String levelOrder1 = DailyLevelMap.getInstance().getDownloadLevelTemp();
-                                                        String levelPreOrder1 = DailyLevelMap.getInstance().getDownloadLevelPreTemp();
+                                                        String levelOrder1 = JigsawPreference.getInstance().getDownloadLevelTemp();
+                                                        String levelPreOrder1 = JigsawPreference.getInstance().getDownloadLevelPreTemp();
                                                         if (Constant.severLevelOrder.equals(levelOrder1)
                                                                 && Constant.severLevelPreOrder.equals(levelPreOrder1)){
                                                             if (!alreadyUpdate) {
-                                                                DailyLevelMap.getInstance().saveDownloadLevelPre(levelPreOrder1);
-                                                                DailyLevelMap.getInstance().saveDownloadLevel(levelOrder1);
-//                                                                InitCsvData.xxx();
+                                                                JigsawPreference.getInstance().saveDownloadLevelPre(levelPreOrder1);
+                                                                JigsawPreference.getInstance().saveDownloadLevel(levelOrder1);
                                                                 alreadyUpdate = true;
                                                             }
                                                         }
@@ -84,7 +84,7 @@ public class DownLevelFileUtils {
                     if (!levelPreOrder.equals("")) {
                         if (!Gdx.files.internal("csv/levelpre/" + levelPreOrder+".csv").exists()) {
                             if (!Gdx.files.local("csv/levelpre/" + levelPreOrder + ".csv").exists()) {
-                                LevelOrderDownload levelOrderDownload = new LevelOrderDownload(GameStaticInstance.gameInstance,
+                                LevelOrderDownload levelOrderDownload = new LevelOrderDownload(
                                         levelPreOrder + ".csv", new Runnable() {
                                     @Override
                                     public void run() {
@@ -98,15 +98,15 @@ public class DownLevelFileUtils {
                                                             FileHandle local = Gdx.files.local("csv/temp/" + levelPreOrder + ".csv");
                                                             FileHandle local1 = Gdx.files.local("csv/levelpre/" + levelPreOrder + ".csv");
                                                             local.moveTo(local1);
-                                                            DailyLevelMap.getInstance().saveDownloadLevelPreTemp(levelPreOrder);
+                                                            JigsawPreference.getInstance().saveDownloadLevelPreTemp(levelPreOrder);
                                                             if (Constant.severLevelOrder != null && Constant.severLevelPreOrder != null) {
-                                                                String levelOrder1 = DailyLevelMap.getInstance().getDownloadLevelTemp();
-                                                                String levelPreOrder1 = DailyLevelMap.getInstance().getDownloadLevelPreTemp();
+                                                                String levelOrder1 = JigsawPreference.getInstance().getDownloadLevelTemp();
+                                                                String levelPreOrder1 = JigsawPreference.getInstance().getDownloadLevelPreTemp();
                                                                 if (Constant.severLevelOrder.equals(levelOrder1)
                                                                         && Constant.severLevelPreOrder.equals(levelPreOrder1)) {
                                                                     if (!alreadyUpdate) {
-                                                                        DailyLevelMap.getInstance().saveDownloadLevelPre(levelPreOrder1);
-                                                                        DailyLevelMap.getInstance().saveDownloadLevel(levelOrder1);
+                                                                        JigsawPreference.getInstance().saveDownloadLevelPre(levelPreOrder1);
+                                                                        JigsawPreference.getInstance().saveDownloadLevel(levelOrder1);
                                                                         alreadyUpdate = true;
                                                                     }
                                                                 }

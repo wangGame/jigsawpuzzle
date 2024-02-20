@@ -1,7 +1,6 @@
 package kw.artpuzzle.group.group;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,12 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kw.gdx.asset.Asset;
 import com.kw.gdx.constant.Constant;
-import com.kw.gdx.listener.OrdinaryButtonListener;
 import com.kw.gdx.shader.ShaderManager;
-import com.kw.gdx.zip.PackZip;
 
 import kw.artpuzzle.data.CateBean;
-import kw.artpuzzle.down.DownLevelUtils;
 import kw.artpuzzle.listener.SignListener;
 import kw.artpuzzle.shader.CornersShader;
 

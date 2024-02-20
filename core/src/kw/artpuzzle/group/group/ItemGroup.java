@@ -14,6 +14,7 @@ import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.LevelBean;
 import kw.artpuzzle.dialog.GetPicDialog;
 import kw.artpuzzle.constant.GameStaticInstance;
+import kw.artpuzzle.dialog.SelectDifficultyDialog;
 import kw.artpuzzle.group.ItemImage;
 
 /**
@@ -22,7 +23,7 @@ import kw.artpuzzle.group.ItemImage;
  */
 public class ItemGroup extends Group {
     private ItemImage itemGroup;
-    private String type;
+
     public ItemGroup(){
         Group group = CocosResource.loadFile("cocos/levelitemview.json");
         setSize(group.getWidth(),group.getHeight());
@@ -54,15 +55,15 @@ public class ItemGroup extends Group {
 //            });
 //        }else {
 //            lock.setVisible(false);
-//            addListener(new OrdinaryButtonListener(){
-//                @Override
-//                public void clicked(InputEvent event, float x, float y) {
-//                    super.clicked(event, x, y);
-//                    LevelConfig.levelIndex = levelBean;
-//                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
-////                    runnable.run();
-//                }
-//            });
+            addListener(new OrdinaryButtonListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    LevelConfig.levelIndex = levelBean;
+                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
+//                    runnable.run();
+                }
+            });
 //        }
         lock.setVisible(false);
         addListener(new OrdinaryButtonListener(){
@@ -79,11 +80,9 @@ public class ItemGroup extends Group {
         process.toFront();
         Label processlabel = process.findActor("processlabel");
         processlabel.setColor(Color.valueOf("#AAAAAA"));
-
     }
 
     public void setType(String type) {
-        this.type = type;
         if (type.equals("PAINT")){
             itemGroup.setMys();
         }

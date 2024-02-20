@@ -126,8 +126,8 @@ public class GameView extends Group {
         }
         LevelBean levelBean = LevelConfig.levelIndex;
         modelUtils = new ModelUtils("finallevel/"
-                +levelBean.getVersion()+"/"+levelBean.getLevel_id()
-                +"/"+levelBean.getLevel_id()+".png",6,6);
+                +levelBean.getVersion()+"/"+levelBean.getLevel_num()
+                +"/pre.png",6,6);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         finalModelGroup.addAll(allModels);
         Collections.shuffle(finalModelGroup);
@@ -230,23 +230,23 @@ public class GameView extends Group {
 //                    c.y = -100;
 //                }
 //
-                view.getParent().localToStageCoordinates(c);
-                contentGroup.getParent().stageToLocalCoordinates(c);
-                view.getContentGroup().setPosition(c.x,c.y);
+//                view.getParent().localToStageCoordinates(c);
+//                contentGroup.getParent().stageToLocalCoordinates(c);
+//                view.getContentGroup().setPosition(c.x,c.y);
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-                Group contentGroup = view.getContentGroup();
-                float x1 = contentGroup.getX(Align.center);
-                float y1 = contentGroup.getY(Align.center);
-                Vector2 c = new Vector2(x1,y1);
-                contentGroup.getParent().localToStageCoordinates(c);
-                view.getParent().setDebug(true);
-                view.getParent().stageToLocalCoordinates(c);
-                contentGroup.setPosition(0,0);
-                view.setPosition(c.x,c.y,Align.center);
+//                Group contentGroup = view.getContentGroup();
+//                float x1 = contentGroup.getX(Align.center);
+//                float y1 = contentGroup.getY(Align.center);
+//                Vector2 c = new Vector2(x1,y1);
+//                contentGroup.getParent().localToStageCoordinates(c);
+//                view.getParent().setDebug(true);
+//                view.getParent().stageToLocalCoordinates(c);
+//                contentGroup.setPosition(0,0);
+//                view.setPosition(c.x,c.y,Align.center);
             }
         });
 

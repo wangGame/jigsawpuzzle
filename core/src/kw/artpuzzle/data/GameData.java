@@ -64,4 +64,17 @@ public class GameData {
         }
         return cateDetailMap;
     }
+
+    private ArrayMap<Integer,SelectItemBean> selectItemBeanArrayMap;
+    public ArrayMap<Integer,SelectItemBean> readSelectItemBean(){
+        if (selectItemBeanArrayMap != null)return selectItemBeanArrayMap;
+        selectItemBeanArrayMap = new ArrayMap<>();
+        Array<SelectItemBean> common = CsvUtils.common("selectpiece/selectpiece.csv", SelectItemBean.class);
+        for (int i = 0; i < common.size; i++) {
+            SelectItemBean levelBean = common.get(i);
+            selectItemBeanArrayMap.put(levelBean.getId(),levelBean);
+        }
+        return selectItemBeanArrayMap;
+    }
+
 }
