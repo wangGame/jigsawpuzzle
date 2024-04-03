@@ -21,7 +21,7 @@ public abstract class BaseView extends Group {
         infoLabel = new Label("",new Label.LabelStyle(){{
             font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
         }});
-        addActor(infoLabel);
+//        addActor(infoLabel);
         infoLabel.setText(TAG);
         infoLabel.setColor(Color.BLACK);
         infoLabel.pack();

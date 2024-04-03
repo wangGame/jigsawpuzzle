@@ -26,20 +26,14 @@ public class DesktopLauncher {
                         Field field = null;
                         try {
                             field = LwjglFiles.class.getField("localPath");
-//                    //将字段的访问权限设为true：即去除private修饰符的影响
-//                    field.setAccessible(true);
-//去除final修饰符的影响，将字段设为可修改的
                             Field modifiersField = Field.class.getDeclaredField("modifiers");
                             modifiersField.setAccessible(true);
                             modifiersField.set(field, field.getModifiers() & ~Modifier.FINAL);
                             field.setAccessible(true);
                             field.set(null, "D://jigsaw/");
-//                    field.set(null,value.);
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     @Override

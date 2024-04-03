@@ -9,7 +9,6 @@ import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
-import kw.artpuzzle.group.group.BannerGroup;
 import kw.artpuzzle.group.group.ItemGroup;
 
 /**

@@ -22,12 +22,12 @@ public class TempView extends Group {
         splitPicGroup = new Group();
         contentGroup.addActor(splitPicGroup);
         addActor(contentGroup);
-        Texture textureTemp = Asset.getAsset().getTexture("out1/" + 0 + ".png");
+        Texture textureTemp = Asset.getAsset().getTexture("out/" + 0 + ".png");
         float startX = -textureTemp.getWidth() / 4.0f;
         float startY = -textureTemp.getHeight() / 4.0f;
         int index = 0;
         for (int i = 0; i < 36; i++) {
-            Image image = new Image(Asset.getAsset().getTexture("out1/"+i+".png"));
+            Image image = new Image(Asset.getAsset().getTexture("out/"+i+".png"));
             image.setName(i+"");
             splitPicGroup.addActor(image);
             image.setVisible(false);

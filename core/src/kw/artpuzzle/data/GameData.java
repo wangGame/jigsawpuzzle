@@ -1,5 +1,6 @@
 package kw.artpuzzle.data;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.resource.csvanddata.demo.CsvUtils;
@@ -40,6 +41,7 @@ public class GameData {
 
     public ArrayMap<Integer,LevelBean> readyDaily(String yearAndMonth){
         ArrayMap<Integer,LevelBean> levelBeanArrayMap = new ArrayMap<>();
+
         try {
             Array<LevelBean> common = CsvUtils.common("daily/"+yearAndMonth, LevelBean.class, true);
             for (int i = 1; i <= common.size; i++) {

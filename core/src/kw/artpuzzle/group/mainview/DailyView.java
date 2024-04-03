@@ -1,5 +1,7 @@
 package kw.artpuzzle.group.mainview;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -7,11 +9,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.kw.gdx.asset.Asset;
+import com.kw.gdx.constant.Constant;
 import com.kw.gdx.scrollpane.ScrollPane;
 
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
+import kw.artpuzzle.down.DownLevelFileUtils;
+import kw.artpuzzle.down.LevelDailyDownload;
+import kw.artpuzzle.down.LevelOrderDownload;
 import kw.artpuzzle.group.group.ItemGroup;
+import kw.artpuzzle.pref.JigsawPreference;
 import kw.artpuzzle.utils.DailyUtils;
 import kw.artpuzzle.utils.DateBean;
 
@@ -44,14 +51,27 @@ public class DailyView extends BaseView {
         };
         scrollPane.layout();
         scrollPane.validate();
-//        addOneMonthData(true);
         scrollPane.setSize(getWidth(),getHeight());
         addActor(scrollPane);
     }
 
     private void addOneMonthData(boolean b) {
-        ArrayMap<Integer, LevelBean> levelBeanArrayMap = GameData.getInstance().readyDaily(dateBean.getYear()
-                + "-" + (dateBean.getMonth()+1) + ".csv");
+        String yearAndMonth ="daily/" + dateBean.getYear() + "-" + (dateBean.getMonth() + 1) + ".csv";
+        if (!Gdx.files.internal(yearAndMonth).exists()&&
+                !Gdx.files.local(yearAndMonth).exists()){
+            LevelDailyDownload levelOrderDownload = new LevelDailyDownload("", new Runnable() {
+                @Override
+                public void run() {
+                    FileHandle local = Gdx.files.local("daily/csv/temp/" + dateBean.getYear() + "-" + (dateBean.getMonth() + 1)+".csv");
+                    FileHandle local1 = Gdx.files.local("daily/"+ dateBean.getYear() + "-" + (dateBean.getMonth() + 1)+".csv");
+                    local.moveTo(local1);
+                }
+            });
+            levelOrderDownload.downLoad();
+        }
+
+
+        ArrayMap<Integer, LevelBean> levelBeanArrayMap = GameData.getInstance().readyDaily(yearAndMonth);
         contentTable.add(new Group() {{
             Label label = new Label("", new Label.LabelStyle() {{
                 font = Asset.getAsset().loadBitFont("cocos/font/inter-semi-32.fnt");
@@ -96,5 +116,4 @@ public class DailyView extends BaseView {
 
         System.out.println(levelIndex);
     }
-
 }
