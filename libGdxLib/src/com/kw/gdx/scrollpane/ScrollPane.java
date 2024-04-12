@@ -115,7 +115,7 @@ public class ScrollPane extends WidgetGroup {
                 if (draggingPointer != -1) return false;
                 if (pointer == 0 && button != 0) return false;
                 getStage().setScrollFocus(ScrollPane.this);
-
+                isTouchUp = false;
                 if (!flickScroll) resetFade();
 
                 if (fadeAlpha == 0) return false;

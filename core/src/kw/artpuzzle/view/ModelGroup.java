@@ -104,7 +104,7 @@ public class ModelGroup extends Group {
 
     private Vector2 imageVector = new Vector2();
     public Vector2 imageVector(){
-        imageVector.set(image.getX(Align.center),image.getY(Align.center));
+        imageVector.set(image.getX(),image.getY());
         image.getParent().localToStageCoordinates(imageVector);
         return imageVector;
     }

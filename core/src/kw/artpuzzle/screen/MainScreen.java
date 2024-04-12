@@ -39,7 +39,6 @@ public class MainScreen extends BaseScreen {
 
     public MainScreen(BaseGame game) {
         super(game);
-        GameStaticInstance.baseScreen = this;
     }
 
     @Override

@@ -44,6 +44,8 @@ public class ItemGroup extends Group {
         itemGroup.setPosition(group.getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Actor lock = group.findActor("lock");
         lock.toFront();
+
+
 //        if (levelBean.getUnlockCost() > 0) {
 //            lock.setVisible(true);
 //            addListener(new OrdinaryButtonListener(){
@@ -60,7 +62,7 @@ public class ItemGroup extends Group {
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event, x, y);
                     LevelConfig.levelIndex = levelBean;
-                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
+//                    GameStaticInstance.baseScreen.showDialog(new SelectDifficultyDialog(runnable));
 //                    runnable.run();
                 }
             });

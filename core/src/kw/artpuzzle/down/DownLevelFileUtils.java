@@ -29,8 +29,7 @@ public class DownLevelFileUtils {
         Net.HttpRequest httpRequest = new Net.HttpRequest("POST");
         httpRequest.setUrl(NetContant.levelConfigUrl);
         httpRequest.setTimeOut(3000);
-        JSONObject requestParam = new JSONObject()
-                .put("method", "normal_config");
+        JSONObject requestParam = new JSONObject().put("method", "normal_config");
         httpRequest.setContent(requestParam.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -43,11 +42,9 @@ public class DownLevelFileUtils {
                     Constant.severLevelOrder = levelOrder;
                     Constant.severLevelPreOrder = levelPreOrder;
                     if (levelOrder!=null&&!levelOrder.equals("")) {
-                        if (!Gdx.files.internal("csv/level/" + levelOrder + ".csv").exists())
+                        if (!Gdx.files.internal("csv/level/" + levelOrder + ".csv").exists()){
                             if (!Gdx.files.local("csv/level/" + levelOrder + ".csv").exists()) {
-                                //下载完成  将old放在固定文件
-                                LevelOrderDownload levelOrderDownload = new LevelOrderDownload(
-                                        levelOrder+".csv", new Runnable() {
+                                LevelOrderDownload levelOrderDownload = new LevelOrderDownload(levelOrder+".csv", new Runnable() {
                                     @Override
                                     public void run() {
                                         Gdx.app.postRunnable(new Runnable() {
@@ -77,8 +74,10 @@ public class DownLevelFileUtils {
                                         });
                                     }
                                 });
+
                                 levelOrderDownload.downLoad();
                             }
+                        }
                     }
 
                     if (!levelPreOrder.equals("")) {

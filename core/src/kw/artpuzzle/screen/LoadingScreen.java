@@ -23,7 +23,6 @@ import kw.artpuzzle.down.NetContant;
 public class LoadingScreen extends BaseScreen {
     public LoadingScreen(BaseGame game) {
         super(game);
-        GameStaticInstance.baseScreen = this;
     }
 
     @Override

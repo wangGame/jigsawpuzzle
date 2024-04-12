@@ -31,6 +31,7 @@ import kw.artpuzzle.group.group.SelectDiffItem;
 @ScreenResource("cocos/selectsplitpage.json")
 public class SelectDifficultyDialog extends BaseDialog {
     private Runnable runnable;
+    private ScrollPane pane;
     public SelectDifficultyDialog(Runnable runnable) {
         this.runnable = runnable;
     }
@@ -63,7 +64,7 @@ public class SelectDifficultyDialog extends BaseDialog {
         preIamge.setSize(pregroup.getWidth(),pregroup.getHeight());
         preIamge.setPosition(pregroup.getWidth()/2.0f,pregroup.getHeight()/2.0f, Align.center);
 
-        ScrollPane pane = new ScrollPane(new Table(){{
+        pane = new ScrollPane(new Table(){{
             ArrayMap<Integer, SelectItemBean> entries = GameData.getInstance().readSelectItemBean();
             Group group = new Group();
             group.setWidth(Constant.GAMEWIDTH/2.0f);
@@ -77,7 +78,50 @@ public class SelectDifficultyDialog extends BaseDialog {
             add(group);
             align(Align.bottom);
             pack();
-        }});
+
+        }}){
+            private boolean update = false;
+            @Override
+            public void act(float delta) {
+                super.act(delta);
+                if (isTouchUp()){
+                    if (!update) {
+
+//                        temp.set(getX(Align.center),getY(Align.center));
+//                        this.getParent().localToStageCoordinates(temp);
+//                        if (temp.x > Constant.GAMEWIDTH/2.0f - offsetX && temp.x<Constant.GAMEWIDTH/2.0f + offsetX){
+//                            float v = Math.abs(temp.x - Constant.GAMEWIDTH / 2.0f);
+//                            setScale(1.0f+0.4f*(Math.abs(v - offsetX)/offsetX));
+//                        }else{
+//                            setScale(1.0f);
+//                        }
+                    }
+                    update = true;
+                }else {
+                    update = false;
+                }
+            }
+        };
+        pane.setHandeListener(new ScrollPane.HandeListener() {
+            private float startX;
+            private int page;
+
+            @Override
+            public void touchDown() {
+                startX = pane.getScrollX();
+            }
+
+            @Override
+            public void touchUp() {
+                pane.setScrollX(page * 220);
+            }
+
+            @Override
+            public void pan() {
+                page = (int) ((pane.getScrollX()) / 220.0f);
+
+            }
+        });
         Group itempanel = dialogGroup.findActor("itempanel");
         itempanel.addActor(pane);
         pane.setSize(Constant.GAMEWIDTH,itempanel.getHeight()+100);

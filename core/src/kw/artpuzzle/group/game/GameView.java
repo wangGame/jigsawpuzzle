@@ -489,6 +489,7 @@ public class GameView extends Group {
                 startV.set(x,y);
                 bottomPanelScrollPanel.setValid(true);
                 ModelGroup group = getGroup();
+                group.setDebug(true);
                 targetPos = logicUtils.findTargetPos(group.getName());
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -512,8 +513,8 @@ public class GameView extends Group {
                         Vector2 vector21 = group.imageVector();
                         logicUtils.convertTarget(vector21);
                         group.resetPosition();
-                        group.setX(vector21.x, Align.center);
-                        group.setY(vector21.y, Align.center);
+                        group.setX(vector21.x);
+                        group.setY(vector21.y);
 //                        group.clearListeners();
                         group.setImageScale(1.0f);
                         logicUtils.addActor(group);

@@ -40,12 +40,6 @@ public class GetPicDialog extends BaseDialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-//                if (JigsawPreference.getInstance().getCoinNum()>levelBean.getUnlockCost()){
-//                    runnable.run();
-//                    JigsawPreference.getInstance().saveCoinNum(-levelBean.getUnlockCost());
-//                }else {
-//
-//                }
             }
         });
     }
