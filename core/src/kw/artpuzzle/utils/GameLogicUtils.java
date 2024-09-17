@@ -1,8 +1,11 @@
 package kw.artpuzzle.utils;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
+import com.kw.gdx.constant.Constant;
 
 import kw.artpuzzle.constant.GameConstant;
 import kw.artpuzzle.view.ModelGroup;
@@ -21,7 +24,7 @@ public class GameLogicUtils {
     }
 
     public Vector2 findTargetPos(String name){
-        Actor actor = view.findActor(name);
+        Actor actor = view.findActor(""+name);
         targetPos.set(actor.getX(Align.center) ,actor.getY(Align.center));
         return targetPos;
     }
@@ -44,5 +47,33 @@ public class GameLogicUtils {
 
     public void addActor(ModelGroup group) {
         view.addFindActor(group);
+    }
+
+    public boolean checkValue(int maskIndex) {
+
+        int arr[] = new int[]{
+                -1,1,GameConstant.rowNum,-GameConstant.rowNum
+        };
+//        int i = current - 1;
+//        int i1 = current + 1;
+//        int i2 = current + allNumer;
+//        int i3 = current - allNumer;
+        int hang = maskIndex / GameConstant.rowNum;
+        int line = maskIndex % GameConstant.rowNum;
+        //边缘
+        if (hang == 0 || hang == GameConstant.rowNum - 1){
+            return true;
+        }
+        if (line == 0||line == GameConstant.rowNum - 1){
+            return true;
+        }
+        for (int i : arr) {
+            int i1 = maskIndex + i;
+            Actor modelGroup = view.findActor("final" + i1);
+            if (modelGroup!=null){
+                return true;
+            }
+        }
+        return false;
     }
 }

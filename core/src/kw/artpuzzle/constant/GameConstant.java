@@ -7,4 +7,5 @@ package kw.artpuzzle.constant;
 public abstract class GameConstant {
     public static float modelScale = 1.0f;
 
+    public static int rowNum = 6;
 }

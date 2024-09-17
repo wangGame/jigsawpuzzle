@@ -27,11 +27,16 @@ public class ModelGroup extends Group {
     private Image image;
     private float currentScale;
     private Texture texture;
+    //自由的
     private boolean freeStatus;
+    private int maskIndex;
+    private boolean success;
 
-    public ModelGroup(String maskName){
+    public ModelGroup(int maskIndex){
         setSize(266,266);
-        image = new Image(Asset.getAsset().getTexture(maskName)){
+        this.maskIndex = maskIndex;
+        System.out.println("out1/"+maskIndex+".png---------------------------");
+        image = new Image(Asset.getAsset().getTexture("out1/"+maskIndex+".png")){
             @Override
             public void draw(Batch batch, float parentAlpha) {
                 batch.setShader(program);
@@ -145,5 +150,17 @@ public class ModelGroup extends Group {
 
     public boolean isFreeStatus() {
         return freeStatus;
+    }
+
+    public int getMaskIndex() {
+        return maskIndex;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 }

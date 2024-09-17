@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import kw.artpuzzle.JigSawPuzzle;
+import kw.artpuzzle.constant.GameConstant;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
 import kw.artpuzzle.data.LevelBean;
@@ -74,6 +75,7 @@ public class GameView extends Group {
 
     public void initView(){
         setSize(1080,1920);
+        //存储近过关序号
         EnterLevelFile.getJigsawfile().saveLevelId(LevelConfig.levelIndex.getLevelUUID());
         setPosition(Constant.GAMEWIDTH/2.0f,Constant.GAMEHIGHT/2.0f,Align.center);
         rootView = CocosResource.loadFile("cocos/gamegroup.json");
@@ -127,7 +129,7 @@ public class GameView extends Group {
         LevelBean levelBean = LevelConfig.levelIndex;
         modelUtils = new ModelUtils("finallevel/"
                 +levelBean.getVersion()+"/"+levelBean.getLevelUUID()
-                +"/"+levelBean.getLevelUUID()+".png",6,6);
+                +"/"+levelBean.getLevelUUID()+".png", GameConstant.rowNum,GameConstant.rowNum);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         finalModelGroup.addAll(allModels);
         Collections.shuffle(finalModelGroup);
@@ -199,16 +201,6 @@ public class GameView extends Group {
         });
         view.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.f,Align.center);
         bottomPanelScrollPanel.setRectangle(0,0,getWidth(),220);
-        Texture texture = modelUtils.getTexture();
-//        Group group = new Group();
-//        for (ModelGroup allModel : allModels) {
-//            allModel.addListener(getItemListener(allModel));
-//            group.addActor(allModel);
-//            allModel.setPosition(allModel.getPosX(),allModel.getPosY(),Align.center);
-//        }
-//        addActor(group);
-//        group.setPosition(200,200);
-//        group.setScale(0.4f);
         clearbtn.addListener(new OrdinaryButtonListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -418,7 +410,10 @@ public class GameView extends Group {
                 System.out.println(event.getStageY());
                 ModelGroup group = getGroup();
 
-                if (group.isFreeStatus() ||isDragged || ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&(Math.abs(x - startV.x) * Math.abs(x - startV.x) +
+                if (group.isFreeStatus() ||
+                        isDragged ||
+                        ((Math.abs(x - startV.x) < Math.abs(y - startV.y))&&
+                                (Math.abs(x - startV.x) * Math.abs(x - startV.x) +
                         Math.abs(y - startV.y) * Math.abs(y - startV.y)>200))) {
                     bottomPanelScrollPanel.cancel();
                     if (event.getStageY()>400) {
@@ -481,20 +476,25 @@ public class GameView extends Group {
                 Vector2 vector2 = group.imageVector();
                 logicUtils.convertTarget(vector2);
                 if (logicUtils.check(targetPos, vector2)) {
-                    successMove = true;
-                    finalModelGroup.remove(group);
-                    group.clearListeners();
-                    group.addAction(Actions.moveToAligned(targetPos.x, targetPos.y, Align.center, 0.1f));
+                    if (logicUtils.checkValue(getGroup().getMaskIndex())) {
+                        successMove = true;
+                        finalModelGroup.remove(group);
+                        group.toBack();
+                        group.clearListeners();
+                        group.setSuccess(true);
+                        group.setName("final"+group.getMaskIndex());
+                        view.findActor(group.getMaskIndex()+"").remove();
+                        group.addAction(Actions.moveToAligned(targetPos.x,
+                                targetPos.y, Align.center, 0.1f));
 
-                    if (finalModelGroup.size()<=0){
-                        addAction(Actions.delay(0.4f,Actions.run(()->{
-                            gameSuccess(picGroup,view);
-                        })));
+                        if (finalModelGroup.size() <= 0) {
+                            addAction(Actions.delay(0.4f, Actions.run(() -> {
+                                gameSuccess(picGroup, view);
+                            })));
+                        }
                     }
                 }
-//                ModelGroup group = getGroup();
-//                group.resetPosition();
-//                group.resetScale();
+
             }
         };
     }

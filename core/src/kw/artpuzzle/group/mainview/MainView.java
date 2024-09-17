@@ -48,9 +48,10 @@ public class MainView extends BaseView {
 
     public void addLevelItem(){
         super.addLevelItem();
-        if (levelIndex>levelData.size)return;
+        if (levelIndex>=levelData.size)return;
         levelIndex ++;
         LevelBean levelBean = levelData.get(levelIndex);
+        if(levelBean==null)return;
         contentTable.add(new ItemGroup(levelBean, runnable)).pad(15);
         if (levelIndex % 2 == 0) {
             contentTable.row();

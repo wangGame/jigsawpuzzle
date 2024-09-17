@@ -29,7 +29,7 @@ public class ModelUtils {
         for (int i3 = 0; i3 < row; i3++) {
             for (int i4 = 0; i4 < colomn; i4++) {
                 modelIndex ++;
-                ModelGroup maskImage = new ModelGroup("out1/"+modelIndex+".png");
+                ModelGroup maskImage = new ModelGroup(modelIndex);
                 maskImage.setTexure(texture);
                 maskImage.setPicIndex(modelIndex);
                 Actor actor = tempView.findActor(modelIndex+"");
