@@ -67,10 +67,12 @@ public class GameView extends Group {
     private boolean showBorder;
     private  Group picGroup;
     private TempView view;
+    private Vector2 basePos;
 
     public GameView(BaseScreen baseScreen){
        this.baseScreen = baseScreen;
        this.finalModelGroup = new ArrayList<>();
+       this.basePos = new Vector2();
     }
 
     public void initView(){
@@ -170,12 +172,35 @@ public class GameView extends Group {
             private float touchDownScale;
             private float minScale;
             private float maxScale;
+            private float moveDst = 0;
+            private Vector2 movePostion=  new Vector2();
             @Override
             public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 touchDownScale = view.getScaleX();
                 minScale = (1080.0f * 0.6f) / view.getWidth();
                 maxScale = (1080.0f * 1.2f) / view.getWidth();
+            }
+
+            @Override
+            public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
+                super.pan(event, x, y, deltaX, deltaY);
+                movePostion.add(deltaX,deltaY);
+                if (Math.abs(movePostion.x)>moveDst){
+                    if(movePostion.x<0){
+                        movePostion.x = -moveDst;
+                    }else {
+                        movePostion.x = moveDst;
+                    }
+                }
+                if (Math.abs(movePostion.y)>moveDst){
+                    if(movePostion.y<0){
+                        movePostion.y = -moveDst;
+                    }else {
+                        movePostion.y = moveDst;
+                    }
+                }
+                view.setPosition(basePos.x+movePostion.x,basePos.y+movePostion.y,Align.center);
             }
 
             @Override
@@ -190,16 +215,34 @@ public class GameView extends Group {
                 if (minScale>v1){
                     v1 = minScale;
                 }
+                float v3 = v1 - minScale;
+                moveDst = v3 * view.getWidth();
                 view.setScale(v1);
+                if (Math.abs(movePostion.x)>moveDst){
+                    if(movePostion.x<0){
+                        movePostion.x = -moveDst;
+                    }else {
+                        movePostion.x = moveDst;
+                    }
+                }
+                if (Math.abs(movePostion.y)>moveDst){
+                    if(movePostion.y<0){
+                        movePostion.y = -moveDst;
+                    }else {
+                        movePostion.y = moveDst;
+                    }
+                }
+                view.setPosition(basePos.x+movePostion.x,basePos.y+movePostion.y,Align.center);
+
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-
             }
         });
         view.setPosition(picGroup.getWidth()/2.0f,picGroup.getHeight()/2.f,Align.center);
+        basePos.set(view.getX(Align.center),view.getY(Align.center));
         bottomPanelScrollPanel.setRectangle(0,0,getWidth(),220);
         clearbtn.addListener(new OrdinaryButtonListener(){
             @Override
