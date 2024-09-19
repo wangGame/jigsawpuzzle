@@ -441,7 +441,7 @@ public class GameView extends Group {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 touchDownModel = true;
-                System.out.println("===========touch down=================");
+
 
                 successMove = false;
                 isDragged = false;
@@ -456,7 +456,7 @@ public class GameView extends Group {
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
                 if (successMove)return;
-                System.out.println(event.getStageY());
+
                 ModelGroup group = getGroup();
 
                 if (group.isFreeStatus() ||
@@ -470,7 +470,7 @@ public class GameView extends Group {
                         group = getGroup();
                         convert.set(x, y);
                         group.localToStageCoordinates(convert);
-                        group.setImagePosition(x, y);
+                        group.setImagePosition(x - (startV.x-group.getWidth()/2.f), y - (startV.y-group.getHeight()/2.f));
                         Vector2 vector21 = group.imageVector();
                         logicUtils.convertTarget(vector21);
                         group.resetPosition();
