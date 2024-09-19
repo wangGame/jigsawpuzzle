@@ -185,6 +185,8 @@ public class GameView extends Group {
             @Override
             public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
                 super.pan(event, x, y, deltaX, deltaY);
+                System.out.println("----------------------------------------");
+                if ( touchDownModel)return;
                 movePostion.add(deltaX,deltaY);
                 if (Math.abs(movePostion.x)>moveDst){
                     if(movePostion.x<0){
@@ -428,6 +430,7 @@ public class GameView extends Group {
         JigsawPreference.getInstance().saveCoinNum(selectItemBean.getRewardcoin());
     }
 
+    private boolean touchDownModel;
     private boolean successMove = false;
     private MyClickListener getItemListener(ModelGroup allModel) {
         return new MyClickListener(allModel){
@@ -437,6 +440,9 @@ public class GameView extends Group {
             private boolean isDragged = false;
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                touchDownModel = true;
+                System.out.println("===========touch down=================");
+
                 successMove = false;
                 isDragged = false;
                 startV.set(x,y);
@@ -515,6 +521,7 @@ public class GameView extends Group {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
+                touchDownModel = false;
                 ModelGroup group = getGroup();
                 Vector2 vector2 = group.imageVector();
                 logicUtils.convertTarget(vector2);
