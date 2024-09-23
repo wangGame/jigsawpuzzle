@@ -82,7 +82,6 @@ public class GameView extends Group {
         setPosition(Constant.GAMEWIDTH/2.0f,Constant.GAMEHIGHT/2.0f,Align.center);
         rootView = CocosResource.loadFile("cocos/gamegroup.json");
         addActor(rootView);
-//        if (JigsawPreference.getInstance().getTheme().equals(""))
         changeBg();
         rootView.setPosition(getWidth()/2.0f,getHeight()/2.0f,Align.center);
         Group gamebottom = rootView.findActor("gamebottom");

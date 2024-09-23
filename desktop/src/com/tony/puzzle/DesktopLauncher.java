@@ -17,7 +17,7 @@ public class DesktopLauncher {
         config.x = 1000;
         config.y = 0;
         config.height = (int) (640*1.3f);
-        config.width = (int) (360 * 1.3f);
+        config.width = (int) (360 * 1.1f);
         new LwjglApplication(new JigSawPuzzle(
                 new DeskDownload(),
                 new GameListener() {

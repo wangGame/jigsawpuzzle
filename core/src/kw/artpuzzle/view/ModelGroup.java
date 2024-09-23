@@ -33,7 +33,8 @@ public class ModelGroup extends Group {
     private boolean success;
 
     public ModelGroup(int maskIndex){
-        setSize(266,266);
+        setSize(246,246);
+        setDebug(true);
         this.maskIndex = maskIndex;
         System.out.println("out1/"+maskIndex+".png---------------------------");
         image = new Image(Asset.getAsset().getTexture("out1/"+maskIndex+".png")){

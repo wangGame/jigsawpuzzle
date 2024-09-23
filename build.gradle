@@ -1,11 +1,7 @@
  buildscript {
     repositories {
         jcenter()
-
-
         google()
-//        mavenLocal()
-//        mavenCentral()
         maven {
             url 'https://maven.aliyun.com/repository/central'
             name 'central'
@@ -14,11 +10,6 @@
             url 'https://maven.aliyun.com/repository/jcenter'
             name 'jcenter'
         }
-//        maven {
-//            url 'https://maven.aliyun.com/repository/google'
-//            name 'Google'
-//        }
-
         gradlePluginPortal()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         google()
@@ -31,31 +22,23 @@
 
 allprojects {
     apply plugin: "idea"
-
     version = '1.0'
     ext {
         appName = "artPuzzle"
         gdxVersion = '1.9.8'
     }
-
     repositories {
         jcenter()
-
-
         google()
         mavenLocal()
         mavenCentral()
-
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         //maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/public' }
-
         flatDir {
             dirs 'libs'
         }
-
-
     }
 }
 

@@ -15,7 +15,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.tony.puzzle"
+        applicationId "com.tony.puzzle.jigsaw"
         minSdkVersion 14
         targetSdkVersion 33
         versionCode 1

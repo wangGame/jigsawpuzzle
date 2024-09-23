@@ -59,7 +59,7 @@ public class MainScreen extends BaseScreen {
             align(Align.bottom);
         }});
         mainScrollPane.setSize(Constant.GAMEWIDTH,Constant.GAMEHIGHT - 142);
-        mainScrollPane.setPosition(540.0f,142,Align.bottom);
+        mainScrollPane.setPosition(540.0f,142 - offsetY,Align.bottom);
         mainScrollPane.setRectangle(0,0,0,0);
         content.addActor(mainScrollPane);
         Actor maintop = rootView.findActor("maintop");

@@ -41,6 +41,7 @@ public class LoadingScreen extends BaseScreen {
         if (Asset.getAsset().getProcess()>=1.0f){
             AudioProcess.loadFinished();
             setScreen(MainScreen.class);
+//            setScreen(CaijianScreen.class);
         }
     }
 }
