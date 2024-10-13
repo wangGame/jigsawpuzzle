@@ -1,10 +1,7 @@
 package kw.artpuzzle.group.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -15,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -31,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import kw.artpuzzle.JigSawPuzzle;
 import kw.artpuzzle.constant.GameConstant;
 import kw.artpuzzle.constant.LevelConfig;
 import kw.artpuzzle.data.GameData;
@@ -41,7 +36,6 @@ import kw.artpuzzle.data.SelectItemBean;
 import kw.artpuzzle.fileutils.FileUtils;
 import kw.artpuzzle.group.group.BgTheme;
 import kw.artpuzzle.jigsawfile.EnterLevelFile;
-import kw.artpuzzle.jigsawfile.Jigsawfile;
 import kw.artpuzzle.jigsawfile.PlayedLevelFile;
 import kw.artpuzzle.listener.MyClickListener;
 import kw.artpuzzle.pref.JigsawPreference;
@@ -130,7 +124,7 @@ public class GameView extends Group {
         LevelBean levelBean = LevelConfig.levelIndex;
         modelUtils = new ModelUtils("finallevel/"
                 +levelBean.getVersion()+"/"+levelBean.getLevelUUID()
-                +"/"+levelBean.getLevelUUID()+".png", GameConstant.rowNum,GameConstant.rowNum);
+                +"/"+levelBean.getLevelUUID()+".png", GameConstant.modelRowNum,GameConstant.modelRowNum);
         ArrayList<ModelGroup> allModels = modelUtils.getAllModels();
         finalModelGroup.addAll(allModels);
         Collections.shuffle(finalModelGroup);

@@ -1,11 +1,8 @@
 package kw.artpuzzle.utils;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
-import com.kw.gdx.constant.Constant;
 
 import kw.artpuzzle.constant.GameConstant;
 import kw.artpuzzle.view.ModelGroup;
@@ -52,19 +49,19 @@ public class GameLogicUtils {
     public boolean checkValue(int maskIndex) {
 
         int arr[] = new int[]{
-                -1,1,GameConstant.rowNum,-GameConstant.rowNum
+                -1,1,GameConstant.modelRowNum,-GameConstant.modelRowNum
         };
 //        int i = current - 1;
 //        int i1 = current + 1;
 //        int i2 = current + allNumer;
 //        int i3 = current - allNumer;
-        int hang = maskIndex / GameConstant.rowNum;
-        int line = maskIndex % GameConstant.rowNum;
+        int hang = maskIndex / GameConstant.modelRowNum;
+        int line = maskIndex % GameConstant.modelRowNum;
         //边缘
-        if (hang == 0 || hang == GameConstant.rowNum - 1){
+        if (hang == 0 || hang == GameConstant.modelRowNum - 1){
             return true;
         }
-        if (line == 0||line == GameConstant.rowNum - 1){
+        if (line == 0||line == GameConstant.modelRowNum - 1){
             return true;
         }
         for (int i : arr) {

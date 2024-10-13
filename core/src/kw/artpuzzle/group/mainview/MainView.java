@@ -46,8 +46,8 @@ public class MainView extends BaseView {
         addActor(levelScrollPanel);
     }
 
+    @Override
     public void addLevelItem(){
-        super.addLevelItem();
         if (levelIndex>=levelData.size)return;
         levelIndex ++;
         LevelBean levelBean = levelData.get(levelIndex);
@@ -56,5 +56,10 @@ public class MainView extends BaseView {
         if (levelIndex % 2 == 0) {
             contentTable.row();
         }
+    }
+
+    @Override
+    public void update() {
+
     }
 }

@@ -10,7 +10,10 @@ import kw.artpuzzle.listener.GameListener;
  * @Date 2023/12/8 12:58
  */
 public class GameStaticInstance {
+    //download
     public static DownLoad downLoad;
+    //current screen
     public static BaseScreen baseScreen;
+    //listener
     public static GameListener gameListener;
 }

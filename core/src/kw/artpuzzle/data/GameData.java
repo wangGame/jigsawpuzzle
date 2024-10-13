@@ -37,7 +37,6 @@ public class GameData {
     public void loadLevel(){
         levelSortData = new ArrayMap<>();
         Array<LevelBean> common = CsvUtils.common("nomal/nomallevel.csv", LevelBean.class, true);
-
         for (int i = 0; i < common.size; i++) {
             LevelBean levelBean = common.get(i);
             levelSortData.put(levelBean.getSortId(),levelBean);
